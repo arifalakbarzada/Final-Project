@@ -5,6 +5,8 @@ import Home from './pages/user/home'
 import Contact from './pages/user/contact'
 import UserLayout from './layout'
 import AdminLayout from './layout/admin'
+import Cart from './pages/user/cart'
+import About from './pages/user/about'
 function App() {
   console.log(productsApi.getAllProduct())
   return (
