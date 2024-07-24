@@ -1,10 +1,16 @@
 import axios from "axios"
-let productsUrl = import.meta.env.VITE_PRODUCTS_API
+export let productsUrl = import.meta.env.VITE_PRODUCTS_API
 export const productsApi = {
     getAllProduct: async function () {
-        return (await axios.get(productsUrl)).data
-
-    },
+        try {
+            const response = await axios.get(productsUrl);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error; 
+        }
+    }
+    ,
     addProduct: function (param) {
         axios.post(productsUrl, param)
     }
