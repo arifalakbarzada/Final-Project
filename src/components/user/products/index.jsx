@@ -7,6 +7,8 @@ function Products() {
  const dispatch = useDispatch(); 
   const products = useSelector((state) => state.products.items);
 const categories = []
+const [category, setCategory] = useState(``)
+
   useEffect(() => { 
     productsApi.getAllProduct().then(data => dispatch(setProducts(data)));
    
@@ -17,9 +19,13 @@ const categories = []
       }
     })
 console.log(categories)
+console.log(category)
   return (
     <div>
-      <select name="categories" id="">
+      <select name="categories" id="" onChange={(e)=>{
+        setCategory(e.target.value)
+      }}>
+        <option value="">All</option>
       {
 categories.map((category) =>{
 return <option value= {category}>{category}</option>
