@@ -9,21 +9,24 @@ import About from './pages/user/about'
 import FavList from './pages/user/favlist'
 import Dashboard from './pages/admin/dashboard'
 import EditPanel from './pages/admin/editPanel'
+import Orders from './components/admin/orders'
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<UserLayout />}>
+      <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/favlist' element={<FavList />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="favlist" element={<FavList />} />
       </Route>
-      <Route path='/admin' element={<AdminLayout />}>
+      <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
-        <Route path='/editpanel' element={<EditPanel />} />
+        <Route path="edit" element={<EditPanel />} />
+        <Route path="orders" element={<Orders />} />
       </Route>
     </Routes>
+
   )
 }
 
