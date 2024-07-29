@@ -6,9 +6,17 @@ import Footer from './footer'
 function UserLayout() {
   return (
     <>
-    <Header />
-    <Outlet />
-    <Footer />
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Outlet />
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+
     </>
   )
 }

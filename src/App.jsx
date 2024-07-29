@@ -10,11 +10,16 @@ import FavList from './pages/user/favlist'
 import Dashboard from './pages/admin/dashboard'
 import EditPanel from './pages/admin/editPanel'
 import Orders from './components/admin/orders'
+import './assets/css/reset.css'
+import './assets/css/animation.css'
+import './assets/css/responsive.css'
+import Details from './components/user/productDetail'
 function App() {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
+        <Route path='products/:id' element = {<Details />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="cart" element={<Cart />} />

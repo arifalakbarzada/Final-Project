@@ -1,13 +1,18 @@
 import React from 'react'
+import { BsCart } from 'react-icons/bs'
+import { CiSearch, CiUser } from 'react-icons/ci'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { selectCartTotalItems, selectCartTotalPrice } from '../../../redux/slices/cartSlice'
 
 function Header() {
+  const dispatch = useDispatch()
   return (
-    <div>
+    <div className='header'>
       <div className="logo">
-        <h1>MyLogo</h1>
+        <h1>eShop</h1>
       </div>
-      <ul>
+      <ul className='center-urls'>
         <li>
           <Link to= "/">Home</Link>
         </li>
@@ -18,6 +23,20 @@ function Header() {
           <Link to= "/contact">Contact</Link>
         </li>
       </ul>
+<ul className="right-urls">
+  <li>
+  <CiSearch />
+  </li>
+  <li>
+  <CiUser />
+  </li>
+  <li>
+    <Link to={'/cart'}><BsCart /></Link>
+  
+{/* {dispatch(selectCartTotalItems)}
+{dispatch(selectCartTotalPrice)} $ */}
+  </li>
+</ul>
     </div>
   )
 }

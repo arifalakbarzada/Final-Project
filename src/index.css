@@ -1,0 +1,26 @@
+.center-urls , .right-urls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    li{
+        padding: 16px;
+    }
+}
+
+header , main , footer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.products{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    .product-image img{
+        width: 100%;
+    }
+}
