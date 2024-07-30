@@ -20,9 +20,75 @@ header , main , footer {
 .products{
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
-    .product-image img{
-        width: 100%;
+    .product{
+      padding: 20px;
+     
     }
+    .product-image {
+      position: relative;
+      width: 90%;
+      height: 80%;
+      display: flex;
+    align-items: center;
+    justify-content: center;
+      &:hover{
+        .product-action li{
+          opacity: 1;
+        }
+      }
+      .product-label{
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        color: red;
+        font-weight: 600;
+      }
+      .product-action {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        z-index: 6;
+        transform: translateY(-50%);
+        li{
+          opacity: 0;
+          padding: 16px;
+          border-radius: 50%;
+          transition: all 0.3s ease-in-out;
+          background-color: #fff;
+          margin-bottom: 5px;
+          svg{
+            font-size: 24px;
+            font-weight: 500;
+          }
+          &:hover{
+            background: #000;
+            color: #fff;
+          }
+                }
+    }
+    img{
+        width: 100%;
+        padding: 16px;
+    }
+  }
+  .product-price{
+    text-align: center;
+
+  }
+  .main-price{
+    font-size: 24px;
+    color: #aaa;
+    text-decoration: line-through;
+    padding: 8px;
+  }
+  .title{
+    font-size: 24px;
+    text-align: center;
+  }
+  .discounted-price{
+    font-size: 24px;
+    color: red;
+  }
 }
 
 

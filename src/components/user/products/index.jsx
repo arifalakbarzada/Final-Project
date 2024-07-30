@@ -47,11 +47,13 @@ function Products() {
         ))}
       </select>
       <div className="products">
-        {filteredProducts.map((product) => (
+        {filteredProducts.map((product) => 
+        product.colors
+        (
           <div key={product.id} className="product">
             <div  className="product-image">
             <div className="product-label">
-              <span>{product.discount}</span>
+              <span>-{product.discount}%</span>
             </div>
             {product.image
               ? <img src={product.image} className="img-fluid" alt={product.name} />
@@ -64,6 +66,13 @@ function Products() {
               </ul>
             </div>
           </div>
+          <div class="product-content">
+                                        <h3 class="title">{product.name}</h3>
+                                        <p class="product-price">
+                                          <span class="discounted-price">${(product.price - product.price*product.discount / 100).toFixed(2)}</span> 
+                                          <span class="main-price">${product.price}</span>
+                                          </p>
+                                    </div>
           </div>
           
         ))}
