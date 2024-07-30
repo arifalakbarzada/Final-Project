@@ -48,7 +48,7 @@ function Products() {
       </select>
       <div className="products">
         {filteredProducts.map((product) => 
-        product.colors
+        // product.colors
         (
           <div key={product.id} className="product">
             <div  className="product-image">
