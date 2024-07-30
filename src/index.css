@@ -73,10 +73,11 @@ header , main , footer {
   }
   .product-price{
     text-align: center;
+    font-weight: 600;
 
   }
   .main-price{
-    font-size: 24px;
+    font-size: 20px;
     color: #aaa;
     text-decoration: line-through;
     padding: 8px;
@@ -84,9 +85,10 @@ header , main , footer {
   .title{
     font-size: 24px;
     text-align: center;
+    padding: 0 20px;
   }
   .discounted-price{
-    font-size: 24px;
+    font-size: 20px;
     color: red;
   }
 }
