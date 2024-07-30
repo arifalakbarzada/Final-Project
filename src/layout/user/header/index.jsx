@@ -10,7 +10,7 @@ function Header() {
   return (
     <div className='header'>
       <div className="logo">
-        <h1>eShop</h1>
+        <h1>TechShop</h1>
       </div>
       <ul className='center-urls'>
         <li>
