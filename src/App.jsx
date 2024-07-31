@@ -15,6 +15,7 @@ import './assets/css/animation.css'
 import './assets/css/responsive.css'
 import Details from './components/user/productDetail'
 import NotFound from './pages/notfound'
+import Login from './pages/user/login'
 function App() {
   return (
     <Routes>
@@ -25,6 +26,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="cart" element={<Cart />} />
         <Route path="favlist" element={<FavList />} />
+        <Route path='login' element = {<Login />} />
         <Route path='*' element = {<NotFound />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>

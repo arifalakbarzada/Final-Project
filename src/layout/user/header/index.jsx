@@ -28,7 +28,8 @@ function Header() {
   <CiSearch />
   </li>
   <li>
-  <CiUser />
+    <Link to={'/login'}><CiUser /></Link>
+  
   </li>
   <li>
     <Link to={'/cart'}><BsCart /></Link>
