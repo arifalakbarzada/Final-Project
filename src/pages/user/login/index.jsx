@@ -21,10 +21,10 @@ const Login = () => {
     const email = e.target.email.value;
 
     emailjs.sendForm(
-      'service_7qs79xq', // Replace with your EmailJS service ID
-      'template_la8xdru', // Replace with your EmailJS template ID
-      { email },          // Template parameters
-      'uZiU_jvMcoRVe1YyL'      // Replace with your EmailJS user ID
+      'service_7qs79xq',
+      'template_la8xdru', 
+      { email },          
+      'uZiU_jvMcoRVe1YyL' 
     )
     .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
@@ -32,6 +32,7 @@ const Login = () => {
     })
     .catch((err) => {
       console.log('FAILED...', err);
+      console.log(email);
     });
   };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { productsApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../../../redux/slices/productSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
 import { FaRegEye } from 'react-icons/fa';
@@ -50,7 +50,7 @@ function Products() {
           </div>
         </div>
         <div className="product-content">
-          <h3 className="title">{product.name}, {color.name}</h3>
+          <h3 className="title"><Link to={`/products/${product.id}`}>{product.name}, {color.name}</Link></h3>
           <p className="product-price">
             <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
             <span className="main-price">${product.price}</span>
@@ -73,7 +73,7 @@ function Products() {
           </div>
         </div>
         <div className="product-content">
-          <h3 className="title">{product.name}</h3>
+          <h3 className="title"><Link to={`/products/${product.id}`}>{product.name}</Link></h3>
           <p className="product-price">
             <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
             <span className="main-price">${product.price}</span>

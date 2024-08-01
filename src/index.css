@@ -22,6 +22,7 @@ header , main , footer {
     grid-template-columns: repeat(4 , 1fr);
     .product{
       padding: 20px;
+      box-shadow: 0 0 -1px 5px violet;
      
     }
     .product-image {
