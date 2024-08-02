@@ -20,9 +20,23 @@ header , main , footer {
 .products{
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
+    place-items: center;
     .product{
       padding: 20px;
-      box-shadow: 0 0 -1px 5px violet;
+      position: relative;
+      /* box-shadow: 0 0 -10px 8px black;
+       */
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       flex-direction: column;
+       .product-label{
+        position: absolute;
+        right: 0px;
+        top: 20px;
+        color: red;
+        font-weight: 600;
+      }
      
     }
     .product-image {
@@ -37,13 +51,7 @@ header , main , footer {
           opacity: 1;
         }
       }
-      .product-label{
-        position: absolute;
-        right: 10px;
-        top: 20px;
-        color: red;
-        font-weight: 600;
-      }
+      
       .product-action {
         position: absolute;
         top: 50%;
@@ -84,8 +92,9 @@ header , main , footer {
     padding: 8px;
   }
   .title{
-    font-size: 24px;
+    font-size: 14px;
     text-align: center;
+    font-weight: 400;
     padding: 0 20px;
   }
   .discounted-price{
@@ -288,5 +297,33 @@ header , main , footer {
   .status-message {
     margin-top: 10px;
     font-size: 16px;
+  }
+  
+
+  .quick-view-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    img{
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  .quick-view-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
   }
   
