@@ -9,7 +9,7 @@ function UserLayout() {
       <header>
         <Header />
       </header>
-      <main>
+      <main className='container'>
         <Outlet />
       </main>
 
@@ -21,4 +21,4 @@ function UserLayout() {
   )
 }
 
-export default UserLayout
+export default UserLayout;

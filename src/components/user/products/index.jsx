@@ -49,11 +49,11 @@ function Products() {
     return product.colors.map((color) =>{
     return  (
       <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6">
-       <div className="product-label">
+      <div className="product-container">
+           <div className="product-image">
+          <div className="product-label">
             <span>-{product.discount}%</span>
           </div> 
-           <div className="product-image">
-         
           <img src={color.images[0]} className="img-fluid" alt={product.name} />
           <div className="product-action">
             <ul>
@@ -71,12 +71,14 @@ function Products() {
           </p>
         </div>
       </div>
+        
+      </div>
     )})
   
   }
   return (
-    <div className='container'>
-      <select name="categories" onChange={handleCategoryChange}>
+    <div className='products-container'>
+      <select name="categories" id='filterProducts' onChange={handleCategoryChange}>
         <option value="">All</option>
         {categories.map((category, index) => (
           <option key={index} value={category}>{category}</option>
