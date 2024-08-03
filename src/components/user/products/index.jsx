@@ -48,11 +48,7 @@ function Products() {
   const renderProduct = (product) => {
     return product.colors.map((color) =>{
     return  (
-      <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6" onClick={
-        () => {
-          navigate(`/products/${product.id}/${color.name}`)
-        }
-      }>
+      <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6">
       <div className="product-container">
            <div className="product-image">
           <div className="product-label">
@@ -67,7 +63,11 @@ function Products() {
             </ul>
           </div>
         </div>
-        <div className="product-content">
+        <div className="product-content"  onClick={
+        () => {
+          navigate(`/products/${product.id}/${color.name}`)
+        }
+      }>
           <h3 className="title">{product.name} {product.colors.length>1 ?`, ${color.name}`  : null}</h3>
           <p className="product-price">
             <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
@@ -82,12 +82,14 @@ function Products() {
   }
   return (
     <div className='products-container'>
-      <select name="categories" id='filterProducts' onChange={handleCategoryChange}>
+      <div className="select-container">
+             <select name="categories" id='filterProducts' onChange={handleCategoryChange}>
         <option value="">All</option>
         {categories.map((category, index) => (
           <option key={index} value={category}>{category}</option>
         ))}
       </select>
+       </div>
       <div className="products row">
         {filteredProducts.map(renderProduct)}
       </div>

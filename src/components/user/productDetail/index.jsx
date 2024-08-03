@@ -8,10 +8,10 @@ import { productsApi } from '../../../service/base';
 function ProductDetail() {
   const { id, color: selectedColor } = useParams();
   const navigate = useNavigate();
-const [product, setProducts] = useState(null)
-useEffect(() => {
- productsApi.getSingleProduct(id).then(res=>setProducts(res))
-}, [id])
+  const [product, setProducts] = useState(null)
+  useEffect(() => {
+    productsApi.getSingleProduct(id).then(res => setProducts(res))
+  }, [id])
 
   if (!product) {
     return <div>Product not found</div>;
@@ -24,9 +24,11 @@ useEffect(() => {
   }
 
   return (
-    <div className="product-detail-container">
-      <h1>{product.name}</h1>
-      <Swiper
+    <div className="product-detail-container container">
+      <div className="row">
+          <div className="col-lg-6 col-sm-12">
+            <div className="product-detail-image">
+                 <Swiper
         spaceBetween={50}
         slidesPerView={1}
         navigation
@@ -42,7 +44,13 @@ useEffect(() => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="product-info">
+            </div>
+      
+      </div>
+     
+      <div className="col-lg-6 col-sm-12">
+<div className="product-info">
+        <h1>{product.name}</h1>
         <p className="brand">Brand: {product.brand}</p>
         <p className="category">Category: {product.category}</p>
         <div className="specifications">
@@ -59,24 +67,28 @@ useEffect(() => {
         </p>
         <p className="stock">Stock: {product.stock}</p>
         <div className="colors">
-          
-{product.colors.length > 1 ?
-          (<><h3>Available Colors:</h3>
-          <div className="color-options">
-            {product.colors.map((color, index) => (
-              <div
-                key={index}
-                className="color"
-                style={{ backgroundColor: color.hex }}
-                title={color.name}
-                onClick={() => navigate(`/products/${product.id}/${color.name.toLowerCase()}`)}
-              ></div>
-            ))}
-          </div>
-          </>) : null
-}
+
+          {product.colors.length > 1 ?
+            (<><h3>Available Colors:</h3>
+              <div className="color-options">
+                {product.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className="color"
+                    style={{ backgroundColor: color.hex }}
+                    title={color.name}
+                    onClick={() => navigate(`/products/${product.id}/${color.name.toLowerCase()}`)}
+                  ></div>
+                ))}
+              </div>
+            </>) : null
+          }
         </div>
+</div>
+
       </div>
+      </div>
+    
     </div>
   );
 }

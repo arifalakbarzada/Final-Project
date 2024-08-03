@@ -18,10 +18,10 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs.send(
-      'YOUR_SERVICE_ID', // EmailJS servis kimliğiniz
-      'YOUR_TEMPLATE_ID', // EmailJS şablon kimliğiniz
+      'service_7qs79xq', // EmailJS servis kimliğiniz
+      'template_la8xdru', // EmailJS şablon kimliğiniz
       formData, // Form verileri
-      'YOUR_USER_ID' // EmailJS kullanıcı kimliğiniz
+      'uZiU_jvMcoRVe1YyL' // EmailJS kullanıcı kimliğiniz
     )
     .then((response) => {
       console.log('Başarılı!', response.status, response.text);
@@ -69,7 +69,11 @@ const Contact = () => {
         </div>
         <button type="submit" className="btn btn-send">GÖNDER</button>
       </form>
-      {status && <p className="status-message">{status}</p>}
+      {status && setTimeout(()=>{
+        return(
+           <p className="status-message">{status}</p>
+        )
+      } , 2000)}
     </div>
   );
 };
