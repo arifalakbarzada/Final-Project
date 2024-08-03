@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   selectedProduct: null,
+  selectedColor : null
 };
 
 const productsSlice = createSlice({
@@ -11,13 +12,7 @@ const productsSlice = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.items = action.payload;
-    },
-    selectProduct: (state, action) => {
-      state.selectedProduct = state.items.find(product => product.id === action.payload);
-    },
-    clearSelectedProduct: (state) => {
-      state.selectedProduct = null;
-    },
+    }
   },
 });
 

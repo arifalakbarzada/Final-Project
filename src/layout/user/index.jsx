@@ -9,7 +9,7 @@ function UserLayout() {
       <header>
         <Header />
       </header>
-      <main className='container'>
+      <main>
         <Outlet />
       </main>
 

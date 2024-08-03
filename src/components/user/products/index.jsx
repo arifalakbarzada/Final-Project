@@ -1,7 +1,7 @@
 import React, { useEffect,  useState } from 'react';
 import { productsApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../../../redux/slices/productSlice';
+import {setProducts } from '../../../redux/slices/productSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
@@ -48,13 +48,17 @@ function Products() {
   const renderProduct = (product) => {
     return product.colors.map((color) =>{
     return  (
-      <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6">
+      <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6" onClick={
+        () => {
+          navigate(`/products/${product.id}/${color.name}`)
+        }
+      }>
       <div className="product-container">
            <div className="product-image">
           <div className="product-label">
             <span>-{product.discount}%</span>
           </div> 
-          <img src={color.images[0]} className="img-fluid" alt={product.name} />
+          <img src={color.images[0]} alt={product.name + color.name} />
           <div className="product-action">
             <ul>
               <li><BsCartPlus /></li>
@@ -64,7 +68,7 @@ function Products() {
           </div>
         </div>
         <div className="product-content">
-          <h3 className="title"><Link to={`/products/${product.id}`}>{product.name} {product.colors.length>1 ?`, ${color.name}`  : null}</Link></h3>
+          <h3 className="title">{product.name} {product.colors.length>1 ?`, ${color.name}`  : null}</h3>
           <p className="product-price">
             <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
             <span className="main-price">${product.price}</span>
