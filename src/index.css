@@ -1,9 +1,11 @@
-
-
 :root {
   --shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
 }
 
+
+body{
+  min-height: 100vh;
+}
 
 .center-urls,
 .right-urls {
@@ -18,10 +20,12 @@
 
 .header,
 main ,
-footer {
+.footer {
   width: 80%;
   margin: 0 auto;
 }
+
+
 
 main{
   margin-top: 4rem;
@@ -46,8 +50,20 @@ header{
 .products-container{
   padding: 2rem 0;
 }
+@keyframes productsAnimation {
+  0%{
+    opacity: 0;
+
+  }
+  100%{
+    opacity: 1;
+  }
+
+}
+
 .products {
   .product {
+    transition: productsAnimation 0.7s ease-in-out;
     padding: 16px;
     position: relative;
     display: flex;
@@ -130,7 +146,7 @@ padding: 16px;
   }
 
   .main-price {
-    font-size: 20px;
+    font-size: 18px;
     color: #aaa;
     text-decoration: line-through;
     padding: 8px;
@@ -144,7 +160,7 @@ padding: 16px;
   }
 
   .discounted-price {
-    font-size: 20px;
+    font-size: 18px;
     color: red;
   }
 }
@@ -601,13 +617,27 @@ option {
 
 /*? Footer CSS start  */
 
+
+footer{
+  /* position: sticky;
+  z-index:  0;
+  bottom: 0;
+  right: 0;
+  left: 0;  */
+   background-color: #f8f8f8;
+
+}
+
 .footer {
-  background-color: #f8f8f8;
   padding: 20px 0;
 }
 
 
-
+.reserved{
+  p{
+    font-size: 12px;
+  }
+}
 
 
 .footer-column h3 {
