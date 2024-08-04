@@ -2,7 +2,7 @@ import React, { useEffect,  useState } from 'react';
 import { productsApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
 import {setProducts } from '../../../redux/slices/productSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
 import { FaRegEye } from 'react-icons/fa';

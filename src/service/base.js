@@ -1,5 +1,7 @@
 import axios from "axios"
 export let productsUrl = import.meta.env.VITE_PRODUCTS_API
+export let usersUrl = import.meta.env.VITE_USERS_API
+
 export const productsApi = {
     getAllProduct: async function () {
         try {
@@ -32,4 +34,34 @@ export const productsApi = {
                     throw error; 
                 }
             }
+}
+
+export const usersApi = {
+getAllUsers : async function () {
+    try {
+        const response = await axios.get(usersUrl);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error; 
+    }
+}
+,
+addUser: function (param) {
+    axios.post(usersUrl, param)
+}
+,
+deleteUser: function (id) {
+    axios.delete(`${usersUrl}/${id}`)
+    }
+    ,
+    getSingleUser : async function (id) {
+        try {
+            const response = await axios.get(`${usersUrl}/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error; 
+        }
+    }
 }

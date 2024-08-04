@@ -16,7 +16,10 @@ import './assets/css/responsive.css'
 import Details from './components/user/productDetail'
 import NotFound from './pages/notfound'
 import Login from './pages/user/login'
+import { useSelector } from 'react-redux'
+import MyAccount from './pages/user/account'
 function App() {
+  const isLogined = useSelector((state)=> state.users.userLogined)
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
@@ -26,7 +29,8 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="cart" element={<Cart />} />
         <Route path="favlist" element={<FavList />} />
-        <Route path='login' element = {<Login />} />
+
+       {isLogined? (<Route path='myaccount' element = {<MyAccount />} />): (<Route path='login' element = {<Login />} />)} 
         <Route path='*' element = {<NotFound />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
