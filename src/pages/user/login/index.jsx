@@ -26,7 +26,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = users.find(user => user.email === loginData.email && user.password === loginData.password);
+    const user = users.find(user => (user.email === loginData.email || user.userName === loginData.email) && user.password === loginData.password);
     if (user) {
       dispatch(loginUser({ user, rememberMe })); // Yalnızca dispatch ile saklayın
       navigate('/myaccount'); // Doğru yönlendirme
@@ -37,17 +37,26 @@ const Login = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (registerData.password.length >= 8) {
+    if (validateEmail(registerData.email) &&validatePassword(registerData.password) && !users.some(user => user.email === registerData.email)) {
       usersApi.addUser(registerData).then(() => {
         console.log('User registered successfully');
       }).catch(err => {
         console.error('Error registering user:', err);
       });
     } else {
-      console.error('Password is too short');
+      console.error('Please register with correct values');
     }
   };
+  function validatePassword(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+    return regex.test(password);
+  }
 
+  function validateEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  }
+  
   return (
     <div className="auth-container">
       <div className="auth-form">
@@ -87,7 +96,7 @@ const Login = () => {
         <h2>Register</h2>
         <form onSubmit={handleRegister}>
           <div className="form-group">
-            <label>Username or email address *</label>
+            <label>Email address *</label>
             <input
               type="email"
               required
