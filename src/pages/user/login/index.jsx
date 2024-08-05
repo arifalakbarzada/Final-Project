@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers, loginUser } from '../../../redux/slices/userSlices/userSlice';
+import { setUsers, loginUser } from '../../../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
 

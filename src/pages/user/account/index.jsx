@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../../redux/slices/userSlices/userSlice';
+import { logoutUser } from '../../../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 

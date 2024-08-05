@@ -18,7 +18,7 @@ import NotFound from './pages/notfound'
 import Login from './pages/user/login'
 import { useDispatch, useSelector } from 'react-redux'
 import MyAccount from './pages/user/account'
-import { setUserFromLocalStorage } from './redux/slices/userSlices/userSlice'
+import { setUserFromLocalStorage } from './redux/slices/userSlice'
 function App() {
   const user = useSelector((state)=> state.users.user)
   const dispatch = useDispatch();
