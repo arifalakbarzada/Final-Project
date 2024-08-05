@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from 'react-router'
+import React, { useEffect } from 'react'
+import { Navigate, Route, Routes  } from 'react-router'
 import Home from './pages/user/home'
 import Contact from './pages/user/contact'
 import UserLayout from './layout/user'
@@ -16,10 +16,18 @@ import './assets/css/responsive.css'
 import Details from './components/user/productDetail'
 import NotFound from './pages/notfound'
 import Login from './pages/user/login'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import MyAccount from './pages/user/account'
+import { setUserFromLocalStorage } from './redux/slices/userSlices/userSlice'
 function App() {
-  const isLogined = useSelector((state)=> state.users.userLogined)
+  const user = useSelector((state)=> state.users.user)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
+    if (storedUser) {
+      dispatch(setUserFromLocalStorage(JSON.parse(storedUser)));
+    }
+  }, [dispatch]);
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
@@ -29,8 +37,8 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="cart" element={<Cart />} />
         <Route path="favlist" element={<FavList />} />
-
-       {isLogined? (<Route path='myaccount' element = {<MyAccount />} />): (<Route path='login' element = {<Login />} />)} 
+        <Route path="/login" element={user ? <Navigate to="/myaccount" /> : <Login />} />
+        <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />} />
         <Route path='*' element = {<NotFound />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>

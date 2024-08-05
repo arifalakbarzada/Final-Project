@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usersApi } from '../../../service/base';
 import { setUsers, loginUser } from '../../../redux/slices/userSlices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { usersApi } from '../../../service/base';
 
 const Login = () => {
   const [registerData, setRegisterData] = useState({
@@ -13,6 +13,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector(state => state.users.items);
@@ -27,8 +28,8 @@ const Login = () => {
     e.preventDefault();
     const user = users.find(user => user.email === loginData.email && user.password === loginData.password);
     if (user) {
-      dispatch(loginUser(user.id));
-      navigate('/myaccount');
+      dispatch(loginUser({ user, rememberMe })); // Yalnızca dispatch ile saklayın
+      navigate('/myaccount'); // Doğru yönlendirme
     } else {
       console.error('Invalid login credentials');
     }
@@ -72,7 +73,12 @@ const Login = () => {
           </div>
           <button type="submit" className="btn btn-login">LOGIN</button>
           <div className="remember-me">
-            <input type="checkbox" id="rememberMe" />
+            <input 
+              type="checkbox" 
+              id="rememberMe" 
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)} 
+            />
             <label htmlFor="rememberMe">Remember me</label>
           </div>
         </form>

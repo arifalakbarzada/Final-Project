@@ -3,7 +3,7 @@ import { BsCart } from 'react-icons/bs'
 import { CiSearch, CiUser } from 'react-icons/ci'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { selectCartTotalItems, selectCartTotalPrice } from '../../../redux/slices/cartSlice'
+// import { selectCartTotalItems, selectCartTotalPrice } from '../../../redux/slices/cartSlice'
 
 function Header() {
   const dispatch = useDispatch()
