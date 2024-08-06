@@ -25,7 +25,7 @@ const filtered =users.filter((user)=> user.email === email)[0]
 if (filtered) {
   setUserData(filtered)
   setFormData({
-    link: `https://final-project-lovat-three.vercel.app/${filtered.id}/${filtered.token}`
+    link: `https://final-project-lovat-three.vercel.app/resetpassword/${filtered.id}/${filtered.token}`
   })
   emailjs.send(
     'service_7qs79xq', // EmailJS servis kimliğiniz
@@ -34,6 +34,7 @@ if (filtered) {
     'uZiU_jvMcoRVe1YyL' // EmailJS kullanıcı kimliğiniz
   )
 }
+console.log(formData)
   }
   return (
     <div className="forget-password-container">
