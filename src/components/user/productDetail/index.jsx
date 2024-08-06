@@ -65,7 +65,7 @@ function ProductDetail() {
           <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
           <span className="main-price">${product.price}</span>
         </p>
-        <p className="stock">Stock: {product.stock}</p>
+        <p className="stock">Stock: {colorData.stock}</p>
         <div className="colors">
 
           {product.colors.length > 1 ?
@@ -77,7 +77,11 @@ function ProductDetail() {
                     className="color"
                     style={{ backgroundColor: color.hex }}
                     title={color.name}
-                    onClick={() => navigate(`/products/${product.id}/${color.name.toLowerCase()}`)}
+                    onClick={
+                      () => {
+                        navigate(`/products/${product.id}/${color.name.toLowerCase()}`)
+                      }
+                    }
                   ></div>
                 ))}
               </div>

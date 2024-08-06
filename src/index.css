@@ -470,6 +470,11 @@ header {
       object-fit: cover;
     }
   }
+  .swiper-slide-active{
+    img{
+      max-width: 380px !important;
+    }
+  }
 
   .color {
     width: 30px;
