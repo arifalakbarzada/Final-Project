@@ -3,10 +3,6 @@
 }
 
 
-/* body{
-  min-height: 100vh;
-} */
-
 .center-urls,
 .right-urls {
   display: flex;
@@ -25,7 +21,10 @@ main,
   margin: 0 auto;
 }
 
-
+.logo h1{
+cursor: pointer;
+color: darkgreen;
+}
 
 main {
   margin-top: 4rem;
@@ -55,7 +54,6 @@ header {
 
 .products {
   .product {
-    transition: productsAnimation 0.7s ease-in-out;
     padding: 16px;
     position: relative;
     display: flex;
@@ -67,7 +65,7 @@ header {
     .product-label {
       position: absolute;
       right: 8px;
-      top: 20px;
+      top: 14px;
       color: red;
       font-weight: 600;
     }

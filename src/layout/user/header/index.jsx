@@ -24,7 +24,7 @@ function Header() {
   }
   return (
     <div className='header'>
-      <div className="logo">
+      <div className="logo" onClick={()=>navigate('/')}>
         <h1>TechShop</h1>
       </div>
       <ul className='center-urls'>
