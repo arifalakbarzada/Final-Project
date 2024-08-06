@@ -8,7 +8,7 @@ import emailjs from '@emailjs/browser';
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
   const [userData, setUserData] = useState({})
-  const [formData , setFormData] = useState({
+  const [formData, setFormData] = useState({
     link: '',
   })
   const dispatch = useDispatch()
@@ -19,22 +19,25 @@ const ForgetPassword = () => {
       dispatch(setUsers(res));
     });
   }, [dispatch]);
-  const handleSubmit = (e)=>{
-e.preventDefault();
-const filtered =users.filter((user)=> user.email === email)[0]
-if (filtered) {
-  setUserData(filtered)
-  setFormData({
-    link: `https://final-project-lovat-three.vercel.app/resetpassword/${filtered.id}/${filtered.token}`
-  })
-  emailjs.send(
-    'service_7qs79xq', // EmailJS servis kimliğiniz
-    'template_5u044cb', // EmailJS şablon kimliğiniz
-    formData, // Form verileri
-    'uZiU_jvMcoRVe1YyL' // EmailJS kullanıcı kimliğiniz
-  )
-}
-console.log(formData)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const filtered = users.filter((user) => user.email === email)[0]
+    if (filtered) {
+      setUserData(filtered)
+      setFormData({
+        link: `https://final-project-lovat-three.vercel.app/resetpassword/${filtered.id}/${filtered.token}`
+      })
+      if (formData.link) {
+        emailjs.send(
+          'service_7qs79xq', // EmailJS servis kimliğiniz
+          'template_5u044cb', // EmailJS şablon kimliğiniz
+          formData, // Form verileri
+          'uZiU_jvMcoRVe1YyL' // EmailJS kullanıcı kimliğiniz
+        )
+      }
+
+    }
+    console.log(formData)
   }
   return (
     <div className="forget-password-container">
@@ -43,7 +46,7 @@ console.log(formData)
         <div className="form-group">
           <label htmlFor="email">Email address *</label>
           <input type="email" id="email" name="email" onChange={
-            (e)=>{
+            (e) => {
               setEmail(e.target.value)
             }
           } required />
