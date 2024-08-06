@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUsers, loginUser } from '../../../redux/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
 import { v4 as uuid4 } from 'uuid';
 const Login = () => {
@@ -94,6 +94,7 @@ const Login = () => {
             />
             <label htmlFor="rememberMe">Remember me</label>
           </div>
+          <Link to={'/forgetpassword'}>Lost your password?</Link>
         </form>
       </div>
       <div className="auth-form">

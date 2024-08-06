@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import MyAccount from './pages/user/account'
 import { setUserFromLocalStorage } from './redux/slices/userSlice'
 import Search from './pages/user/search'
+import ForgetPassword from './pages/user/forgotpass'
+import ResetPassword from './pages/user/resetPassword'
 function App() {
   const user = useSelector((state)=> state.users.user)
   const dispatch = useDispatch();
@@ -40,7 +42,9 @@ function App() {
         <Route path="cart" element={user ? <Cart /> : <Navigate to="/login" />} />
         <Route path="favlist" element={user ? <FavList /> : <Navigate to="/login" />} />
         <Route path="/login" element={user ? <Navigate to="/myaccount" /> : <Login />} />
+        <Route path='/resetpassword/:id/:token' element = {<ResetPassword />} />
         <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />} />
+        <Route path='forgetpassword' element={user ? <Navigate to="/login" />: <ForgetPassword />} />
         <Route path='*' element = {<NotFound />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>

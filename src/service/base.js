@@ -64,6 +64,10 @@ export const usersApi = {
             throw error;
         }
     }
+    ,
+    resetPassword: function (id, data, password) {
+        axios.put(`${usersApi}/${id}`, { ...data, password: password })
+    }
 }
 
 export const cartsApi = {

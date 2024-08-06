@@ -15,9 +15,9 @@ import './../node_modules/swiper/modules/navigation.min.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <HashRouter>
+    <Router>
       <App />
-    </HashRouter>
+    </Router>
 
   </Provider>
 )

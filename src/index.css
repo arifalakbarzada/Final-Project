@@ -21,9 +21,9 @@ main,
   margin: 0 auto;
 }
 
-.logo h1{
-cursor: pointer;
-color: darkgreen;
+.logo h1 {
+  cursor: pointer;
+  color: darkgreen;
 }
 
 main {
@@ -468,8 +468,9 @@ header {
       object-fit: cover;
     }
   }
-  .swiper-slide-active{
-    img{
+
+  .swiper-slide-active {
+    img {
       max-width: 380px !important;
     }
   }
@@ -624,7 +625,8 @@ option {
     width: 250px;
     background-color: #f5f5f5;
     padding: 20px;
-    button{
+
+    button {
       width: 100%;
       background: transparent;
       height: -webkit-fill-available;
@@ -653,6 +655,107 @@ option {
 }
 
 /** My Account CSS end  */
+
+/* ? Forget Password CSS start */
+.forget-password-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+
+  .forget-password-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+}
+
+/* ? Forget Password CSS end */
+
+/* todo Reset Password CSS start */
+
+.reset-password-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .reset-password-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+}
+
+
+
 
 /* ! Search Modal CSS start */
 .search-modal {
