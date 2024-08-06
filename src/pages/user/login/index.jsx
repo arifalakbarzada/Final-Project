@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUsers, loginUser } from '../../../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
-
+import { v4 as uuid4 } from 'uuid';
 const Login = () => {
   const [registerData, setRegisterData] = useState({
     email: '',
-    password: ''
+    password: '',
+    token : uuid4()
   });
   const [loginData, setLoginData] = useState({
     email: '',
@@ -37,18 +38,21 @@ const Login = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (validateEmail(registerData.email) &&validatePassword(registerData.password) && !users.some(user => user.email === registerData.email)) {
-      usersApi.addUser(registerData).then(() => {
-        console.log('User registered successfully');
-      }).catch(err => {
-        console.error('Error registering user:', err);
-      });
+    if (validateEmail(registerData.email) &&validatePassword(registerData.password)) {
+      usersApi.addUser(registerData)
+      setRegisterData(
+        {
+          email: '',
+          password : '',
+          token : uuid4()
+        }
+      )
     } else {
       console.error('Please register with correct values');
     }
   };
   function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     return regex.test(password);
   }
 
