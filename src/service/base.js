@@ -66,7 +66,7 @@ export const usersApi = {
     }
     ,
     resetPassword: function (id, data, password) {
-        axios.put(`${usersApi}/${id}`, { ...data, password: password })
+        axios.put(`${usersUrl}/${id}`, { ...data, password: password })
     }
 }
 
