@@ -69,20 +69,3 @@ export const usersApi = {
         axios.put(`${usersUrl}/${id}`, { ...data, password: password })
     }
 }
-
-export const cartsApi = {
-    getAllCarts: async function (id) {
-        try {
-            const response = await axios.get(`${usersUrl}/${id}`);
-            return response.data;
-        }
-        catch (error) {
-            console.error(error)
-            throw error;
-        }
-    }
-    ,
-    changeCartItem: function (id, param) {
-        axios.put(`${usersUrl}/${id}`, param)
-    }
-}

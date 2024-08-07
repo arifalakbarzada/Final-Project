@@ -9,6 +9,9 @@ function ProductDetail() {
   const { id, color: selectedColor } = useParams();
   const navigate = useNavigate();
   const [product, setProducts] = useState(null)
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   useEffect(() => {
     productsApi.getSingleProduct(id).then(res => setProducts(res))
   }, [id])
@@ -51,13 +54,13 @@ function ProductDetail() {
       <div className="col-lg-6 col-sm-12">
 <div className="product-info">
         <h1>{product.name}</h1>
-        <p className="brand">Brand: {product.brand}</p>
-        <p className="category">Category: {product.category}</p>
+        <p className="brand">Brand: {capitalizeFirstLetter(product.brand)}</p>
+        <p className="category">Category: {capitalizeFirstLetter(product.category)}</p>
         <div className="specifications">
           <h3>Specifications:</h3>
           <ul>
             {product.specifications.map((spec, index) => (
-              <li key={index}><strong>{spec.name}:</strong> {spec.value}</li>
+              <li key={index}><strong>{capitalizeFirstLetter(spec.name)}:</strong> {capitalizeFirstLetter(spec.value)}</li>
             ))}
           </ul>
         </div>
