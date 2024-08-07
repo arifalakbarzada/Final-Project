@@ -12,7 +12,7 @@ const ResetPassword = () => {
     const users = useSelector((state)=>state.users.items)
     useEffect(()=>{
         usersApi.getAllUsers().then(res=>dispatch(setUsers(res)))
-    })
+    },[dispatch])
     const handleSubmit = (e) => {
         const user = users.find(user => user.token === token)
         e.preventDefault();
