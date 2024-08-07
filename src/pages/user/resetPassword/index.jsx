@@ -5,6 +5,10 @@ import { usersApi } from '../../../service/base';
 import { setUsers } from '../../../redux/slices/userSlice';
 
 const ResetPassword = () => {
+    function validatePassword(password) {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        return regex.test(password);
+      }
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { id , token} = useParams()
@@ -16,7 +20,7 @@ const ResetPassword = () => {
     const handleSubmit = (e) => {
         const user = users.find(user => user.token === token)
         e.preventDefault();
-        if (password === confirmPassword && user) {
+        if (password === confirmPassword && user && validatePassword(password)) {
             usersApi.resetPassword(id , user , password)
             console.log('Passwords match. Proceed with reset.');
             console.log(token);
