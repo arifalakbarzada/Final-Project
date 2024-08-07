@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { usersApi } from '../../../service/base';
 import { setUsers } from '../../../redux/slices/userSlice';
@@ -8,9 +8,10 @@ const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { id , token} = useParams()
+    const dispatch = useDispatch()
     const users = useSelector((state)=>state.users.items)
     useEffect(()=>{
-        usersApi.getAllUsers().then(res=>setUsers(res))
+        usersApi.getAllUsers().then(res=>dispatch(setUsers(res)))
     })
     const handleSubmit = (e) => {
         const user = users.find(user => user.token === token)
