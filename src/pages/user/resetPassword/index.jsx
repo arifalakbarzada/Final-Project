@@ -4,15 +4,18 @@ import { useParams } from 'react-router';
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const { id } = useParams()
+    const { id , token} = useParams()
     
     const handleSubmit = (e) => {
 
         e.preventDefault();
         if (password === confirmPassword) {
             console.log('Passwords match. Proceed with reset.');
+            console.log(token);
+            
         } else {
             console.log('Passwords do not match.');
+            console.log(token)
         }
     };
 
