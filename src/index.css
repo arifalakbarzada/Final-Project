@@ -651,8 +651,12 @@ option {
     padding: 10px;
     cursor: pointer;
   }
+  .sidebar a.active{
+    width: 100% !important;
+    display: block;
+    color: #fff;
 
-  .sidebar ul li.active,
+  }
   .sidebar ul li:hover {
     background-color: #000;
     color: #fff;
