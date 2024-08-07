@@ -22,12 +22,10 @@ const ResetPassword = () => {
         e.preventDefault();
         if (password === confirmPassword && user && validatePassword(password)) {
             usersApi.resetPassword(id , user , password)
-            console.log('Passwords match. Proceed with reset.');
-            console.log(token);
-            
-        } else {
+            console.log('Passwords match. Proceed with reset.');            
+        } 
+        else {
             console.log('Passwords do not match.');
-            console.log(token)
         }
     };
 
