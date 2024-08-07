@@ -5,17 +5,14 @@ const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { id } = useParams()
+    
     const handleSubmit = (e) => {
 
         e.preventDefault();
         if (password === confirmPassword) {
-            console.log(id)
-
             console.log('Passwords match. Proceed with reset.');
         } else {
             console.log('Passwords do not match.');
-            console.log(id)
-
         }
     };
 
