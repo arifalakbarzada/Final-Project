@@ -5,12 +5,14 @@
       "password": "Aa677077",
       "userCart": [],
       "orders": [],
+      "favlist" : [],
       "id": "1",
       "token": "sdijojsdkMMJb-plkmknjwd"
     },
     {
       "email": "alakbarzadaarif@gmail.com",
       "password": "Aa123456",
+      "favlist" : [],
       "userCart": [],
       "orders": [],
       "token": "77307292-18c5-47c9-ba1e-740b34a35754",
@@ -20,6 +22,7 @@
       "email": "example@gmail.com",
       "password": "Aa7894420",
       "userCart": [],
+      "favlist" : [],
       "orders": [],
       "token": "e8338715-7b1f-4ce5-8aed-1277576269cc",
       "id": "3"
@@ -29,6 +32,7 @@
       "email": "arif12scvd@gmail.com",
       "password": "Aa000000",
       "token": "0eb34adf-5b1a-4660-a3f5-105c2ae79d92",
+      "favlist" : [],
       "userCart": [],
       "orders": []
     }
