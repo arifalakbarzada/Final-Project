@@ -73,7 +73,7 @@ export const usersApi = {
 export const cartsApi = {
     getAllCarts: async function (id) {
         try {
-            const response = await axios.get(`${usersApi}/${id}`);
+            const response = await axios.get(`${usersUrl}/${id}`);
             return response.data;
         }
         catch (error) {
@@ -83,6 +83,6 @@ export const cartsApi = {
     }
     ,
     changeCartItem: function (id, param) {
-        axios.put(`${usersApi}/${id}`, param)
+        axios.put(`${usersUrl}/${id}`, param)
     }
 }
