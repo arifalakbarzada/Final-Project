@@ -8,7 +8,9 @@ const Login = () => {
   const [registerData, setRegisterData] = useState({
     email: '',
     password: '',
-    token : uuid4()
+    token : uuid4(),
+    userCart: [],
+    orders : []
   });
   const [loginData, setLoginData] = useState({
     email: '',
