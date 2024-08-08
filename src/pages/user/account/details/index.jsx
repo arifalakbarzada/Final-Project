@@ -7,19 +7,7 @@ function AccountDetails() {
   const [edit , setEdit] = useState(false)
   return (
     <div>
-      <h2>Account Details</h2>
-      <input type="text" defaultValue={userData.email} onChange={
-        (e) => setUserData({...userData , email : e.target.value})
-      } readOnly = {!edit} />
-      <button onClick={()=>{
-        setEdit(!edit)
-      }}>{edit ? 'Close Edit' : 'Open Edit'}</button>
-
-      <button onClick={
-        ()=>{
-          usersApi.changeUserData(userData.id , userData)
-        }
-      }>Allow Changes</button>
+  
       </div>
   )
 }

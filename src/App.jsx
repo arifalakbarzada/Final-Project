@@ -23,7 +23,6 @@ import Search from './pages/user/search'
 import ForgetPassword from './pages/user/forgotpass'
 import ResetPassword from './pages/user/resetPassword'
 import AccountOrders from './pages/user/account/orders'
-import ResetInAccount from './pages/user/account/resetPassword'
 import AccountAddress from './pages/user/account/address'
 import AccountDetails from './pages/user/account/details'
 import AccountDashBoard from './pages/user/account/dashboard'
@@ -51,7 +50,6 @@ function App() {
         <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />}>
         <Route path='dashboard' index element={<AccountDashBoard />} />
         <Route path="orders" element = {<AccountOrders />} />
-        <Route path="resetpassword" element = {<ResetInAccount />} />
         <Route path="address" element = {<AccountAddress />} />
         <Route path="details" element = {<AccountDetails />} />
         </Route>

@@ -21,7 +21,6 @@ function SideBarForMyAccount() {
           className={({ isActive }) => (isActive || window.location.pathname.startsWith('/dashboard') ? 'active' : '')}
         >Dashboard</NavLink></li>
         <li><NavLink to="orders" className={({ isActive }) => (isActive ? 'active' : '')}>Orders</NavLink></li>
-        <li><NavLink to="resetpassword" className={({ isActive }) => (isActive ? 'active' : '')}>Reset Password</NavLink></li>
         <li><NavLink to="address" className={({ isActive }) => (isActive ? 'active' : '')}>Address</NavLink></li>
         <li><NavLink to="details" className={({ isActive }) => (isActive ? 'active' : '')}>Account Details</NavLink></li>
         <li><button onClick={handleLogout}><FiLogOut /> Logout</button></li>
