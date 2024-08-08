@@ -1,4 +1,5 @@
 import axios from "axios"
+import { v4 } from "uuid";
 export let productsUrl = import.meta.env.VITE_PRODUCTS_API
 export let usersUrl = import.meta.env.VITE_USERS_API
 
@@ -66,7 +67,7 @@ export const usersApi = {
     }
     ,
     resetPassword: function (id, data, password) {
-        axios.put(`${usersUrl}/${id}`, { ...data, password: password })
+        axios.put(`${usersUrl}/${id}`, { ...data, password: password, token: v4() })
     }
     ,
     changeUserData: function (id, param) {
