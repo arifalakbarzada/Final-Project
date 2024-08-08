@@ -68,10 +68,14 @@ export const usersApi = {
     resetPassword: function (id, data, password) {
         axios.put(`${usersUrl}/${id}`, { ...data, password: password })
     }
+    ,
+    changeUserData: function (id, param) {
+        axios.patch(`${usersUrl}/${id}`, param)
+    }
 }
 
 export const cartApi = {
-    getCart : async function (id) {
+    getCart: async function (id) {
         try {
             const response = await axios.get(`${usersUrl}/${id}`);
             return response.data;

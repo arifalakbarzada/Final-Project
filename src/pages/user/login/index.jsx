@@ -10,7 +10,8 @@ const Login = () => {
     password: '',
     token : uuid4(),
     userCart: [],
-    orders : []
+    orders : [],
+    userName : ''
   });
   const [loginData, setLoginData] = useState({
     email: '',
