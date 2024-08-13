@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Navigate, Route, Routes  } from 'react-router'
+import { Navigate, Route, Routes, useLocation } from 'react-router'
 import Home from './pages/user/home'
 import Contact from './pages/user/contact'
 import UserLayout from './layout/user'
@@ -26,8 +26,25 @@ import AccountOrders from './pages/user/account/orders'
 import AccountAddress from './pages/user/account/address'
 import AccountDetails from './pages/user/account/details'
 import AccountDashBoard from './pages/user/account/dashboard'
+import { TransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
+import Register from './pages/user/register'
 function App() {
-  const user = useSelector((state)=> state.users.user)
+  document.addEventListener("DOMContentLoaded", function() {
+    const mainElements = document.querySelectorAll("main *");
+
+    mainElements.forEach(element => {
+        element.classList.add("fade-in");
+    });
+
+    window.addEventListener("load", () => {
+        mainElements.forEach(element => {
+            element.classList.add("visible");
+        });
+    });
+});
+
+  const user = useSelector((state) => state.users.user)
   const dispatch = useDispatch();
   useEffect(() => {
     const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
@@ -35,34 +52,44 @@ function App() {
       dispatch(setUserFromLocalStorage(JSON.parse(storedUser)));
     }
   }, [dispatch]);
+  const location = useLocation();
   return (
-    <Routes>
-      <Route path="/" element={<UserLayout />}>
-        <Route index element={<Home />} />
-        <Route path='products/:id/:color' element = {<Details />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="/search/:searchTerm" element={<Search />} />
-        <Route path="cart" element={user ? <Cart /> : <Navigate to="/login" />} />
-        <Route path="favlist" element={user ? <FavList /> : <Navigate to="/login" />} />
-        <Route path="/login" element={user ? <Navigate to="/myaccount/dashboard" /> : <Login />} />
-        <Route path='/resetpassword/:id/:token' element = {<ResetPassword />} />
-        <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />}>
-        <Route path='dashboard' index element={<AccountDashBoard />} />
-        <Route path="orders" element = {<AccountOrders />} />
-        <Route path="address" element = {<AccountAddress />} />
-        <Route path="details" element = {<AccountDetails />} />
-        </Route>
-        <Route path='forgetpassword' element={user ? <Navigate to="/login" />: <ForgetPassword />} />
-        <Route path='*' element = {<NotFound />} />
-      </Route>
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="edit" element={<EditPanel />} />
-        <Route path="orders" element={<Orders />} />
-      </Route>
-    </Routes>
+    <TransitionGroup>
+      <CSSTransition
+        key={location.key}
+        classNames="page"
+        timeout={500}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<UserLayout />}>
+            <Route index element={<Home />} />
+            <Route path='products/:id/:color' element={<Details />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="/search/:searchTerm" element={<Search />} />
+            <Route path="cart" element={user ? <Cart /> : <Navigate to="/login" />} />
+            <Route path="favlist" element={user ? <FavList /> : <Navigate to="/login" />} />
+            <Route path="register" element = {<Register />} />
+            <Route path="/login" element={user ? <Navigate to="/myaccount/dashboard" /> : <Login />} />
+            <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
+            <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />}>
+              <Route path='dashboard' index element={<AccountDashBoard />} />
+              <Route path="orders" element={<AccountOrders />} />
+              <Route path="address" element={<AccountAddress />} />
+              <Route path="details" element={<AccountDetails />} />
+            </Route>
+            <Route path='forgetpassword' element={user ? <Navigate to="/login" /> : <ForgetPassword />} />
+            <Route path='*' element={<NotFound />} />
+          </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="edit" element={<EditPanel />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
+        </Routes>
+      </CSSTransition>
 
+    </TransitionGroup>
   )
 }
 

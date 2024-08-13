@@ -5,14 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
 import { v4 as uuid4 } from 'uuid';
 const Login = () => {
-  const [registerData, setRegisterData] = useState({
-    email: '',
-    password: '',
-    token : uuid4(),
-    userCart: [],
-    orders : [],
-    userName : ''
-  });
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -39,93 +31,45 @@ const Login = () => {
     }
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    if (validateEmail(registerData.email) &&validatePassword(registerData.password)) {
-      usersApi.addUser(registerData)
-      setRegisterData(
-        {
-          email: '',
-          password : '',
-          token : uuid4()
-        }
-      )
-    } else {
-      console.error('Please register with correct values');
-    }
-  };
-  function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    return regex.test(password);
-  }
-
-  function validateEmail(email) {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return regex.test(email);
-  }
-  
   return (
-    <div className="auth-container">
-      <div className="auth-form">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
-            <label>Username or email address *</label>
-            <input
-              type="text"
-              required
-              value={loginData.email}
-              onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password *</label>
-            <input
-              type="password"
-              required
-              value={loginData.password}
-              onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-            />
-          </div>
-          <button type="submit" className="btn btn-login">LOGIN</button>
-          <div className="remember-me">
-            <input 
-              type="checkbox" 
-              id="rememberMe" 
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)} 
-            />
-            <label htmlFor="rememberMe">Remember me</label>
-          </div>
-          <Link to={'/forgetpassword'}>Lost your password?</Link>
-        </form>
-      </div>
-      <div className="auth-form">
-        <h2>Register</h2>
-        <form onSubmit={handleRegister}>
-          <div className="form-group">
-            <label>Email address *</label>
-            <input
-              type="email"
-              required
-              value={registerData.email}
-              onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password *</label>
-            <input
-              type="password"
-              required
-              value={registerData.password}
-              onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-            />
-          </div>
-          <button type="submit" className="btn btn-register">REGISTER</button>
-        </form>
+    <div className="login-container">
+      <h2>Login</h2>
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="input-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={loginData.email}
+            onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={loginData.password}
+            onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+            required
+          />
+        </div>
+        <button type="submit" className="btn-login">Login</button>
+        <div className="remember-me">
+          <input type="checkbox" name="rememberMe"  onChange={() => setRememberMe(!rememberMe)} />
+          <label htmlFor="remember">Remember Me</label>
+        </div>
+      </form>
+      <div className="login-options">
+        <Link to={'/forgetpassword'}>Lost your password?</Link>
+        <Link to={'/register'} className="create-account">Create Account</Link>
       </div>
     </div>
   );
+
 };
 
 export default Login;

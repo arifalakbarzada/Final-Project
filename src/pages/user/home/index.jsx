@@ -6,14 +6,14 @@ function Home() {
   
 
   return (
-    <>
+    <div>
     <Slider />
 <Suspense fallback = {<Loading />}>
 
  <Products />
 </Suspense>
     
-    </>
+    </div>
    
   )
 }

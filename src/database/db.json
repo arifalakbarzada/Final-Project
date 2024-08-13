@@ -39,6 +39,16 @@
       "userName": "",
       "userCart": [],
       "orders": []
+    },
+    {
+      "id": "4f7c",
+      "email": "yeajnfdsllkdfkvsv98565232@gmail.com",
+      "password": "Aa000000",
+      "name": "Akjscz1452015452",
+      "token": "68df4e0c-e1ac-47be-bed2-acd4ca155ddc",
+      "userCart": [],
+      "orders": [],
+      "favlist": []
     }
   ]
 }
