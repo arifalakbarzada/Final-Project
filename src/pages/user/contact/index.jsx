@@ -36,7 +36,7 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <h2>İletişim</h2>
+      <h2>Contact</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name *</label>
