@@ -2,106 +2,40 @@
   --shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
 }
 
-.swiper-slide{
-  &::selection{
+.swiper-slide {
+  &::selection {
     user-select: none;
   }
 }
 
-.slick-dots{
-  button{
+.slick-dots {
+  button {
     background: #ffffff !important;
     transition: none;
-    &:hover{
+
+    &:hover {
       background: #ffffff !important;
       animation: none;
     }
   }
 
 }
-main>div{
+
+main>div {
   width: 80% !important;
   margin: 0 auto;
 }
 
-main>.slick-slider{
+main>.slick-slider {
   width: 100% !important;
 }
 
-.login-container , .register-container , .forget-password-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-
-.login-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-.input-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.btn-login, .btn-register {
-  width: 100%;
-  padding: 10px;
-  background-color: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-login:hover {
-  background-color: #005f8b;
-}
-
-.login-options {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.login-options a {
-  margin: 0 10px;
-  font-size: 14px;
-  color: #0077b6;
-  text-decoration: none;
-}
-
-.login-options a:hover {
-  text-decoration: underline;
-}
-
-}
 
 
 
 
-::selection{
+
+::selection {
   user-select: none;
 }
 
@@ -112,37 +46,11 @@ main>.slick-slider{
 }
 
 .header a:hover {
-  color: #ef476f !important; /* Hover durumunda dikkat çekici bir renk */
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-  border-color: #0077b6; /* Focus durumunda mavi renk */
-  outline: none;
+  color: #ef476f !important;
+  /* Hover durumunda dikkat çekici bir renk */
 }
 
 
-button {
-  background-color: #0077b6 !important; /* Modern ve canlı bir mavi renk */
-  color: white !important;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.3s ease !important;
-}
-
-button:hover {
-  background-color: #023e8a !important; /* Hover durumunda daha koyu bir ton */
-  transform: translateY(-3px); /* Butonun yukarı doğru hafif bir hareket kazanması */
-}
 
 
 
@@ -155,7 +63,8 @@ button:hover {
 }
 
 .product-container:hover {
-  transform: translateY(-5px); /* Kart hover durumunda hafifçe yukarı çıkar */
+  transform: translateY(-5px);
+  /* Kart hover durumunda hafifçe yukarı çıkar */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -187,7 +96,7 @@ main {
 
 header {
   position: sticky;
-   background-color: #2d2d2d !important;
+  background-color: #2d2d2d !important;
   color: #f5f5f5;
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -196,12 +105,17 @@ header {
   left: 0;
   box-shadow: var(--shadow);
   z-index: 10000;
+
+  .active {
+    color: #5547ff !important;
+  }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
 }
+
 /*? Products CSS start  */
 .products-container {
   padding: 2rem 0;
@@ -321,148 +235,175 @@ header {
   padding: 20px;
   max-width: 800px;
   margin: auto;
+
+
+  .about-banner {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .about-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-content h2 {
+    color: #333;
+  }
+
+  .about-content h3 {
+    color: #4CAF50;
+  }
+
+  .about-content p,
+  .about-content ul {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .about-content ul {
+    padding: 0;
+  }
+
+  .about-content a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+
+  .about-content a:hover {
+    text-decoration: underline !important;
+  }
+
 }
-
-.about-banner {
-  background-color: #4CAF50;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px 8px 0 0;
-}
-
-.about-content {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.about-content h2 {
-  color: #333;
-}
-
-.about-content h3 {
-  color: #4CAF50;
-}
-
-.about-content p,
-.about-content ul {
-  color: #555;
-  line-height: 1.6;
-}
-
-.about-content ul {
-  padding: 0;
-}
-
-.about-content a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-
-.about-content a:hover {
-  text-decoration: underline !important;
-}
-
-
 
 /* ! About CSS end */
 
 /* ? Login  CSS start */
 
+.login-container,
+.register-container,
+.forget-password-container,
+.reset-password-container {
 
-.auth-container {
-  display: flex;
-  justify-content: space-between;
+  max-width: 400px;
+  margin: 50px auto;
   padding: 20px;
-}
-
-.auth-form {
-  border: 1px solid #ccc;
+  background-color: #f7f7f7;
   border-radius: 8px;
-  padding: 20px;
-  width: 45%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #0077b6;
+    /* Focus durumunda mavi renk */
+    outline: none;
+  }
+
+
+  button {
+    background-color: #0077b6 !important;
+    /* Modern ve canlı bir mavi renk */
+    color: white !important;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease !important;
+  }
+
+  button:hover {
+    background-color: #023e8a !important;
+    /* Hover durumunda daha koyu bir ton */
+    transform: translateY(-3px);
+    /* Butonun yukarı doğru hafif bir hareket kazanması */
+  }
+
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .btn-login,
+  .btn-register {
+    width: 100%;
+    padding: 10px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-login:hover {
+    background-color: #005f8b;
+  }
+
+  .login-options {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .login-options a {
+    margin: 0 10px;
+    font-size: 14px;
+    color: #0077b6;
+    text-decoration: none;
+  }
+
+  .login-options a:hover {
+    text-decoration: underline;
+  }
+
+  .remember-me {
+    margin: 10px 0;
+  }
+
+  .remember-me input {
+    margin-right: 5px;
+  }
 }
 
-.auth-form h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-}
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  outline: none;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.btn {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.btn-login {
-  background-color: black;
-}
-
-.btn-register {
-  background-color: black;
-}
-
-.btn-reset {
-  background-color: black;
-}
-
-.btn-back {
-  background-color: gray;
-}
-
-.remember-me {
-  margin: 10px 0;
-}
-
-.remember-me input {
-  margin-right: 5px;
-}
-
-.forgot-password {
-  display: block;
-  margin-top: 10px;
-  color: #b3422c;
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-.reset-notification {
-  color: green;
-  font-size: 16px;
-}
 
 /* ? Login CSS end */
 
@@ -785,9 +726,21 @@ option {
 #myAccount {
 
   .sidebar {
-    width: 250px;
+    max-width: 250px;
     background-color: #f5f5f5;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    .logout{
+      width: 100%;
+    }
+    .active {
+      background-color: #484f9a;
+      color: #fff;
+    }
 
     button {
       width: 100%;
@@ -801,7 +754,11 @@ option {
   }
 
   .sidebar ul {
+    width: 100%;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     padding: 0;
   }
 
@@ -810,25 +767,24 @@ option {
   }
 
   .sidebar ul li {
-    padding: 10px;
     cursor: pointer;
   }
 
   .sidebar a.active {
     width: 100% !important;
     display: block;
-    color: #fff;
+    color: #fff !important;
 
   }
 
   .sidebar ul li:hover {
-    background-color: #000;
+    background-color: #484f9a;
     color: #fff;
   }
 }
 
 .account-details-form {
-  max-width: 500px;
+  /* max-width: 500px; */
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #eaeaea;
@@ -860,7 +816,7 @@ option {
   .save-btn {
     width: 100%;
     padding: 12px;
-    background-color: #000;
+    background-color: #0056b3;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -869,7 +825,7 @@ option {
   }
 
   .save-btn:hover {
-    background-color: #444;
+    background-color: #007BFF;
   }
 }
 

@@ -14,17 +14,15 @@ function SideBarForMyAccount() {
     navigate('/login');
   };
   return (
-    <div className="sidebar col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div className="sidebar col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <ul>
-        <li> <NavLink
-          to="dashboard"
-          className={({ isActive }) => (isActive || window.location.pathname.startsWith('/dashboard') ? 'active' : '')}
-        >Dashboard</NavLink></li>
-        <li><NavLink to="orders" className={({ isActive }) => (isActive ? 'active' : '')}>Orders</NavLink></li>
-        <li><NavLink to="address" className={({ isActive }) => (isActive ? 'active' : '')}>Address</NavLink></li>
-        <li><NavLink to="details" className={({ isActive }) => (isActive ? 'active' : '')}>Account Details</NavLink></li>
-        <li><button onClick={handleLogout}><FiLogOut /> Logout</button></li>
+        <li><NavLink to="dashboard">Dashboard</NavLink></li>
+        <li><NavLink to="orders">Orders</NavLink></li>
+        <li><NavLink to="address">Address</NavLink></li>
+        <li><NavLink to="details">Account Details</NavLink></li>
       </ul>
+              <div className='logout'><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
+
     </div>
   )
 }

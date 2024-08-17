@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { CiHeart, CiSearch, CiUser } from 'react-icons/ci'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import SearchModal from '../../../pages/user/searchModal'
 import { setSearchTerm } from '../../../redux/slices/searchSlice'
 
@@ -29,13 +29,13 @@ function Header() {
       </div>
       <ul className='center-urls'>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <NavLink to="/about">About</NavLink>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <NavLink to="/contact">Contact</NavLink>
         </li>
       </ul>
       <ul className="right-urls">
