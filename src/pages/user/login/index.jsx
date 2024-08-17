@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUsers, loginUser } from '../../../redux/slices/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
-import { v4 as uuid4 } from 'uuid';
 const Login = () => {
   const [loginData, setLoginData] = useState({
     email: '',
