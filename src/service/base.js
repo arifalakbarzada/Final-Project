@@ -70,8 +70,8 @@ export const usersApi = {
         axios.put(`${usersUrl}/${id}`, { ...data, password: password, token: v4() })
     }
     ,
-    changeUserData: function (id, param) {
-        axios.patch(`${usersUrl}/${id}`, param)
+    changeUserData: function (id, user,param) {
+        axios.put(`${usersUrl}/${id}`,{...user ,...param})
     }
 }
 

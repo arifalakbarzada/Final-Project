@@ -39,7 +39,7 @@ const Contact = () => {
       <h2>İletişim</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Adınız *</label>
+          <label>Name *</label>
           <input
             type="text"
             name="name"
@@ -49,7 +49,7 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
-          <label>E-posta Adresiniz *</label>
+          <label>Email *</label>
           <input
             type="email"
             name="email"
@@ -59,7 +59,7 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
-          <label>Mesajınız *</label>
+          <label>Message *</label>
           <textarea
             name="message"
             value={formData.message}

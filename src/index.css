@@ -19,9 +19,16 @@
   }
 
 }
+main>div{
+  width: 80% !important;
+  margin: 0 auto;
+}
 
+main>.slick-slider{
+  width: 100% !important;
+}
 
-.login-container {
+.login-container , .register-container , .forget-password-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -57,7 +64,7 @@
   box-sizing: border-box;
 }
 
-.btn-login {
+.btn-login, .btn-register {
   width: 100%;
   padding: 10px;
   background-color: #0077b6;
@@ -167,6 +174,7 @@ button:hover {
 }
 
 
+
 .product-container {
   background-color: #ffffff;
   border-radius: 10px;
@@ -192,7 +200,6 @@ button:hover {
 }
 
 .header,
-.products-container,
 .footer {
   width: 80%;
   margin: 0 auto;
@@ -207,6 +214,9 @@ main {
   /* margin-top: 4rem; */
   /* padding-block: 1.5rem; */
   margin-bottom: 1rem;
+  .products-container{
+  width: 100% !important;
+}
 }
 
 header {
