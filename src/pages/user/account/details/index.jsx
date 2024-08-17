@@ -51,7 +51,7 @@ const AccountDetails = () => {
     e.preventDefault();
     if (formData.currentPassword === userData.password && formData.newPassword === formData.confirmPassword && validatePassword(formData.newPassword) && validateEmail(formData.email) && validateUserName(formData.userName)) {
 console.log(formData);
-usersApi.changeUserData(userData.id  ,user , {
+usersApi.changeUserData(userData.id  ,userData , {
   userName: formData.userName ,
   password : formData.newPassword,
   email: formData.email
