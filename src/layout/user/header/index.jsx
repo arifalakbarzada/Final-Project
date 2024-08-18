@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { CiHeart, CiSearch, CiUser } from 'react-icons/ci'
 import { useDispatch } from 'react-redux'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import {NavLink, useNavigate } from 'react-router-dom'
 import SearchModal from '../../../pages/user/searchModal'
 import { setSearchTerm } from '../../../redux/slices/searchSlice'
 
@@ -48,19 +48,19 @@ function Header() {
           />
         </li>
         <li>
-          <Link to={'/login'}>
+          <NavLink to={'/login'}>
             <CiUser />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to={'/favlist'}>
+          <NavLink to={'/favlist'}>
             <CiHeart />
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to={'/cart'}>
+          <NavLink to={'/cart'}>
             <BsCart />
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>

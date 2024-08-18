@@ -21,7 +21,7 @@ function SideBarForMyAccount() {
         <li><NavLink to="address">Address</NavLink></li>
         <li><NavLink to="details">Account Details</NavLink></li>
       </ul>
-              <div className='logout'><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
+      <div className='logout'><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
 
     </div>
   )
