@@ -65,7 +65,7 @@ function Products() {
         </div>
         <div className="product-content"  onClick={
         () => {
-          navigate(`/products/${product.id}/${color.name}`)
+          navigate(`/products/${product.id}/${color.id}/${color.name}`)
         }
       }>
           <h3 className="title">{product.name} {product.colors.length>1 ?`, ${color.name}`  : null}</h3>

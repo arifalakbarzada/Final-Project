@@ -3,17 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { productsApi } from '../../../service/base';
+import { BsCartPlus } from 'react-icons/bs';
 
 
 function ProductDetail() {
-  const { id, color: selectedColor } = useParams();
+  const { id, colorId, color: selectedColor } = useParams();
   const navigate = useNavigate();
-  const [product, setProducts] = useState(null)
+  const [product, setProduct] = useState(null)
+  const [selectedColorId, setSelectedColorId] = useState(colorId)
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   useEffect(() => {
-    productsApi.getSingleProduct(id).then(res => setProducts(res))
+    productsApi.getSingleProduct(id).then(res => setProduct(res))
   }, [id])
 
   if (!product) {
@@ -82,7 +84,8 @@ function ProductDetail() {
                     title={color.name}
                     onClick={
                       () => {
-                        navigate(`/products/${product.id}/${color.name.toLowerCase()}`)
+                        navigate(`/products/${product.id}/${color.id}/${color.name.toLowerCase()}`)
+                        setSelectedColorId(color.id)
                       }
                     }
                   ></div>
@@ -92,7 +95,22 @@ function ProductDetail() {
           }
         </div>
 </div>
-
+<div className="product-action">
+  <button className="addToCart" onClick={()=>{
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      colorId : selectedColorId,
+      color : selectedColor ,
+      price: product.price - product.price * product.discount / 100,
+      image: colorData.images[0],
+      stock: colorData.stock
+      }
+      console.log(cartItem)
+  }}>
+  <BsCartPlus />  Add To Cart
+  </button>
+</div>
       </div>
       </div>
     

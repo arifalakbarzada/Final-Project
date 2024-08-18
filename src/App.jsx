@@ -40,7 +40,7 @@ function App() {
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
-        <Route path='products/:id/:color' element={<Details />} />
+        <Route path='products/:id/:colorId/:color' element={<Details />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="/search/:searchTerm" element={<Search />} />
