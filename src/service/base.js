@@ -84,5 +84,10 @@ export const cartApi = {
             console.error(error);
             throw error;
         }
-    }
+        
+    },
+    changeUserCart : function (id,user,changes) {
+        axios.put(`${usersUrl}/${id}` , {...user , userCart : changes})
+            
+        }
 } 

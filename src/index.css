@@ -941,6 +941,31 @@ option {
   }
 }
 
+/* todo Reset Password CSS end */
+
+/*? Cart CSS start  */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  *{
+      text-wrap: pretty;
+  }
+  .cart-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+   .cart-image{
+    width: 100px;
+    height: 100px;
+   }
+    img{
+      width: 100% !important;
+      object-fit: cover;
+    } 
+    
+  }
+}
 
 
 
