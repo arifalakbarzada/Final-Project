@@ -11,7 +11,7 @@ function FavList() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   useEffect(() => {
     favListApi.getFavList(JSON.parse(user).id).then(res => dispatch(setFavList(res.favlist)));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

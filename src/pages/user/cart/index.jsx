@@ -11,7 +11,7 @@ function Cart() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   useEffect(() => {
     cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)));
-  }, []);
+  }, [dispatch]);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
