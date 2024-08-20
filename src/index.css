@@ -1110,32 +1110,38 @@ option {
   background-color: #218838;
 }
 
-.cart-empty {
+.empty-cart {
   text-align: center;
+  padding: 50px 20px;
+  background: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty-cart h2 {
+  font-size: 28px;
+  color: #333;
+}
+
+.empty-cart p {
+  color: #777;
   font-size: 18px;
-  color: #888;
-  margin-top: 50px;
+  margin: 20px 0;
 }
 
-.cart-empty p {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
+.shop-now-btn {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.home-link {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.home-link:hover {
-  background-color: #0056b3;
+.shop-now-btn:hover {
+  background-color: #ff5a50;
 }
 
 
@@ -1145,6 +1151,39 @@ option {
 /*todo FavList CSS start */
 
 
+.empty-fav-list {
+  text-align: center;
+  padding: 50px 20px;
+  background: #fff5e6;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.empty-fav-list h2 {
+  font-size: 28px;
+  color: #e67e22;
+}
+
+.empty-fav-list p {
+  color: #e67e22;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.explore-btn {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+  background-color: #d35400;
+}
 
 /*todo FavList CSS end  */
 
