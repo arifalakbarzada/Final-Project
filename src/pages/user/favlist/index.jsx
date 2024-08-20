@@ -18,28 +18,32 @@ function FavList() {
       {
         favList.length > 0 ? (
           <div className="favList-container">
-            {
-              favList.map((item, index) => (
-                <div key={index} className='fav-item'>
-                  <div className="fav-item-image">
-                    <img src={item.image} alt={item.name} />
-                  </div>
-                  <div className="fav-item-name">
-                    <Link to={`/products/${item.id}/${item.colorId}/${item.color}`}>{item.name} , {item.color}</Link>
-                  </div>
-                  <div className="fav-item-stock">
-                    <p>{item.stock ? 'In Stock' : 'Out Stock'}</p>
-                  </div>
-                  <div className="addToCartInFavList">
-                    <button onClick={() => dispatch(addCartItem(item))}><BsCart /> Add To Cart</button>
-                  </div>
-                  <div className="removeFavItem">
-                    <button onClick={() => dispatch(removeFromFavList(item.colorId))}>Remove</button>
-                  </div>
+            {favList.map((item, index) => (
+              <div key={index} className="fav-item">
+                <div className="fav-item-image">
+                  <img src={item.image} alt={item.name} />
                 </div>
-              ))
-            }
+                <div className="fav-item-details">
+                  <Link to={`/products/${item.id}/${item.colorId}/${item.color}`} className="fav-item-name">
+                    <h4>{item.name} , {item.color}</h4>
+                  </Link>
+                  <p className="fav-item-price">${item.price.toFixed(2)}</p>
+                  <p className={`fav-item-stock ${item.stock ? 'in-stock' : 'out-stock'}`}>
+                    {item.stock ? 'In Stock' : 'Out of Stock'}
+                  </p>
+                </div>
+                <div className="fav-item-actions">
+                  <button onClick={() => dispatch(addCartItem(item))} className="addToCartBtn">
+                    <BsCart /> Add To Cart
+                  </button>
+                  <button onClick={() => dispatch(removeFromFavList(item.colorId))} className="removeBtn">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
+
 
         ) : (
           <div className="empty-fav-list">

@@ -1150,6 +1150,114 @@ option {
 
 /*todo FavList CSS start */
 
+.favList-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.favList-container:hover {
+  background-color: #f2f2f2;
+}
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.fav-item:last-child {
+  border-bottom: none;
+}
+
+.fav-item-image img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.fav-item-image img:hover {
+  transform: scale(1.1);
+}
+
+.fav-item-details {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.fav-item-name h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.fav-item-name:hover h4 {
+  color: #2980b9;
+}
+
+.fav-item-price {
+  font-size: 18px;
+  font-weight: 500;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.fav-item-stock {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
+.fav-item-stock.in-stock {
+  color: #27ae60;
+}
+
+.fav-item-stock.out-stock {
+  color: #e74c3c;
+}
+
+.fav-item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.addToCartBtn,
+.removeBtn {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.addToCartBtn:hover {
+  background-color: #2980b9;
+}
+
+.removeBtn {
+  background-color: #e74c3c;
+}
+
+.removeBtn:hover {
+  background-color: #c0392b;
+}
+
 
 .empty-fav-list {
   text-align: center;

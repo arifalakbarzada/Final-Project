@@ -48,17 +48,17 @@ const cartSlice = createSlice({
     },
     decreaseQuantity: (state, action) => {
       const index = state.items.findIndex(item => item.colorId === action.payload);
-      
-      if (index !== -1 && state.items[index].quantity > 1) {
-        state.items[index].quantity -= 1;
-        cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items);
-        
-        if (state.items[index].quantity === 1) {
+      if (index !== -1) {
+        if (state.items[index].quantity > 1) {
+          state.items[index].quantity -= 1;
+          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items);
+        } else {
           state.items = state.items.filter(item => item.colorId !== action.payload);
           cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items);
         }
       }
     }
+    
     
   }
 })
