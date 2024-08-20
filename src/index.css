@@ -22,7 +22,7 @@
 }
 
 main>div {
-  width: 80% !important;
+  width: 60% !important;
   margin: 0 auto;
 }
 
@@ -71,9 +71,8 @@ main>.slick-slider {
   }
 }
 
-.header,
 .footer {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -108,6 +107,8 @@ header {
 }
 
 .header {
+  width: 60%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   a.active::hover{
@@ -539,14 +540,16 @@ header {
 /*? Loading CSS end */
 
 
-/* todo Details CSS*/
+/* todo Details CSS start*/
 
 
 .product-detail-container {
-  /* display: flex;
-  flex-wrap: wrap;
-  max-width: 1200px; */
   padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
 }
 
 .product-detail-image {
@@ -554,36 +557,37 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .product-detail-image .swiper {
   width: 100%;
-  max-width: 380px; /* Maksimum genişliği belirledik */
-  height: 400px; /* Yüksekliği manuel olarak belirledik */
+  max-width: 400px;
+  height: 400px;
 }
 
 .product-detail-image .swiper-slide img {
-  mix-blend-mode: color-burn;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Görüntü oranlarını korumak için kullanıldı */
+  object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .product-info {
   flex: 1;
-  padding: 20px;
+  padding: 30px;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .product-info h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
+  color: #222;
 }
 
 .product-info .brand,
@@ -592,7 +596,7 @@ header {
 .product-info .stock {
   margin-bottom: 15px;
   font-size: 1.2rem;
-  color: #555;
+  color: #666;
 }
 
 .product-info .specifications ul {
@@ -603,20 +607,20 @@ header {
 
 .product-info .specifications li {
   margin-bottom: 10px;
-  color: #666;
+  color: #777;
 }
 
 .product-info .discounted-price {
   color: #e74c3c;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-right: 15px;
 }
 
 .product-info .main-price {
   text-decoration: line-through;
   color: #bbb;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .colors {
@@ -629,8 +633,8 @@ header {
 }
 
 .color {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border: 2px solid #ddd;
   border-radius: 50%;
   cursor: pointer;
@@ -639,7 +643,46 @@ header {
 
 .color:hover {
   transform: scale(1.2);
-  border-color: #333;
+  border-color: #555;
+}
+
+.addToCart,
+.addToFav {
+  background-color: #3498db;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addToCart:hover,
+.addToFav:hover {
+  background-color: #2980b9;
+}
+
+.product-action {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.addToFav {
+  background-color: #e67e22;
+}
+
+.addToFav:hover {
+  background-color: #d35400;
+}
+
+.swiper-button-prev::after, 
+.swiper-button-next::after {
+  padding: 24px !important;
 }
 
 @media (max-width: 768px) {
@@ -649,6 +692,7 @@ header {
 
   .product-detail-image {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .swiper {
@@ -674,6 +718,7 @@ header {
     font-size: 1.3rem;
   }
 }
+
 
 
 /* todo Details CSS end */
@@ -782,8 +827,12 @@ option {
     display: block;
   }
 
-  .sidebar ul li {
+  .sidebar ul li , .logout {
     cursor: pointer;
+    padding: 8px 12px;
+    &:has(a.active){
+      background-color: #484f9a;
+    }
   }
 
   .sidebar a.active {
@@ -1092,6 +1141,12 @@ option {
 
 
 /*? Cart CSS end */
+
+/*todo FavList CSS start */
+
+
+
+/*todo FavList CSS end  */
 
 /* ! Search Modal CSS start */
 .search-modal {

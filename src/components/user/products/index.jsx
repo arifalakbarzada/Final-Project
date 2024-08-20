@@ -8,6 +8,7 @@ import { CiHeart } from 'react-icons/ci';
 import { FaRegEye } from 'react-icons/fa';
 import QuickViewModal from './../quickview';
 import { addCartItem } from '../../../redux/slices/cartSlice';
+import { addToFavList } from '../../../redux/slices/favListSlice';
 
 function Products() {
   const dispatch = useDispatch();
@@ -73,7 +74,20 @@ function Products() {
                 }
               } /></li>
               <li><FaRegEye onClick={() => handleQuickViewOpen(product)} /></li>
-              <li><CiHeart /></li>
+              <li><CiHeart onClick={
+                ()=>{
+                  const favItem = {
+                    id : product.id,
+                    name: product.name,
+                    colorId: color.id,
+                    color: color.name,
+                    price: product.price - product.price * product.discount / 100,
+                    image: color.images[0],
+                    stock: color.stock,
+                  };
+                  dispatch(addToFavList(favItem))
+                }
+              }/></li>
             </ul>
           </div>
         </div>

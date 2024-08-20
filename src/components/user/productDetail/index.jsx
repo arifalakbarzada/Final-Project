@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { productsApi } from '../../../service/base';
-import { BsCartPlus } from 'react-icons/bs';
+import { BsCartPlus, BsHeart } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { addCartItem } from '../../../redux/slices/cartSlice';
+import { addToFavList } from '../../../redux/slices/favListSlice';
 
 function ProductDetail() {
   const { id, colorId, color: selectedColor } = useParams();
@@ -120,7 +121,7 @@ function ProductDetail() {
               onClick={(e) => {
                 e.preventDefault();
                 const cartItem = {
-                  id,
+                  id : product.id,
                   name: product.name,
                   colorId: selectedColorId,
                   color: selectedColor,
@@ -133,7 +134,27 @@ function ProductDetail() {
             >
               <BsCartPlus /> Add To Cart
             </button>
+
+            <button
+              className="addToFav"
+              onClick={(e) => {
+                e.preventDefault();
+                const favoriteItem = {
+                  id: product.id,
+                  name: product.name,
+                  image: colorData.images[0],
+                  price: product.price - product.price * product.discount / 100,
+                  colorId: selectedColorId,
+                  color: selectedColor,
+                  stock : colorData.stock
+                }
+                dispatch(addToFavList(favoriteItem))
+              }}
+            >
+              <BsHeart /> Add To Favorite
+            </button>
           </div>
+
         </div>
       </div>
     </div>
