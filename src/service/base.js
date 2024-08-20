@@ -91,3 +91,19 @@ export const cartApi = {
             
         }
 } 
+
+export const favListApi = {
+    getFavList: async function (id) {
+        try {
+            const response = await axios.get(`${usersUrl}/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+        
+    },
+    changeFavList : function(id , user , changes){
+        axios.put(`${usersUrl}/${id}` , {...user , favlist : changes})
+    }
+}

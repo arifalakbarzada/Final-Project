@@ -7,6 +7,7 @@ import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
 import { FaRegEye } from 'react-icons/fa';
 import QuickViewModal from './../quickview';
+import { addCartItem } from '../../../redux/slices/cartSlice';
 
 function Products() {
   const dispatch = useDispatch();
@@ -57,7 +58,20 @@ function Products() {
           <img src={color.images[0]} alt={product.name + color.name} />
           <div className="product-action">
             <ul>
-              <li><BsCartPlus /></li>
+              <li><BsCartPlus onClick={
+                ()=>{
+                  const cartItem = {
+                    id : product.id,
+                    name: product.name,
+                    colorId: color.id,
+                    color: color.name,
+                    price: product.price - product.price * product.discount / 100,
+                    image: color.images[0],
+                    stock: color.stock,
+                  };
+                  dispatch(addCartItem(cartItem))
+                }
+              } /></li>
               <li><FaRegEye onClick={() => handleQuickViewOpen(product)} /></li>
               <li><CiHeart /></li>
             </ul>
