@@ -53,7 +53,7 @@ function Cart() {
           ))}
           <div className="cart-summary">
             <p className="total-price">Total: ${calculateTotal()}</p>
-            <button className="checkout-button">Checkout</button>
+            <button className="checkout-button" onClick={()=>navigate('/checkout')}>Checkout</button>
           </div>
         </div>
       ) : (

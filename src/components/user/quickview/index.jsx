@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const QuickViewModal = ({ isOpen, onRequestClose, product }) => {
+const QuickViewModal = ({ isOpen, onRequestClose, product}) => {
   if (!product) return null;
 
   return (

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 const SearchModal = ({ isOpen, onClose, onSearch }) => {
   const [input, setInput] = useState('');
-  const [open , setOpen] = useState(null)
+  const [open , setOpen] = useState(isOpen)
 useEffect(()=>{
     setOpen(isOpen)
-})
+},[open])
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       onSearch(input);
