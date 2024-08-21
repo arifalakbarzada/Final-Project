@@ -26,7 +26,7 @@ function Register() {
           usersApi.addUser({
             email: registerData.email,
             password: registerData.password,
-            name: registerData.name,
+            userName: registerData.name,
             token: registerData.token,
             userCart : [],
             orders : [], 

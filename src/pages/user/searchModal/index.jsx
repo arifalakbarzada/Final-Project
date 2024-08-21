@@ -28,7 +28,7 @@ const handleClose = ()=>{
             placeholder="Type and hit Enter to search"
           />
           <button onClick={() => onSearch(input)}>Search</button>
-          <button onClick={()=>setOpen(false)}>Close</button>
+          <button onClick={handleClose}>Close</button>
         </div>
       </div>
     ):null

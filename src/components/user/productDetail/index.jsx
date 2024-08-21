@@ -55,7 +55,7 @@ function ProductDetail() {
   return (
     <div className="product-detail-container container">
       <div className="row">
-        <div className="col-lg-6 col-sm-12">
+        <div className="col-lg-6 col-sm-12 flex-center">
           <div className="product-detail-image">
             <Swiper spaceBetween={50} slidesPerView={1} navigation modules={[Navigation]}>
               {colorData.images.map((image, idx) => (
