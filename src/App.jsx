@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router'
 import Home from './pages/user/home'
 import Contact from './pages/user/contact'
@@ -29,15 +29,17 @@ import AccountDashBoard from './pages/user/account/dashboard'
 import Register from './pages/user/register'
 import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
+import { cartApi } from './service/base'
+import { setCartItems } from './redux/slices/cartSlice'
 function App() {
-  const user = useSelector((state) => state.users.user)
+  const cart = useSelector((state)=>state.cart.items)
   const dispatch = useDispatch();
+  const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   useEffect(() => {
-    const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
-    if (storedUser) {
-      dispatch(setUserFromLocalStorage(JSON.parse(storedUser)));
-    }
-  }, [dispatch]);
+    cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)));
+  }, [cart]);
+
+
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
@@ -49,8 +51,8 @@ function App() {
         <Route path="cart" element={user ? <Cart /> : <Navigate to="/login" />} />
         <Route path="favlist" element={user ? <FavList /> : <Navigate to="/login" />} />
         <Route path="register" element={<Register />} />
-        {user?(<Route path='/submit' element = {<Submit />} />) : null}
-        {user?(<Route path='/checkout' element = {<Checkout />} />) : null}
+        {user &&cart.length>0 ? (<Route path='/submit' element={<Submit />} />) : null}
+        {user &&cart.length>0 ? (<Route path='/checkout' element={<Checkout />} />) : null}
         <Route path="/login" element={user ? <Navigate to="/myaccount/dashboard" /> : <Login />} />
         <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
         <Route path="/myaccount" element={user ? <MyAccount /> : <Navigate to="/login" />}>
