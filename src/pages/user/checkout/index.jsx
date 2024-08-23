@@ -1,36 +1,105 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { cartApi, ordersApi } from '../../../service/base';
 
 const Checkout = () => {
     const navigate = useNavigate();
-    const cart = useSelector((state) => state.cart.items);
+    const [userCart, setUserCart] = useState([]);
+    const [lastOrders, setLastOrders] = useState()
+    const user = localStorage.getItem('user')
+    const [checkoutDetails, setCheckoutDetails] = useState({
+      userName: '',
+      email: '',
+      address: '',
+      city: '',
+      zipCode: ''
+    })
+    const calculateTotal = () => {
+      return userCart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    };
+    useEffect(() => {
+      cartApi.getCart(JSON.parse(user).id).then(res=>setUserCart(res.userCart));
+      ordersApi.getOrders(JSON.parse(user).id).then(res=>setLastOrders(res.orders))
+    }, [])
+    const handleCheckout = (e)=>{
+      e.preventDefault();
+      function validateAddressForm(addressData) {
+  const errors = {};
+
+  const zipCodePattern = /^\d{5}(-\d{4})?$/;
+  if (!addressData.zipCode || !zipCodePattern.test(addressData.zipCode)) {
+      errors.zipCode = "Invalid Zip Code";
+  }
+
+  const cityPattern = /^[a-zA-Z\s]+$/;
+  if (!addressData.city || !cityPattern.test(addressData.city)) {
+      errors.city = "Invalid City Name";
+  }
+
+  if (!addressData.address || addressData.address.trim().length < 5) {
+      errors.address = "Address is too short";
+  }
+
+  return errors;
+}
+
+const addressData = {
+  zipCode: checkoutDetails.zipCode,
+  city: checkoutDetails.city,
+  address: checkoutDetails.address
+};
+
+const validationErrors = validateAddressForm(addressData);
+      if (checkoutDetails.userName === JSON.parse(user).userName && checkoutDetails.email === JSON.parse(user).email && Object.keys(validationErrors).length === 0) {
+        console.log({
+          "checkoutDetails": checkoutDetails,
+          "user": JSON.parse(user),
+          "orders" : userCart
+        })
+        
+      }
+      else if (Object.keys(validationErrors).length>0) {
+        console.log(`Errors` ,validationErrors)
+      }
+      else{
+        console.log("User not found")
+      }
+    }
   return (
     <div className="checkout-container">
       <h2>Checkout</h2>
-      
       <div className="billing-details">
         <h3>Billing Details</h3>
-        <form>
+        <form onSubmit={handleCheckout}>
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" placeholder="John Doe" required />
+            <input type="text" id="name" placeholder="John Doe" required onChange={
+              (e) => setCheckoutDetails({...checkoutDetails, userName: e.target.value})
+            }  />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="john.doe@example.com" required />
+            <input type="email" id="email" placeholder="john.doe@example.com" required onChange={
+              (e) => setCheckoutDetails({...checkoutDetails, email: e.target.value})
+            } />
           </div>
           <div className="form-group">
             <label htmlFor="address">Address</label>
-            <input type="text" id="address" placeholder="123 Main St" required />
+            <input type="text" id="address" placeholder="123 Main St" required onChange={
+              (e) => setCheckoutDetails({...checkoutDetails, address: e.target.value})
+            } />
           </div>
           <div className="form-group">
             <label htmlFor="city">City</label>
-            <input type="text" id="city" placeholder="Anytown" required />
+            <input type="text" id="city" placeholder="Anytown" required onChange={
+              (e) => setCheckoutDetails({...checkoutDetails, city: e.target.value})
+            } />
           </div>
           <div className="form-group">
             <label htmlFor="zipcode">Zip Code</label>
-            <input type="text" id="zipcode" placeholder="12345" required />
+            <input type="text" id="zipcode" placeholder="12345" required onChange={
+              (e) => setCheckoutDetails({...checkoutDetails, zipCode: e.target.value})
+            } />
           </div>
           <button type="submit" className="btn-submit">Place Order</button>
         </form>
@@ -38,17 +107,23 @@ const Checkout = () => {
       
       <div className="order-summary">
         <h3>Order Summary</h3>
-        <div className="summary-item">
-          <span>Item 1 x 1</span>
-          <span>$50.00</span>
-        </div>
-        <div className="summary-item">
-          <span>Item 2</span>
-          <span>$25.00</span>
-        </div>
+        {
+          userCart.length>0?
+          userCart.map((item, index) => (
+            <div key={index} className='summary-item'>
+              <span>{item.name} , {item.color} x {item.quantity}</span>
+              <span>${(item.price*item.quantity).toFixed(2)}</span>
+              </div>
+              ))
+              :(
+                <div>
+                  <p>No items in cart</p>
+                </div>
+              )
+              }
         <div className="summary-total">
           <span>Total</span>
-          <span>$75.00</span>
+          <span>${calculateTotal()}</span>
         </div>
       </div>
       

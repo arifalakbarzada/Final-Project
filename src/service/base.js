@@ -107,3 +107,18 @@ export const favListApi = {
         axios.put(`${usersUrl}/${id}` , {...user , favlist : changes})
     }
 }
+
+export const ordersApi = {
+    getOrders: async function (id) {
+        try {
+            const response = await axios.get(`${usersUrl}/${id}`)
+            return response.data;
+            } catch (error) {
+                console.error(error);
+                throw error;
+                }
+                },
+                changeOrder : function(id , user , changes){
+                    axios.put(`${usersUrl}/${id}` , {...user , orders : changes})
+                }
+}
