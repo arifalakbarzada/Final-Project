@@ -892,7 +892,164 @@ option {
     background-color: #484f9a;
     color: #fff;
   }
+  .dashboard {
+    padding: 30px;
+    background-color: #f0f2f5;
+  }
+  
+  .dashboard-title {
+    color: #007bff;
+    font-size: 32px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .dashboard-widgets {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .widget {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(33% - 20px);
+    min-width: 280px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .widget-icon {
+    font-size: 40px;
+    color: #007bff;
+    margin-right: 15px;
+  }
+  
+  .widget-details h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .widget-details p {
+    font-size: 16px;
+    color: #555;
+  }
+  .orders {
+  padding: 30px;
+  background-color: #f8f9fa;
 }
+
+.orders-title {
+  color: #007bff;
+  font-size: 32px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.orders-table th, .orders-table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.orders-table th {
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.orders-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.orders-table tr:hover {
+  background-color: #e9ecef;
+}
+
+.status {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status.delivered {
+  color: #28a745;
+}
+
+.status.in-transit {
+  color: #ffc107;
+}
+
+.status.canceled {
+  color: #dc3545;
+}
+.address {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.address-title {
+  color: #007bff;
+  font-size: 32px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.address-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.address-item {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 280px;
+}
+
+.address-item h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.address-item p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+}
+
 
 .account-details-form {
   /* max-width: 500px; */
