@@ -90,6 +90,10 @@ export const cartApi = {
         axios.put(`${usersUrl}/${id}` , {...user , userCart : changes})
             
         }
+        ,
+        clearUserCart : function (id,user) {
+            axios.put(`${usersUrl}/${id}` , {...user , userCart : []})
+        }
 } 
 
 export const favListApi = {

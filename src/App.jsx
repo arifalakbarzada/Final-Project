@@ -31,8 +31,12 @@ import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
 import { cartApi } from './service/base'
 import { setCartItems } from './redux/slices/cartSlice'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js';
+
 function App() {
   const cart = useSelector((state)=>state.cart.items)
+  const stripePromise = loadStripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXX');
   const dispatch = useDispatch();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   useEffect(() => {
@@ -41,7 +45,9 @@ function App() {
 
 
   return (
-    <Routes>
+    <Elements  stripe={stripePromise}>
+
+   <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
         <Route path='products/:id/:colorId/:color' element={<Details />} />
@@ -71,7 +77,9 @@ function App() {
       <Route path='*' element={<NotFound />} />
 
     </Routes>
-
+    
+    </Elements>
+   
   )
 }
 

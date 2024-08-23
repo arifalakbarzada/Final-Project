@@ -2,6 +2,35 @@
   --shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
 }
 
+.stripe-card-element {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.stripe-card-element:focus {
+  border-color: #007bff;
+}
+
+.stripe-card-element-error {
+  border-color: #e74c3c;
+}
+
+.stripe-card-element::placeholder {
+  color: #aab7c4;
+}
+
+.stripe-card-element:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+
 .swiper-slide {
   &::selection {
     user-select: none;
