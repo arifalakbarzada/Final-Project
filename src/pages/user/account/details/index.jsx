@@ -118,7 +118,7 @@ const AccountDetails = () => {
       </button>
       <div className="notification">
         {
-notification?notification:null
+          notification ? notification : null
         }
       </div>
     </form>
