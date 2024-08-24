@@ -40,7 +40,10 @@ function App() {
   const dispatch = useDispatch();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   useEffect(() => {
-    cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)));
+    if (user) {
+          cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)));
+
+    }
   }, [cart]);
 
 
