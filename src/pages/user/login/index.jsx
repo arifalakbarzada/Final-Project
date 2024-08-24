@@ -24,7 +24,7 @@ const Login = () => {
     const user = users.find(user => (user.email === loginData.email || user.userName === loginData.email) && user.password === loginData.password);
     if (user) {
       dispatch(loginUser({ user, rememberMe })); // Yalnızca dispatch ile saklayın
-      navigate('/myaccount'); // Doğru yönlendirme
+      navigate('/myaccount/dashboard'); // Doğru yönlendirme
     } else {
       console.error('Invalid login credentials');
     }
