@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { logoutUser } from '../../../../redux/slices/userSlice';
+import { MdDashboard } from 'react-icons/md';
+import { FaMapMarkerAlt, FaShoppingCart } from 'react-icons/fa';
+import { GrUserSettings } from 'react-icons/gr';
 
 function SideBarForMyAccount() {
   const dispatch = useDispatch();
@@ -16,12 +19,12 @@ function SideBarForMyAccount() {
   return (
     <div className="sidebar col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
       <ul>
-        <li><NavLink to="dashboard">Dashboard</NavLink></li>
-        <li><NavLink to="orders">Orders</NavLink></li>
-        <li><NavLink to="address">Address</NavLink></li>
-        <li><NavLink to="details">Account Details</NavLink></li>
+        <li onClick={()=>navigate('dashboard')}> <NavLink to="dashboard"><MdDashboard /> Dashboard</NavLink></li>
+        <li onClick={()=>navigate('orders')}><NavLink to="orders"><FaShoppingCart /> Orders</NavLink></li>
+        <li onClick={()=>navigate('address')}><NavLink to="address"><FaMapMarkerAlt /> Address</NavLink></li>
+        <li onClick={()=>navigate('settings')}><NavLink to="settings"><GrUserSettings /> Settings</NavLink></li>
       </ul>
-      <div className='logout'><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
+      <div className='logout' onClick={handleLogout}><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
 
     </div>
   )

@@ -29,7 +29,7 @@ import AccountDashBoard from './pages/user/account/dashboard'
 import Register from './pages/user/register'
 import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
-import { cartApi } from './service/base'
+import { cartApi, usersApi } from './service/base'
 import { setCartItems } from './redux/slices/cartSlice'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js';
@@ -46,6 +46,11 @@ function App() {
     }
   }, [cart]);
 
+  useEffect(()=>{
+if (window.location.href && user) {
+  usersApi.changeUserActivity(JSON.parse(user).id,JSON.parse(user),new Date())
+}
+  },[user])
 
   return (
     <Elements  stripe={stripePromise}>
@@ -68,7 +73,7 @@ function App() {
           <Route path='dashboard' index element={<AccountDashBoard />} />
           <Route path="orders" element={<AccountOrders />} />
           <Route path="address" element={<AccountAddress />} />
-          <Route path="details" element={<AccountDetails />} />
+          <Route path="settings" element={<AccountDetails />} />
         </Route>
         <Route path='forgetpassword' element={user ? <Navigate to="/login" /> : <ForgetPassword />} />
       </Route>

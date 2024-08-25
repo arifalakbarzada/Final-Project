@@ -548,6 +548,7 @@ header {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 80%;
 
   img {
     width: 40px;
@@ -866,11 +867,20 @@ option {
     justify-content: space-between;
     align-items: center;
     height: fit-content;
-
+    li{
+      display: flex;
+      gap: 10px;
+      svg{
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        color: inherit;
+        font-size: inherit;
+      }
+    }
     .logout {
       width: 100%;
     }
-
     .active {
       background-color: #484f9a;
       color: #fff;

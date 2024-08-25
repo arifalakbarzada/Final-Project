@@ -34,6 +34,7 @@ function Register() {
         password: registerData.password,
         userName: registerData.name,
         token: registerData.token,
+        lastActivity: '',
         userCart: [],
         orders: [],
         favlist: [],

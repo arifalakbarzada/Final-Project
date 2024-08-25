@@ -21,14 +21,29 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = users.find(user => (user.email === loginData.email || user.userName === loginData.email) && user.password === loginData.password);
+    const user = users.find(user =>
+      (user.email === loginData.email || user.userName === loginData.email) &&
+      user.password === loginData.password
+    );
+
     if (user) {
-      dispatch(loginUser({ user, rememberMe })); // Yalnızca dispatch ile saklayın
-      navigate('/myaccount/dashboard'); // Doğru yönlendirme
+      const activity = new Date();
+
+      if (rememberMe) {
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        sessionStorage.setItem('user', JSON.stringify(user));
+      }
+
+      dispatch(loginUser({ user, rememberMe }));
+      usersApi.changeUserActivity(user.id, user, activity);
+
+      navigate('/myaccount/dashboard');
     } else {
       console.error('Invalid login credentials');
     }
   };
+
 
   return (
     <div className="login-container">
@@ -58,7 +73,7 @@ const Login = () => {
         </div>
         <button type="submit" className="btn-login">Login</button>
         <div className="remember-me">
-          <input type="checkbox" name="rememberMe"  onChange={() => setRememberMe(!rememberMe)} />
+          <input type="checkbox" name="rememberMe" onChange={() => setRememberMe(!rememberMe)} />
           <label htmlFor="remember">Remember Me</label>
         </div>
       </form>

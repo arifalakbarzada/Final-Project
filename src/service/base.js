@@ -72,6 +72,9 @@ export const usersApi = {
     ,
     changeUserData: function (id, user,param) {
         axios.put(`${usersUrl}/${id}`,{...user ,...param})
+    },
+    changeUserActivity : function (id , user , param) {
+        axios.put(`${usersUrl}/${id}`,{...user ,lastActivity : param})
     }
 }
 

@@ -39,8 +39,9 @@ function Products() {
     }
   };
 
-  const handleQuickViewOpen = (product) => {
+  const handleQuickViewOpen = (product , color) => {
     setSelectedProduct(product);
+    setSelectedColor(color)
     setIsQuickViewOpen(true);
   };
 
@@ -78,7 +79,7 @@ function Products() {
                     }
                   } /></li>
                   <li><FaRegEye onClick={() => {
-                    handleQuickViewOpen(product)
+                    handleQuickViewOpen(product , color)
                   }
                     } /></li>
                   <li><CiHeart onClick={
@@ -135,6 +136,7 @@ function Products() {
         isOpen={isQuickViewOpen}
         onRequestClose={handleQuickViewClose}
         product={selectedProduct}
+        color = {selectedColor}
       />
     </div>
   );

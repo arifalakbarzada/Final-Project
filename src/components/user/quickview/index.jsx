@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const QuickViewModal = ({ isOpen, onRequestClose, product}) => {
+const QuickViewModal = ({ isOpen, onRequestClose, product , color}) => {
   if (!product) return null;
 
   return (
@@ -15,7 +15,7 @@ const QuickViewModal = ({ isOpen, onRequestClose, product}) => {
       overlayClassName="quick-view-overlay"
     >
       <h2>{product.name}</h2>
-      <img src={product.colors[0].images[0]} className="img-fluid" alt={product.name} />
+      <img src={color.images[0]} className="img-fluid" alt={product.name} />
       <p>{product.description}</p>
       <p>Price: ${(product.price - product.price * product.discount / 100).toFixed(2)}</p>
       <button onClick={onRequestClose}>Close</button>
