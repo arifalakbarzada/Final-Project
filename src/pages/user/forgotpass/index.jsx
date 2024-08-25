@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import { usersApi } from '../../../service/base';
 import { setUsers } from '../../../redux/slices/userSlice';
 import emailjs from '@emailjs/browser';
+import { Link } from 'react-router-dom';
+import { PiArrowElbowLeft, PiArrowLeft } from 'react-icons/pi';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +55,13 @@ const ForgetPassword = () => {
         </div>
         <button type="submit">Send Reset Link</button>
       </form>
+      <div className="login-redirect">
+        <p>
+          <Link to="/login"> <PiArrowLeft />
+          {' '}
+          Back to{' '}Log in</Link>
+        </p>
+      </div>
     </div>
   );
 }
