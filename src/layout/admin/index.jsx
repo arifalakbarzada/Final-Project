@@ -2,6 +2,7 @@ import React from 'react'
 import AdminNavbar from './adminnav'
 import { Outlet, useLocation } from 'react-router'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import AdminFooter from './adminfooter'
 
 function AdminLayout() {
  const location = useLocation()
@@ -17,6 +18,9 @@ function AdminLayout() {
           </CSSTransition>
         </TransitionGroup>
       </main>
+      <footer>
+        <AdminFooter />
+      </footer>
     </>
   )
 }

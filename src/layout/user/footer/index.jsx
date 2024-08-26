@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="footer-column col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <h3>Quick Link</h3>
                     <ul>
-                        <li><Link to={'myaccount'}>My Account</Link></li>
+                        <li><Link to={'/myaccount/dashboard'}>My Account</Link></li>
                         <li>Wishlist</li>
                         <li>Order Tracking</li>
                         <li>Privacy Policy</li>

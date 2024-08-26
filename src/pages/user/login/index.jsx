@@ -27,8 +27,7 @@ const Login = () => {
     );
 
     if (user) {
-      const activity = new Date();
-
+      // const activity = new Date();
       if (rememberMe) {
         localStorage.setItem('user', JSON.stringify(user));
       } else {
@@ -36,9 +35,9 @@ const Login = () => {
       }
 
       dispatch(loginUser({ user, rememberMe }));
-      usersApi.changeUserActivity(user.id, user, activity);
+     navigate('/myaccount/dashboard'
+)
 
-      navigate('/myaccount/dashboard');
     } else {
       console.error('Invalid login credentials');
     }
