@@ -46,7 +46,7 @@ function AccountDashBoard() {
           </div>
         </div> {
           role === 'admin' ? <>
-            <div className="widget" onClick={() => {
+            <div className="widget widget-admin" onClick={() => {
               navigate('/admin/dashboard')
             }}>
 

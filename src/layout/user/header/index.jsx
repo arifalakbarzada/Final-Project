@@ -10,6 +10,8 @@ function Header() {
   const dispatch = useDispatch()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const user = localStorage.getItem('user') || sessionStorage.getItem('user')
+  const userInDis = useSelector((state)=>state.users.user)
   const cart = useSelector(state => state.cart.items)
   const handleSearch = (term) => {
     if (term.length > 0) {
@@ -61,7 +63,7 @@ function Header() {
           <NavLink to={'/cart'}>
             <BsCart />
             <span className='total-price'>
-              {cart.length > 0 ? `(${cart.length})` : null}
+              {cart.length > 0 && user || userInDis ? `(${cart.length})` : null}
             </span>
           </NavLink>
         </li>
