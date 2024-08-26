@@ -11,7 +11,7 @@ function AdminLayout() {
       <header>
         <AdminNavbar />
       </header>
-      <main>
+      <main className='admin'>
         <TransitionGroup component={null}>
           <CSSTransition key={location.key} classNames="page" timeout={500}>
             <Outlet />

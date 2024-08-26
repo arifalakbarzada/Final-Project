@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../../../redux/slices/userSlice'
+import { Link } from 'react-router-dom'
 
 function AdminNavbar() {
   const dispatch = useDispatch()
@@ -12,8 +13,8 @@ function AdminNavbar() {
       </div>
       <nav className="nav-links">
         <ul>
-          <li><a href="#dashboard">Dashboard</a></li>
-          <li><a href="#products">Products</a></li>
+          <li><Link to={'/admin/dashboard'}>Dashboard</Link></li>
+          <li><Link to={'edit'}>Products</Link></li>
           <li><a href="#users">Users</a></li>
           <li><a href="#orders">Orders</a></li>
           <li><a onClick={
