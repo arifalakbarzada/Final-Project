@@ -18,11 +18,12 @@ function Products() {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedColor , setSelectedColor] = useState(null)
+  const [selectedColor, setSelectedColor] = useState(null)
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   useEffect(() => {
     productsApi.getAllProduct().then(data => dispatch(setProducts(data)));
-  }, [dispatch]);
+  }, []);
+  
 
   useEffect(() => {
     setFilteredProducts(products);
@@ -39,11 +40,14 @@ function Products() {
     }
   };
 
-  const handleQuickViewOpen = (product , color) => {
-    setSelectedProduct(product);
-    setSelectedColor(color)
-    setIsQuickViewOpen(true);
+  const handleQuickViewOpen = (product, color) => {
+    if (product && color) {
+      setSelectedProduct(product);
+      setSelectedColor(color);
+      setIsQuickViewOpen(true);
+    }
   };
+  
 
   const handleQuickViewClose = () => {
     setSelectedProduct(null);
@@ -79,10 +83,10 @@ function Products() {
                     }
                   } /></li>
                   <li><FaRegEye onClick={() => {
-                    handleQuickViewOpen(product , color)
+                    handleQuickViewOpen(product, color)
                   }
-                    } /></li>
-                  <li><CiHeart onClick={
+                  } /></li>
+                  <li  onClick={
                     () => {
                       const favItem = {
                         id: product.id,
@@ -97,7 +101,7 @@ function Products() {
                         dispatch(addToFavList(favItem))
                         : navigate('/login')
                     }
-                  } /></li>
+                  } ><CiHeart /></li>
                 </ul>
               </div>
             </div>
@@ -132,12 +136,15 @@ function Products() {
       <div className="products row">
         {filteredProducts.map(renderProduct)}
       </div>
-      <QuickViewModal
-        isOpen={isQuickViewOpen}
-        onRequestClose={handleQuickViewClose}
-        product={selectedProduct}
-        color = {selectedColor}
-      />
+      {selectedProduct && selectedColor && (
+        <QuickViewModal
+          isOpen={isQuickViewOpen}
+          onRequestClose={handleQuickViewClose}
+          product={selectedProduct}
+          color={selectedColor}
+        />
+      )}
+
     </div>
   );
 }

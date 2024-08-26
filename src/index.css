@@ -536,7 +536,7 @@ header {
 
 /* ! Quick View CSS start */
 
-.quick-view-modal {
+/* .quick-view-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -563,6 +563,41 @@ header {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
+} */
+
+/* Overlay styling */
+/* Overlay styling */
+.quick-view-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+/* Modal container styling */
+.quick-view-modal {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  transform: translateY(0);
+  opacity: 1;
+}
+.quick-view-modal {
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 
