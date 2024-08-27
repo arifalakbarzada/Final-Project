@@ -2,11 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { productsApi } from '../../../service/base';
+import { productsApi } from '../../service/base';
 import { BsCartPlus, BsHeart } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { addCartItem } from '../../../redux/slices/cartSlice';
-import { addToFavList } from '../../../redux/slices/favListSlice';
+import { addCartItem } from '../../redux/slices/cartSlice';
+import { addToFavList } from '../../redux/slices/favListSlice';
 
 function ProductDetail() {
   const { id, colorId, color: selectedColor } = useParams();

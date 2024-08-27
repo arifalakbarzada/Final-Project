@@ -1,12 +1,12 @@
 import Modal from 'react-modal';
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { BsCartPlus, BsHeart } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { addCartItem } from '../../../redux/slices/cartSlice';
-import { addToFavList } from '../../../redux/slices/favListSlice';
+import { addCartItem } from '../../redux/slices/cartSlice';
+import { addToFavList } from '../../redux/slices/favListSlice';
 Modal.setAppElement('#root');
 
 const QuickViewModal = ({ isOpen, onRequestClose, product, color }) => {

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
-import Loading from '../../../components/user/loading';
-import Slider from '../../../components/user/slider';
-const Products = lazy(() => import('../../../components/user/products'));
+import Loading from '../../../components/loading';
+import Slider from '../../../components/slider';
+const Products = lazy(() => import('../../../components/products'));
 function Home() {
 
 

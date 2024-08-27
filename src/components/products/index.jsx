@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { productsApi } from '../../../service/base';
+import { productsApi } from '../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../../../redux/slices/productSlice';
+import { setProducts } from '../../redux/slices/productSlice';
 import { useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
 import { FaRegEye } from 'react-icons/fa';
 import QuickViewModal from './../quickview';
-import { addCartItem } from '../../../redux/slices/cartSlice';
-import { addToFavList } from '../../../redux/slices/favListSlice';
+import { addCartItem } from '../../redux/slices/cartSlice';
+import { addToFavList } from '../../redux/slices/favListSlice';
 
 function Products() {
   const dispatch = useDispatch();
