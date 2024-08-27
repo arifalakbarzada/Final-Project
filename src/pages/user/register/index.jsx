@@ -34,10 +34,11 @@ function Register() {
         password: registerData.password,
         userName: registerData.name,
         token: registerData.token,
-        lastActivity: '',
+        lastActivity: new Date(),
         userCart: [],
         orders: [],
         favlist: [],
+        status: 'Active'
       });
       setRegisterData({
         email: '',

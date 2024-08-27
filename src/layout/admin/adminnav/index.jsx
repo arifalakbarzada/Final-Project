@@ -9,7 +9,9 @@ function AdminNavbar() {
   return (
     <div  className="admin-header">
 
-         <div className="logo">
+         <div className="logo" onClick={()=>{
+          navigate('/')
+         }}>
         <h1>TechShop</h1>
       </div>
       <nav className="nav-links">
