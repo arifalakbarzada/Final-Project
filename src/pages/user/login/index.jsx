@@ -26,8 +26,7 @@ const Login = () => {
       user.password === loginData.password
     );
 
-    if (user) {
-      // const activity = new Date();
+    if (user && user.status === 'Active') {
       if (rememberMe) {
         localStorage.setItem('user', JSON.stringify(user));
       } else {
@@ -38,7 +37,11 @@ const Login = () => {
      navigate('/myaccount/dashboard'
 )
 
-    } else {
+    }
+    else if(user.status !== 'Active' && user) {
+      alert('Your account is not active. Please contact admin')
+    }
+     else {
       console.error('Invalid login credentials');
     }
   };
@@ -49,7 +52,7 @@ const Login = () => {
       <h2>Login</h2>
       <form className="login-form" onSubmit={handleLogin}>
         <div className="input-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email or User Name:</label>
           <input
             type="email"
             id="email"

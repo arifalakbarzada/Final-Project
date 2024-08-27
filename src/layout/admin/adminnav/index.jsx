@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../../../redux/slices/userSlice'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { CiLogout } from 'react-icons/ci'
 
 function AdminNavbar() {
   const dispatch = useDispatch()
@@ -16,16 +17,16 @@ function AdminNavbar() {
       </div>
       <nav className="nav-links">
         <ul>
-          <li><Link to={'/admin/dashboard'}>Dashboard</Link></li>
-          <li><Link to={'edit'}>Products</Link></li>
-          <li><Link to={'users'}>Users</Link></li>
-          <li><Link to={'orders'}>Orders</Link></li>
-          <li><a onClick={
+          <li><NavLink to={'/admin/dashboard'}>Dashboard</NavLink></li>
+          <li><NavLink to={'edit'}>Products</NavLink></li>
+          <li><NavLink to={'users'}>Users</NavLink></li>
+          <li><NavLink to={'orders'}>Orders</NavLink></li>
+          <li><button onClick={
             ()=>{
               dispatch(logoutUser())
               navigate('/login')
             }
-          }>Logout</a></li>
+          }><CiLogout /> Logout</button></li>
         </ul>
       </nav>
     </div>
