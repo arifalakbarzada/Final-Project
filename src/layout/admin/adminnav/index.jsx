@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../../../redux/slices/userSlice'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AdminNavbar() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   return (
     <div  className="admin-header">
 
@@ -20,6 +21,7 @@ function AdminNavbar() {
           <li><a onClick={
             ()=>{
               dispatch(logoutUser())
+              navigate('/login')
             }
           }>Logout</a></li>
         </ul>
