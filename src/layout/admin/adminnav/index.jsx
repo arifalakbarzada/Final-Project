@@ -15,8 +15,8 @@ function AdminNavbar() {
         <ul>
           <li><Link to={'/admin/dashboard'}>Dashboard</Link></li>
           <li><Link to={'edit'}>Products</Link></li>
-          <li><a href="#users">Users</a></li>
-          <li><a href="#orders">Orders</a></li>
+          <li><Link to={'users'}>Users</Link></li>
+          <li><Link to={'orders'}>Orders</Link></li>
           <li><a onClick={
             ()=>{
               dispatch(logoutUser())

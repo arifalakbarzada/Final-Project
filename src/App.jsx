@@ -34,6 +34,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js';
 import { setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
+import UserManagement from './pages/admin/users'
 
 function App() {
   const cart = useSelector((state) => state.cart.items)
@@ -95,6 +96,7 @@ function App() {
               <Route path="edit" element={<EditPanel />} />
               <Route path="edit/:id" element={<AddPanel />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="users" element={<UserManagement />} />
             </Route>
             : null
         }

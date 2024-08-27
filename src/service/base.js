@@ -54,6 +54,10 @@ export const usersApi = {
     ,
     deleteUser: function (id) {
         axios.delete(`${usersUrl}/${id}`)
+    },
+
+    changeUserStatus: function (id , user , status) {
+        axios.put(`${usersUrl}/${id}`, {...user , status:status})
     }
     ,
     getSingleUser: async function (id) {

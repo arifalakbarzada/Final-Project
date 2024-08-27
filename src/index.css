@@ -1490,105 +1490,106 @@ option {
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
-}
 
-.favList-container:hover {
-  background-color: #f2f2f2;
-}
+  .fav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
 
-.fav-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 0;
-  border-bottom: 1px solid #e0e0e0;
-}
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 
-.fav-item:last-child {
-  border-bottom: none;
-}
+  &:hover {
+    background-color: #f2f2f2;
+  }
 
-.fav-item-image img {
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
+  .fav-item .fav-item-image img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 
-.fav-item-image img:hover {
-  transform: scale(1.1);
-}
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 
-.fav-item-details {
-  flex: 1;
-  margin-left: 20px;
-}
+  .fav-item-image img .fav-item-details {
+    flex: 1;
+    margin-left: 20px;
+  }
 
-.fav-item-name h4 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 5px 0;
-  color: #2c3e50;
-  transition: color 0.3s ease;
-}
+  .fav-item-name h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+    transition: color 0.3s ease;
 
-.fav-item-name:hover h4 {
-  color: #2980b9;
-}
+    &:hover {
+      color: #2980b9;
+    }
+  }
 
-.fav-item-price {
-  font-size: 18px;
-  font-weight: 500;
-  color: #7f8c8d;
-  margin: 0;
-}
 
-.fav-item-stock {
-  font-size: 14px;
-  font-weight: 500;
-  margin: 5px 0;
-  text-transform: uppercase;
-}
 
-.fav-item-stock.in-stock {
-  color: #27ae60;
-}
+  .fav-item-price {
+    font-size: 18px;
+    font-weight: 500;
+    color: #7f8c8d;
+    margin: 0;
+  }
 
-.fav-item-stock.out-stock {
-  color: #e74c3c;
-}
+  .fav-item-stock {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 5px 0;
+    text-transform: uppercase;
+  }
 
-.fav-item-actions {
-  display: flex;
-  gap: 10px;
-}
+  .fav-item-stock.in-stock {
+    color: #27ae60;
+  }
 
-.addToCartBtn,
-.removeBtn {
-  background-color: #3498db;
-  color: #ffffff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+  .fav-item-stock.out-stock {
+    color: #e74c3c;
+  }
 
-.addToCartBtn:hover {
-  background-color: #2980b9;
-}
+  .fav-item-actions {
+    display: flex;
+    gap: 10px;
+  }
 
-.removeBtn {
-  background-color: #e74c3c;
-}
+  .addToCartBtn,
+  .removeBtn {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-.removeBtn:hover {
-  background-color: #c0392b;
-}
+  .addToCartBtn:hover {
+    background-color: #2980b9;
+  }
 
+  .removeBtn {
+    background-color: #e74c3c;
+  }
+
+  .removeBtn:hover {
+    background-color: #c0392b;
+  }
+}
 
 .empty-fav-list {
   text-align: center;
@@ -1596,32 +1597,35 @@ option {
   background: #fff5e6;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
-.empty-fav-list h2 {
-  font-size: 28px;
-  color: #e67e22;
-}
 
-.empty-fav-list p {
-  color: #e67e22;
-  font-size: 18px;
-  margin: 20px 0;
-}
+  h2 {
+    font-size: 28px;
+    color: #e67e22;
+  }
 
-.explore-btn {
-  background-color: #e67e22;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  p {
+    color: #e67e22;
+    font-size: 18px;
+    margin: 20px 0;
+  }
 
-.explore-btn:hover {
-  background-color: #d35400;
+  .explore-btn {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #d35400;
+    }
+  }
+
+
 }
 
 /*todo FavList CSS end  */
@@ -1961,7 +1965,7 @@ footer:has(.footer) {
 }
 
 /*? Admin Header CSS end  */
-
+/*todo Product Panel CSS start  */
 main.admin {
   .product-panel {
     padding: 20px;
@@ -2048,6 +2052,10 @@ main.admin {
 
 }
 
+/*todo Product Panel CSS end  */
+
+
+/*! Edit Panel CSS start  */
 .panel {
   padding: 20px;
   background-color: #f5f5f5;
@@ -2139,9 +2147,128 @@ main.admin {
   .add-color-form button:hover {
     background-color: #218838;
   }
+
   input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
+
+/*! Edit Panel CSS end  */
+
+/*todo User Magement CSS start  */
+.user-management {
+  padding: 20px;
+  background-color: #f9f9f9;
+
+
+  .user-management h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .user-table th {
+    background-color: #f4f4f4;
+  }
+
+  .ban-button {
+    padding: 8px 20px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .ban-button:hover {
+    background-color: #c0392b;
+  }
+
+  .banned-label {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+
+  .active-label {
+    color: #2ecc71;
+    font-weight: bold;
+  }
+
+  .active-button {
+    padding: 8px 12px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+  }
 }
+
+/*todo User Magement CSS end  */
+
+/*? Admin Dashboard CSS start  */
+.statistics-dashboard {
+  padding: 20px;
+  background-color: #f9f9f9;
+
+
+  .statistics-dashboard h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .stats-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
+  .stats-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+  }
+
+  .stats-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .stats-card p {
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .chart-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+}
+
+/*? Admin Dashboard CSS end  */
