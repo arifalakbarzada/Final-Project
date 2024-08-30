@@ -36,11 +36,13 @@ useEffect(() => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const user = users.find(user =>(user.email === registerData.email || user.userName === registerData.userName));
     if (
       validateEmail(registerData.email) &&
       validatePassword(registerData.password) &&
       registerData.confirmPassword === registerData.password &&
-      validateUserName(registerData.name)
+      validateUserName(registerData.name)&&
+      !user
     ) {
       usersApi.addUser({
         email: registerData.email,
@@ -64,6 +66,9 @@ useEffect(() => {
       navigate('/login')
       setNotification('')
     } 
+    else if (user) {
+      setNotification('User already exists')
+    }
     else if(!validateEmail(registerData.email)){
       // alert('Invalid email')
       setNotification('Invalid email')
