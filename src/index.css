@@ -2172,6 +2172,11 @@ main.admin {
     cursor: pointer;
     transition: background-color 0.3s;
   }
+  button.cannot-ban:hover{
+    background-color: #aaa !important;
+    color: #eee;
+    cursor: not-allowed !important;
+  }
 button:disabled{
   background-color: #aaa;
   color: #eee;

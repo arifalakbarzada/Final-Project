@@ -34,7 +34,7 @@ const UserManagement = () => {
               <td className={user.status === 'Active' ? 'active-label' : 'banned-label'}>{user.status === 'Active' ? 'Active' : 'Banned'}</td>
               <td>
                 {user.status === 'Active' ? (
-                  <button className="ban-button" disabled={user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? true : false} onClick={() => {
+                  <button className={`ban-button ${user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? 'cannot-ban' : null}`} disabled={user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? true : false} onClick={() => {
                     usersApi.changeUserStatus(user.id, user, 'Banned')
                     dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Banned' }]))
                   }}>Ban</button>
