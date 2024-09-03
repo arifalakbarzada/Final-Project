@@ -1,40 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { usersApi } from '../../../service/base';
 import { setUsers } from '../../../redux/slices/userSlice';
 
 const ResetPassword = () => {
-    function validatePassword(password) {
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        return regex.test(password);
-    }
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const { id, token } = useParams()
-    const dispatch = useDispatch()
-    const users = useSelector((state) => state.users.items)
+    const { id, token } = useParams();
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users.items);
+    const user = users.find(user => user.token === token);
+
     useEffect(() => {
-        usersApi.getAllUsers().then(res => dispatch(setUsers(res)))
+        usersApi.getAllUsers().then(res => dispatch(setUsers(res)));
     }, [dispatch]);
-    const user = users.find(user => user.token === token)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword && user && validatePassword(password)) {
-            usersApi.resetPassword(id, user, password)
-            console.log('Passwords match. Proceed with reset.');
+            usersApi.resetPassword(id, user, password);
+            alert('Password has been reset successfully.');
+        } else {
+            alert('Passwords do not match or invalid.');
         }
-        else {
-            console.log('Passwords do not match.');
-        }
+    };
+
+    const validatePassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        return regex.test(password);
     };
 
     return user ? (
         <div className="reset-password-container">
             <h2>Reset Password</h2>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="input-group">
                     <label htmlFor="new-password">New Password *</label>
                     <input
                         type="password"
@@ -45,7 +46,7 @@ const ResetPassword = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="input-group">
                     <label htmlFor="confirm-password">Confirm New Password *</label>
                     <input
                         type="password"
@@ -59,7 +60,7 @@ const ResetPassword = () => {
                 <button type="submit">Reset Password</button>
             </form>
         </div>
-    ):null;
+    ) : null;
 };
 
 export default ResetPassword;

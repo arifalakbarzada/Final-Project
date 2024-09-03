@@ -1,0 +1,37 @@
+@media (max-width: 768px) {
+    .product-detail-container {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .product-detail-image {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+  
+    .product-info {
+      padding: 15px;
+    }
+  
+    .product-info h1 {
+      font-size: 20px;
+    }
+  
+    .product-info .brand,
+    .product-info .category,
+    .product-info .price,
+    .product-info .stock {
+      font-size: 14px;
+    }
+  
+    .product-info .discounted-price {
+      font-size: 18px;
+    }
+  
+    .addToCart,
+    .addToFav {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }

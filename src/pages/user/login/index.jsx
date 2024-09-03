@@ -3,20 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUsers, loginUser } from '../../../redux/slices/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
+
 const Login = () => {
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
-  });
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector(state => state.users.items);
 
   useEffect(() => {
-    usersApi.getAllUsers().then(res => {
-      dispatch(setUsers(res));
-    });
+    usersApi.getAllUsers().then(res => dispatch(setUsers(res)));
   }, [dispatch]);
 
   const handleLogin = (e) => {
@@ -26,26 +22,22 @@ const Login = () => {
       user.password === loginData.password
     );
 
-    if (user && user.status === 'Active') {
-      if (rememberMe) {
-        localStorage.setItem('user', JSON.stringify(user));
+    if (user) {
+      if (user.status === 'Active') {
+        if (rememberMe) {
+          localStorage.setItem('user', JSON.stringify(user));
+        } else {
+          sessionStorage.setItem('user', JSON.stringify(user));
+        }
+        dispatch(loginUser({ user, rememberMe }));
+        navigate('/myaccount/dashboard');
       } else {
-        sessionStorage.setItem('user', JSON.stringify(user));
+        alert('Your account is not active. Please contact admin');
       }
-
-      dispatch(loginUser({ user, rememberMe }));
-     navigate('/myaccount/dashboard'
-)
-
-    }
-    else if(user.status !== 'Active' && user) {
-      alert('Your account is not active. Please contact admin')
-    }
-     else {
-      console.error('Invalid login credentials');
+    } else {
+      alert('Invalid login credentials');
     }
   };
-
 
   return (
     <div className="login-container">
@@ -75,17 +67,21 @@ const Login = () => {
         </div>
         <button type="submit" className="btn-login">Login</button>
         <div className="remember-me">
-          <input type="checkbox" name="rememberMe" onChange={() => setRememberMe(!rememberMe)} />
+          <input
+            type="checkbox"
+            name="rememberMe"
+            checked={rememberMe}
+            onChange={() => setRememberMe(!rememberMe)}
+          />
           <label htmlFor="remember">Remember Me</label>
         </div>
       </form>
       <div className="login-options">
         <Link to={'/forgetpassword'}>Lost your password?</Link>
-        <Link to={'/register'} className="create-account">Create Account</Link>
+        <Link to={'/register'}>Create Account</Link>
       </div>
     </div>
   );
-
 };
 
 export default Login;

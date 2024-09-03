@@ -55,15 +55,15 @@ function ProductDetail() {
   return (
     <div className="product-detail-container container">
       <div className="row">
-        <div className="col-lg-6 col-sm-12 flex-center">
+        <div className="col-lg-6 col-sm-12">
           <div className="product-detail-image">
-            <Swiper spaceBetween={50} slidesPerView={1} navigation modules={[Navigation]}>
+            <Swiper spaceBetween={20} slidesPerView={1} navigation modules={[Navigation]}>
               {colorData.images.map((image, idx) => (
                 <SwiperSlide key={idx}>
                   <img
                     src={image}
                     alt={`${product.name} ${colorData.name}`}
-                    style={{ width: '100%', height: 'auto' }}
+                    style={{ width: '100%', height: 'auto', borderRadius: '12px', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)' }}
                   />
                 </SwiperSlide>
               ))}
@@ -101,7 +101,7 @@ function ProductDetail() {
                     {product.colors.map((color, index) => (
                       <div
                         key={index}
-                        className="color"
+                        className={`color ${color.id === selectedColorId ? 'selected' : ''}`}
                         style={{ backgroundColor: color.hex }}
                         title={color.name}
                         onClick={() => {

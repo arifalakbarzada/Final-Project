@@ -14,16 +14,24 @@ function Products() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.items);
-  const user = localStorage.getItem('user') || sessionStorage.getItem('user')
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null)
+  const [selectedColor, setSelectedColor] = useState(null);
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+
   useEffect(() => {
-    productsApi.getAllProduct().then(data => dispatch(setProducts(data)));
-  }, []);
-  
+    const fetchProducts = async () => {
+      try {
+        const data = await productsApi.getAllProduct();
+        dispatch(setProducts(data));
+      } catch (error) {
+        console.error('Ürünler alınırken hata oluştu:', error);
+      }
+    };
+    fetchProducts();
+  }, [dispatch]);
 
   useEffect(() => {
     setFilteredProducts(products);
@@ -47,94 +55,102 @@ function Products() {
       setIsQuickViewOpen(true);
     }
   };
-  
 
   const handleQuickViewClose = () => {
     setSelectedProduct(null);
+    setSelectedColor(null);
     setIsQuickViewOpen(false);
   };
 
   const renderProduct = (product) => {
-    return product.colors.map((color) => {
-      return (
-        <div key={product.id + color.name} className="product col-lg-3 col-md-4 col-sm-6">
-          <div className="product-container">
-            <div className="product-image">
+    return product.colors.map((color) => (
+      <div key={`${product.id}-${color.id}`} className="product">
+        <div className="product-container">
+          <div className="product-image">
+            {product.discount > 0 && (
               <div className="product-label">
                 <span>-{product.discount}%</span>
               </div>
-              <img src={color.images[0]} alt={product.name + color.name} />
-              <div className="product-action">
-                <ul>
-                  <li><BsCartPlus onClick={
-                    () => {
-                      const cartItem = {
-                        id: product.id,
-                        name: product.name,
-                        colorId: color.id,
-                        color: color.name,
-                        price: product.price - product.price * product.discount / 100,
-                        image: color.images[0],
-                        stock: color.stock,
-                      };
-                      user ?
-                        dispatch(addCartItem(cartItem))
-                        : navigate('/login')
-                    }
-                  } /></li>
-                  <li><FaRegEye onClick={() => {
-                    handleQuickViewOpen(product, color)
-                  }
-                  } /></li>
-                  <li  onClick={
-                    () => {
-                      const favItem = {
-                        id: product.id,
-                        name: product.name,
-                        colorId: color.id,
-                        color: color.name,
-                        price: product.price - product.price * product.discount / 100,
-                        image: color.images[0],
-                        stock: color.stock,
-                      };
-                      user ?
-                        dispatch(addToFavList(favItem))
-                        : navigate('/login')
-                    }
-                  } ><CiHeart /></li>
-                </ul>
-              </div>
-            </div>
-            <div className="product-content" onClick={
-              () => {
-                navigate(`/products/${product.id}/${color.id}/${color.name}`)
-              }
-            }>
-              <h3 className="title">{product.name} {product.colors.length > 1 ? `, ${color.name}` : null}</h3>
-              <p className="product-price">
-                <span className="discounted-price">${(product.price - product.price * product.discount / 100).toFixed(2)}</span>
-                <span className="main-price">${product.price}</span>
-              </p>
+            )}
+            <img src={color.images[0]} alt={`${product.name} - ${color.name}`} />
+            <div className="product-action">
+              <ul>
+                <li>
+                  <BsCartPlus onClick={() => handleAddToCart(product, color)} />
+                </li>
+                <li>
+                  <FaRegEye onClick={() => handleQuickViewOpen(product, color)} />
+                </li>
+                <li onClick={() => handleAddToFav(product, color)}>
+                  <CiHeart />
+                </li>
+              </ul>
             </div>
           </div>
-
+          <div
+            className="product-content"
+            onClick={() => navigate(`/products/${product.id}/${color.id}/${color.name}`)}
+          >
+            <h3 className="title">{product.name} {product.colors.length > 1 && ` - ${color.name}`}</h3>
+            <div className="product-price">
+              <span className="discounted-price">${(product.price - (product.price * product.discount) / 100).toFixed(2)}</span>
+              {product.discount > 0 && (
+                <span className="main-price">${product.price.toFixed(2)}</span>
+              )}
+            </div>
+          </div>
         </div>
-      )
-    })
+      </div>
+    ));
+  };
 
-  }
+  const handleAddToCart = (product, color) => {
+    if (user) {
+      const cartItem = {
+        id: product.id,
+        name: product.name,
+        colorId: color.id,
+        color: color.name,
+        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
+        image: color.images[0],
+        stock: color.stock,
+        quantity: 1, // Başlangıç miktarı
+      };
+      dispatch(addCartItem(cartItem));
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const handleAddToFav = (product, color) => {
+    if (user) {
+      const favItem = {
+        id: product.id,
+        name: product.name,
+        colorId: color.id,
+        color: color.name,
+        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
+        image: color.images[0],
+        stock: color.stock,
+      };
+      dispatch(addToFavList(favItem));
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div className='products-container'>
-      <div className="select-container">
-        <select name="categories" id='filterProducts' onChange={handleCategoryChange}>
-          <option value="">All</option>
+      <div className="select-container" style={{ marginBottom: '24px' }}>
+        <select name="categories" id='filterProducts' onChange={handleCategoryChange} className="category-select">
+          <option value="">All Categories</option>
           {categories.map((category, index) => (
             <option key={index} value={category}>{category}</option>
           ))}
         </select>
       </div>
-      <div className="products row">
-        {filteredProducts.map(renderProduct)}
+      <div className="products">
+        {filteredProducts.length > 0 ? filteredProducts.map(renderProduct) : <p>Ürün bulunamadı.</p>}
       </div>
       {selectedProduct && selectedColor && (
         <QuickViewModal
@@ -144,7 +160,6 @@ function Products() {
           color={selectedColor}
         />
       )}
-
     </div>
   );
 }
