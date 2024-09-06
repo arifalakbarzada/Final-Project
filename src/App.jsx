@@ -30,8 +30,6 @@ import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
 import { cartApi, usersApi } from './service/base'
 import { setCartItems } from './redux/slices/cartSlice'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js';
 import { setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
 import UserManagement from './pages/admin/users'
@@ -39,7 +37,6 @@ import UserManagement from './pages/admin/users'
 function App() {
   const cart = useSelector((state) => state.cart.items)
   const userInRedux = useSelector((state)=>state.users.user)
-  const stripePromise = loadStripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXX');
   const dispatch = useDispatch();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
@@ -49,7 +46,7 @@ function App() {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
 
     }
-  }, [cart]);
+  }, [user]);
       const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
 
   useEffect(() => {
@@ -65,7 +62,6 @@ function App() {
   }, [user])
 
   return (
-    <Elements stripe={stripePromise}>
 
       <Routes>
         <Route path="/" element={<UserLayout />}>
@@ -105,7 +101,6 @@ function App() {
 
       </Routes>
 
-    </Elements>
 
   )
 }

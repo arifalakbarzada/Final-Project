@@ -5,8 +5,6 @@ import { setProducts } from '../../redux/slices/productSlice';
 import { useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
-import { FaRegEye } from 'react-icons/fa';
-import QuickViewModal from './../quickview';
 import { addCartItem } from '../../redux/slices/cartSlice';
 import { addToFavList } from '../../redux/slices/favListSlice';
 
@@ -15,11 +13,10 @@ function Products() {
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.items);
   const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
+  const cart = useSelector((state)=>state.cart.items)
+  const favList = useSelector((state)=>state.favList.items)
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,7 +35,39 @@ function Products() {
     const uniqueCategories = [...new Set(products.map(product => product.category))];
     setCategories(uniqueCategories);
   }, [products]);
+  const handleAddToCart = (product, color) => {
+    if (user) {
+      const cartItem = {
+        id: product.id,
+        name: product.name,
+        colorId: color.id,
+        color: color.name,
+        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
+        image: color.images[0],
+        stock: color.stock,
+      };
+      dispatch(addCartItem({cartItem , favList}));
+    } else {
+      navigate('/login');
+    }
+  };
 
+  const handleAddToFav = (product, color) => {
+    if (user) {
+      const favItem = {
+        id: product.id,
+        name: product.name,
+        colorId: color.id,
+        color: color.name,
+        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
+        image: color.images[0],
+        stock: color.stock,
+      };
+      dispatch(addToFavList({favItem , cart}));
+    } else {
+      navigate('/login');
+    }
+  };
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     if (category === '') {
@@ -48,19 +77,6 @@ function Products() {
     }
   };
 
-  const handleQuickViewOpen = (product, color) => {
-    if (product && color) {
-      setSelectedProduct(product);
-      setSelectedColor(color);
-      setIsQuickViewOpen(true);
-    }
-  };
-
-  const handleQuickViewClose = () => {
-    setSelectedProduct(null);
-    setSelectedColor(null);
-    setIsQuickViewOpen(false);
-  };
 
   const renderProduct = (product) => {
     return product.colors.map((color) => (
@@ -77,9 +93,6 @@ function Products() {
               <ul>
                 <li>
                   <BsCartPlus onClick={() => handleAddToCart(product, color)} />
-                </li>
-                <li>
-                  <FaRegEye onClick={() => handleQuickViewOpen(product, color)} />
                 </li>
                 <li onClick={() => handleAddToFav(product, color)}>
                   <CiHeart />
@@ -104,40 +117,7 @@ function Products() {
     ));
   };
 
-  const handleAddToCart = (product, color) => {
-    if (user) {
-      const cartItem = {
-        id: product.id,
-        name: product.name,
-        colorId: color.id,
-        color: color.name,
-        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
-        image: color.images[0],
-        stock: color.stock,
-        quantity: 1, // Başlangıç miktarı
-      };
-      dispatch(addCartItem(cartItem));
-    } else {
-      navigate('/login');
-    }
-  };
 
-  const handleAddToFav = (product, color) => {
-    if (user) {
-      const favItem = {
-        id: product.id,
-        name: product.name,
-        colorId: color.id,
-        color: color.name,
-        price: (product.price - (product.price * product.discount) / 100).toFixed(2),
-        image: color.images[0],
-        stock: color.stock,
-      };
-      dispatch(addToFavList(favItem));
-    } else {
-      navigate('/login');
-    }
-  };
 
   return (
     <div className='products-container'>
@@ -152,14 +132,6 @@ function Products() {
       <div className="products">
         {filteredProducts.length > 0 ? filteredProducts.map(renderProduct) : <p>Ürün bulunamadı.</p>}
       </div>
-      {selectedProduct && selectedColor && (
-        <QuickViewModal
-          isOpen={isQuickViewOpen}
-          onRequestClose={handleQuickViewClose}
-          product={selectedProduct}
-          color={selectedColor}
-        />
-      )}
     </div>
   );
 }

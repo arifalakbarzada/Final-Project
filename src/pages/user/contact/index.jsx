@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,32 +16,32 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     emailjs.send(
-      'service_7qs79xq', // EmailJS servis kimliğiniz
-      'template_la8xdru', // EmailJS şablon kimliğiniz
-      formData, // Form verileri
-      'uZiU_jvMcoRVe1YyL' // EmailJS kullanıcı kimliğiniz
+      'service_7qs79xq', 
+      'template_la8xdru', 
+      formData, 
+      'uZiU_jvMcoRVe1YyL'
     )
     .then((response) => {
-      console.log('Başarılı!', response.status, response.text);
-      setStatus('Mesajınız başarıyla gönderildi!');
-      setFormData({ name: '', email: '', message: '' }); // Formu sıfırla
+      console.log('Success!', response.status, response.text);
+      setStatus('Your message was sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
     })
     .catch((err) => {
-      console.log('Başarısız...', err);
-      setStatus('Bir hata oluştu, lütfen tekrar deneyin.');
+      console.log('Failed...', err);
+      setStatus('An error occurred, please try again.');
     });
   };
 
   return (
     <div className="contact-container">
-      <h2>Contact</h2>
+      <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Name *</label>
+          <label htmlFor="name">Name *</label>
           <input
             type="text"
+            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -49,9 +49,10 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
-          <label>Email *</label>
+          <label htmlFor="email">Email *</label>
           <input
             type="email"
+            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -59,21 +60,18 @@ const Contact = () => {
           />
         </div>
         <div className="form-group">
-          <label>Message *</label>
+          <label htmlFor="message">Message *</label>
           <textarea
+            id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-send">GÖNDER</button>
+        <button type="submit" className="btn-send">Send</button>
       </form>
-      {status && setTimeout(()=>{
-        return(
-           <p className="status-message">{status}</p>
-        )
-      } , 2000)}
+      {status && <p className="status-message">{status}</p>}
     </div>
   );
 };

@@ -15,12 +15,12 @@ const cartSlice = createSlice({
       state.items = action.payload
     },
     addCartItem: (state, action) => {
-      const cartItem = action.payload
+      const { cartItem, favList } = action.payload
       const item = state.items.find(element => element.colorId === cartItem.colorId)
       if (item) {
         if (item.stock > item.quantity) {
           item.quantity += 1
-          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items)
+          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, favList)
         }
 
 
@@ -29,37 +29,40 @@ const cartSlice = createSlice({
       else {
         if (cartItem.stock > 0) {
           state.items.push({ ...cartItem, quantity: 1 })
-          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items)
+          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, favList)
         }
       }
 
     },
     removeCartItem: (state, action) => {
-      state.items = state.items.filter(item => item.colorId !== action.payload)
-      cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items)
+      const { colorId, fav } = action.payload
+      state.items = state.items.filter(item => item.colorId !== colorId)
+      cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, fav)
     },
     increaseQuantity: (state, action) => {
-      const index = state.items.findIndex(item => item.colorId === action.payload)
+      const { colorId, fav } = action.payload
+      const index = state.items.findIndex(item => item.colorId === colorId)
       if (state.items[index].stock > state.items[index].quantity) {
         state.items[index].quantity += 1
-        cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items)
+        cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, fav)
       }
 
     },
     decreaseQuantity: (state, action) => {
-      const index = state.items.findIndex(item => item.colorId === action.payload);
+      const { colorId, fav } = action.payload
+      const index = state.items.findIndex(item => item.colorId === colorId);
       if (index !== -1) {
         if (state.items[index].quantity > 1) {
           state.items[index].quantity -= 1;
-          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items);
+          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, fav);
         } else {
-          state.items = state.items.filter(item => item.colorId !== action.payload);
-          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items);
+          state.items = state.items.filter(item => item.colorId !== colorId);
+          cartApi.changeUserCart(JSON.parse(user).id, JSON.parse(user), state.items, fav);
         }
       }
     }
-    
-    
+
+
   }
 })
 

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { productsApi } from '../../service/base';
 import { BsCartPlus, BsHeart } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem } from '../../redux/slices/cartSlice';
 import { addToFavList } from '../../redux/slices/favListSlice';
 
@@ -12,6 +12,8 @@ function ProductDetail() {
   const { id, colorId, color: selectedColor } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cart = useSelector((state)=>state.cart.items)
+  const favList = useSelector((state)=>state.favList.items)
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -129,7 +131,7 @@ function ProductDetail() {
                   image: colorData.images[0],
                   stock: colorData.stock,
                 };
-                user ? dispatch(addCartItem(cartItem)) : navigate('/login');
+                user ? dispatch(addCartItem({cartItem , favList})) : navigate('/login');
               }}
             >
               <BsCartPlus /> Add To Cart
@@ -148,7 +150,7 @@ function ProductDetail() {
                   color: selectedColor,
                   stock : colorData.stock
                 }
-                dispatch(addToFavList(favoriteItem))
+                dispatch(addToFavList({favoriteItem , cart}))
               }}
             >
               <BsHeart /> Add To Favorite

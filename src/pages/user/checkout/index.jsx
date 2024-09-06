@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { cartApi, ordersApi, usersApi } from '../../../service/base';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+// import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const [userCart, setUserCart] = useState([]);
   const [lastOrders, setLastOrders] = useState();
-  const stripe = useStripe();
-  const elements = useElements();
-  const cardStyle = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#aab7c4"
-        }
-      },
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a"
-      }
-    }
-  };
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const cardStyle = {
+  //   style: {
+  //     base: {
+  //       color: "#32325d",
+  //       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+  //       fontSmoothing: "antialiased",
+  //       fontSize: "16px",
+  //       "::placeholder": {
+  //         color: "#aab7c4"
+  //       }
+  //     },
+  //     invalid: {
+  //       color: "#fa755a",
+  //       iconColor: "#fa755a"
+  //     }
+  //   }
+  // };
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [checkoutDetails, setCheckoutDetails] = useState({
     userName: '',
@@ -138,10 +138,10 @@ const Checkout = () => {
               (e) => setCheckoutDetails({ ...checkoutDetails, zipCode: e.target.value })
             } />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="payment">Card Number</label>
             <CardElement options={cardStyle} className='stripe-card-element' />
-          </div>
+          </div> */}
           <button type="submit" className="btn-submit">Place Order</button>
         </form>
       </div>

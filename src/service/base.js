@@ -70,6 +70,14 @@ export const usersApi = {
         }
     }
     ,
+    getUserCountry : async function () {
+        try {
+       await axios.get("https://ipinfo.io/json?token=89c1c413324bc8")
+       } catch (error) {
+        console.error(error);
+        throw error;
+        }
+    },
     resetPassword: function (id, data, password) {
         axios.put(`${usersUrl}/${id}`, { ...data, password: password, token: v4() })
     }
@@ -93,8 +101,8 @@ export const cartApi = {
         }
 
     },
-    changeUserCart: function (id, user, changes) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes })
+    changeUserCart: function (id, user, changes , fav) {
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes , favList : fav })
 
     }
     ,
@@ -113,9 +121,9 @@ export const favListApi = {
             throw error;
         }
     },
-    changeFavList: async function (id, user, changes) {
+    changeFavList: async function (id, user, changes , cart) {
         try {
-            const updatedUser = { ...user, favlist: changes };
+            const updatedUser = { ...user, favlist: changes , userCart : cart };
             const response = await axios.put(`${usersUrl}/${id}`, updatedUser);
 
             return response.data;

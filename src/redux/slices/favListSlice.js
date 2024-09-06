@@ -5,7 +5,7 @@ const initialState = {
     items: []
 };
 
-const user = localStorage.getItem('user') || sessionStorage.getItem('user');
+const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
 
 const favListSlice = createSlice({
     name: 'favList',
@@ -14,13 +14,13 @@ const favListSlice = createSlice({
         setFavList: (state, action) => {
             state.items = action.payload;
         },
-        addToFavList: async (state, action) => {
-            const item = state.items.find(item => item.colorId === action.payload.colorId);
+        addToFavList: (state, action) => {
+            const { favItem, cart } = action.payload;
+            const item = state.items.find(item => item.colorId === favItem.colorId);
             if (!item) {
-                state.items.push(action.payload);
-
+                state.items.push(favItem);
                 try {
-                    await favListApi.changeFavList(JSON.parse(user).id, JSON.parse(user), state.items);
+                    favListApi.changeFavList(user.id, user, state.items, cart);
                     console.log("FavList updated in the API");
                 } catch (err) {
                     console.error("Error updating favList in the API", err);
@@ -29,11 +29,11 @@ const favListSlice = createSlice({
                 console.log("This item is already in the favList");
             }
         },
-        removeFromFavList: async (state, action) => {
-            state.items = state.items.filter(item => item.colorId !== action.payload);
-
+        removeFromFavList: (state, action) => {
+            const { colorId, cart } = action.payload;
+            state.items = state.items.filter(item => item.colorId !== colorId);
             try {
-                await favListApi.changeFavList(JSON.parse(user).id, JSON.parse(user), state.items);
+                favListApi.changeFavList(user.id, user, state.items, cart);
                 console.log("FavList updated in the API");
             } catch (err) {
                 console.error("Error updating favList in the API", err);
