@@ -28,7 +28,6 @@
   transform: scale(1.05);
 }
 
-/* Konum Bilgisi */
 .navbar-location {
   margin-right: 30px;
 }
@@ -44,7 +43,6 @@
   color: #fff;
 }
 
-/* Arama Kutusu */
 .navbar-search {
   display: flex;
   flex: 1;
@@ -87,30 +85,32 @@
   color: #131A22;
 }
 
-/* Hesap ve Sipariş Bölümü */
-.navbar-account, .navbar-orders {
+.navbar-account,
+.navbar-orders {
   margin-right: 30px;
   cursor: pointer;
   text-align: center;
   transition: color 0.3s ease;
 }
 
-.navbar-account:hover, .navbar-orders:hover {
+.navbar-account:hover,
+.navbar-orders:hover {
   color: #febd69;
 }
 
-.navbar-account span, .navbar-orders span {
+.navbar-account span,
+.navbar-orders span {
   font-size: 12px;
   color: #B0B6C3;
 }
 
-.navbar-account strong, .navbar-orders strong {
+.navbar-account strong,
+.navbar-orders strong {
   display: block;
   font-size: 14px;
   color: #fff;
 }
 
-/* Sepet İkonu */
 .navbar-cart {
   display: flex;
   align-items: center;
@@ -129,11 +129,11 @@
   color: #fff;
 }
 
-.navbar-cart:hover i, .navbar-cart:hover span {
+.navbar-cart:hover i,
+.navbar-cart:hover span {
   color: #febd69;
 }
 
-/* Responsive Tasarım */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -145,13 +145,14 @@
     margin: 10px 0;
   }
 
-  .navbar-account, .navbar-orders {
+  .navbar-account,
+  .navbar-orders {
     margin-right: 10px;
   }
 }
 
 .swiper-slide img {
-  padding: 50px;
+  /* padding: 50px; */
   padding-top: 0;
 }
 
@@ -173,25 +174,6 @@ main>.slider-container {
 
 .header a:hover {
   color: #ef476f !important;
-  /* Hover durumunda dikkat çekici bir renk */
-}
-
-
-
-
-
-.product-container {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-container:hover {
-  transform: translateY(-5px);
-  /* Kart hover durumunda hafifçe yukarı çıkar */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .center-urls,
@@ -311,6 +293,16 @@ header:has(.header) {
       background: transparent;
       justify-content: space-between;
       flex-grow: 1;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
     }
 
     .product-image {
@@ -779,12 +771,19 @@ header:has(.header) {
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, border-color 0.3s ease;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      border-color: #888;
+    }
   }
 
-  .color:hover {
-    transform: scale(1.1);
-    border-color: #888;
-  }
 
   .addToCart,
   .addToFav {
@@ -858,78 +857,6 @@ option {
 }
 
 /* ? Select  CSS end */
-
-
-/* ! Slider CSS start */
-.slider-container {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.slider-image img {
-  width: 100%;
-  display: block;
-  border-radius: 4px;
-}
-
-.slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 24px;
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease;
-}
-
-.slider-arrow-left {
-  left: 16px;
-}
-
-.slider-arrow-right {
-  right: 16px;
-}
-
-.slider-arrow:hover {
-  background-color: #f3f3f3;
-}
-
-.slider-dots {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.slider-dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 4px;
-  background-color: #ddd;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.slider-dot.active {
-  background-color: #333;
-}
-
-.slider-dot:hover {
-  background-color: #aaa;
-}
-
-
-/* ! Slider CSS end */
 
 /** My Account CSS start  */
 #myAccount {

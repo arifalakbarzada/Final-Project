@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { cartApi } from '../../../service/base';
+import { cartApi, favListApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
 import { decreaseQuantity, increaseQuantity, removeCartItem, setCartItems } from '../../../redux/slices/cartSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { setFavList } from '../../../redux/slices/favListSlice';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -10,13 +11,14 @@ function Cart() {
   const cart = useSelector(state => state.cart.items);
   const favList = useSelector(state => state.favList.items);
   
-  const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
 
   useEffect(() => {
     if (user && user.id) {
       cartApi.getCart(user.id).then(res => dispatch(setCartItems(res.userCart)));
+      favListApi.getFavList(user.id).then(res=>dispatch(setFavList(res.favlist)));
     }
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { productsApi } from '../../service/base';
@@ -107,10 +107,9 @@ function ProductDetail() {
                         style={{ backgroundColor: color.hex }}
                         title={color.name}
                         onClick={() => {
-                          navigate(`/products/${product.id}/${color.id}/${color.name.toLowerCase()}`);
                           setSelectedColorId(color.id);
                         }}
-                      ></div>
+                      ><NavLink to={`/products/${product.id}/${color.id}/${color.name.toLowerCase()}`}></NavLink></div>
                     ))}
                   </div>
                 </>
@@ -150,7 +149,7 @@ function ProductDetail() {
                   color: selectedColor,
                   stock : colorData.stock
                 }
-                dispatch(addToFavList({favoriteItem , cart}))
+                dispatch(addToFavList({favItem : favoriteItem, cart}))
               }}
             >
               <BsHeart /> Add To Favorite

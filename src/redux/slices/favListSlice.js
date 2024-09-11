@@ -19,12 +19,9 @@ const favListSlice = createSlice({
             const item = state.items.find(item => item.colorId === favItem.colorId);
             if (!item) {
                 state.items.push(favItem);
-                try {
                     favListApi.changeFavList(user.id, user, state.items, cart);
                     console.log("FavList updated in the API");
-                } catch (err) {
-                    console.error("Error updating favList in the API", err);
-                }
+
             } else {
                 console.log("This item is already in the favList");
             }
@@ -32,12 +29,8 @@ const favListSlice = createSlice({
         removeFromFavList: (state, action) => {
             const { colorId, cart } = action.payload;
             state.items = state.items.filter(item => item.colorId !== colorId);
-            try {
                 favListApi.changeFavList(user.id, user, state.items, cart);
                 console.log("FavList updated in the API");
-            } catch (err) {
-                console.error("Error updating favList in the API", err);
-            }
         }
     }
 });

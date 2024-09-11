@@ -42,9 +42,7 @@ function App() {
   const [role, setRole] = useState(null)
   useEffect(() => {
     if (user) {
-      cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)));
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
-
     }
   }, [user]);
       const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
@@ -54,12 +52,6 @@ function App() {
       dispatch(setUserFromLocalStorage(savedUser));
     }
   }, [dispatch]);
-  
-  useEffect(() => {
-    if (window.location.href && user) {
-      usersApi.changeUserActivity(JSON.parse(user).id, JSON.parse(user), new Date())
-    }
-  }, [user])
 
   return (
 

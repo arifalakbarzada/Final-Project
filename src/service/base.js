@@ -102,7 +102,7 @@ export const cartApi = {
 
     },
     changeUserCart: function (id, user, changes , fav) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes , favList : fav })
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes , favlist : fav })
 
     }
     ,

@@ -16,13 +16,9 @@ useEffect(()=>{
         const filteredResults = mockData.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
     if (searchTerm) {
-      
     setResults(filteredResults);
     }
-
-
   }, [searchTerm]);
 
     return (
