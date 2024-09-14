@@ -19,14 +19,15 @@ function Header() {
   const [country, setCountry] = useState('')
   const [isMenuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
-    productsApi.getAllProduct().then(res=>setProducts(res))
+    productsApi.getAllProduct().then(res => setProducts(res))
   }, [dispatch])
-  
+
   useEffect(() => {
     setFilteredProducts(products);
     const uniqueCategories = [...new Set(products.map(product => product.category))];
     setCategories(uniqueCategories);
-  }, [products]);
+  }
+  , [products]);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -47,7 +48,6 @@ function Header() {
       <div className="logo" onClick={() => navigate('/')}>
         <h1>TechShop</h1>
       </div>
-
       <div className='search-bar'>
         <input type="text" placeholder="Search..." onChange={(e) => {
           setSearch(e.target.value)
@@ -61,7 +61,7 @@ function Header() {
           {
             categories.map(category => (
               <option key={category} value={category}>{category}</option>
-              ))
+            ))
           }
         </select>
       </div>
@@ -85,7 +85,7 @@ function Header() {
         </li>
       </ul>
 
-      <div className='responsive-menu' onClick={toggleMenu}>
+      <div className={isMenuOpen?'responsive-menu active' : 'responsive-menu'} onClick={toggleMenu}>
         <span></span>
         <span></span>
         <span></span>
