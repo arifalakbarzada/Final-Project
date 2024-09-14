@@ -18,11 +18,11 @@ function FavList() {
       favListApi.getFavList(user.id).then(res => dispatch(setFavList(res.favlist)));
     }
   }, [dispatch]);
-useEffect(() => {
-  if (user && user.id) {
-    cartApi.getCart(user.id).then(res => dispatch(setCartItems(res.userCart)))
-  }
-}, [dispatch])
+  useEffect(() => {
+    if (user && user.id) {
+      cartApi.getCart(user.id).then(res => dispatch(setCartItems(res.userCart)))
+    }
+  }, [dispatch])
 
   return (
     <>

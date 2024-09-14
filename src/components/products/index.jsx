@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { productsApi } from '../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../../redux/slices/productSlice';
+import { setFilter, setProducts } from '../../redux/slices/productSlice';
 import { useNavigate } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
@@ -12,11 +12,10 @@ function Products() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.items);
+  const filtered = useSelector((state) => state.products.filteredByCategory)
   const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
-  const cart = useSelector((state)=>state.cart.items)
-  const favList = useSelector((state)=>state.favList.items)
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const cart = useSelector((state) => state.cart.items)
+  const favList = useSelector((state) => state.favList.items)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,9 +30,7 @@ function Products() {
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredProducts(products);
-    const uniqueCategories = [...new Set(products.map(product => product.category))];
-    setCategories(uniqueCategories);
+    dispatch(setFilter(products))
   }, [products]);
   const handleAddToCart = (product, color) => {
     if (user) {
@@ -46,7 +43,7 @@ function Products() {
         image: color.images[0],
         stock: color.stock,
       };
-      dispatch(addCartItem({cartItem , favList}));
+      dispatch(addCartItem({ cartItem, favList }));
     } else {
       navigate('/login');
     }
@@ -63,17 +60,9 @@ function Products() {
         image: color.images[0],
         stock: color.stock,
       };
-      dispatch(addToFavList({favItem , cart}));
+      dispatch(addToFavList({ favItem, cart }));
     } else {
       navigate('/login');
-    }
-  };
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    if (category === '') {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(products.filter(product => product.category === category));
     }
   };
 
@@ -121,16 +110,8 @@ function Products() {
 
   return (
     <div className='products-container'>
-      <div className="select-container" style={{ marginBottom: '24px' }}>
-        <select name="categories" id='filterProducts' onChange={handleCategoryChange} className="category-select">
-          <option value="">All Categories</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>{category}</option>
-          ))}
-        </select>
-      </div>
       <div className="products">
-        {filteredProducts.length > 0 ? filteredProducts.map(renderProduct) : <p>Ürün bulunamadı.</p>}
+        {filtered.length > 0 ? filtered.map(renderProduct) : <p>Ürün bulunamadı.</p>}
       </div>
     </div>
   );

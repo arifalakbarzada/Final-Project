@@ -3,16 +3,42 @@ import { BsCart } from 'react-icons/bs'
 import { CiHeart, CiSearch, CiUser } from 'react-icons/ci'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { usersApi } from '../../../service/base'
+import { productsApi, usersApi } from '../../../service/base'
+import { filterByCategory, setFilter, setProducts } from '../../../redux/slices/productSlice'
 
 function Header() {
   const dispatch = useDispatch()
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user')
   const userInDis = useSelector((state) => state.users.user)
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [search, setSearch] = useState('')
+  const [categories, setCategories] = useState([])
+  const products = useSelector((state) => state.products.items)
   const cart = useSelector(state => state.cart.items)
   const [country, setCountry] = useState('')
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    productsApi.getAllProduct().then(res=>setProducts(res))
+  }, [dispatch])
+  
+  useEffect(() => {
+    setFilteredProducts(products);
+    const uniqueCategories = [...new Set(products.map(product => product.category))];
+    setCategories(uniqueCategories);
+  }, [products]);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    if (category === '') {
+      dispatch(setFilter(products))
+    } else {
+      dispatch(setFilter(products.filter(product => product.category === category)));
+    }
+  };
   useEffect(() => {
     usersApi.getUserCountry().then(res => setCountry(res))
   }, [])
@@ -21,33 +47,36 @@ function Header() {
       <div className="logo" onClick={() => navigate('/')}>
         <h1>TechShop</h1>
       </div>
+
+      <div className='search-bar'>
+        <input type="text" placeholder="Search..." onChange={(e) => {
+          setSearch(e.target.value)
+        }} />
+        <button><CiSearch /></button>
+      </div>
+
+      <div className='filter'>
+        <select onChange={handleCategoryChange}>
+          <option value="">All</option>
+          {
+            categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+              ))
+          }
+        </select>
+      </div>
+
       <ul className='center-urls'>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/about">About</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">Contact</NavLink>
-        </li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/about">About</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
       </ul>
+
       <ul className="right-urls">
+        <li><NavLink to='/login'><CiUser /></NavLink></li>
+        <li><NavLink to='/favlist'><CiHeart /></NavLink></li>
         <li>
-          <CiSearch />
-        </li>
-        <li>
-          <NavLink to={'/login'}>
-            <CiUser />
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={'/favlist'}>
-            <CiHeart />
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={'/cart'}>
+          <NavLink to='/cart'>
             <BsCart />
             <span className='total-price'>
               {cart.length > 0 && user || userInDis ? `(${cart.length})` : null}
@@ -55,44 +84,15 @@ function Header() {
           </NavLink>
         </li>
       </ul>
+
+      <div className='responsive-menu' onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+
   )
-  //   return     <div className="header">
-  //   <div className="navbar-logo">
-  //     <img 
-  //       src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" 
-  //       alt="Amazon Logo" 
-  //     />
-  //   </div>
-  //   <div className="navbar-location">
-  //     <span>Deliver to</span>
-  //     <strong>{country?.country}</strong>
-  //   </div>
-  //   <div className="navbar-search">
-  //     <select className="navbar-search-category">
-  //       <option>All</option>
-  //       <option>Electronics</option>
-  //       <option>Books</option>
-  //       <option>Fashion</option>
-  //     </select>
-  //     <input type="text" className="navbar-search-input" />
-  //     <button className="navbar-search-button">
-  //       <CiSearch />
-  //     </button>
-  //   </div>
-  //   <div className="navbar-account">
-  //     <span>Hello, Sign in</span>
-  //     <strong>Account & Lists</strong>
-  //   </div>
-  //   <div className="navbar-orders">
-  //     <span>Returns</span>
-  //     <strong>& Orders</strong>
-  //   </div>
-  //   <div className="navbar-cart">
-  //     <i className="fas fa-shopping-cart"></i>
-  //     <span>Cart</span>
-  //   </div>
-  // </div>
 }
 
 export default Header
