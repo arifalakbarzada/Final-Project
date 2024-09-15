@@ -180,7 +180,7 @@ header:has(.header) {
 
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 15px 20px;
     color: #fff;
@@ -249,7 +249,12 @@ header:has(.header) {
     }
   }
 
-
+.responsive-side{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
   .center-urls {
     display: flex;
     list-style: none;
@@ -324,7 +329,7 @@ header:has(.header) {
 
 
 
-@media screen and (max-width: 1168px) {
+@media screen and (max-width: 1060px) {
 .header{
   position: static;
   .center-urls,
@@ -340,6 +345,18 @@ header:has(.header) {
     display: block !important;
   }
 }
+
+@media screen and (max-width:510px) {
+  main>div{
+    width: 80% !important;
+  }
+}
+@media screen and (max-width:510px) {
+  main>div{
+    width: 100% !important;
+  }
+}
+
 
 .responsive-menu.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px) !important;
