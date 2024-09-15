@@ -56,8 +56,8 @@ export const usersApi = {
         axios.delete(`${usersUrl}/${id}`)
     },
 
-    changeUserStatus: function (id , user , status) {
-        axios.put(`${usersUrl}/${id}`, {...user , status:status})
+    changeUserStatus: function (id, user, status) {
+        axios.put(`${usersUrl}/${id}`, { ...user, status: status })
     }
     ,
     getSingleUser: async function (id) {
@@ -70,12 +70,13 @@ export const usersApi = {
         }
     }
     ,
-    getUserCountry : async function () {
+    getUserCountry: async function () {
         try {
-       await axios.get("https://ipinfo.io/json?token=89c1c413324bc8")
-       } catch (error) {
-        console.error(error);
-        throw error;
+            const response = await axios.get("https://ipinfo.io/json?token=89c1c413324bc8")
+            return response.data
+        } catch (error) {
+            console.error(error);
+            throw error;
         }
     },
     resetPassword: function (id, data, password) {
@@ -101,8 +102,8 @@ export const cartApi = {
         }
 
     },
-    changeUserCart: function (id, user, changes , fav) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes , favlist : fav })
+    changeUserCart: function (id, user, changes, fav) {
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav })
 
     }
     ,
@@ -121,9 +122,9 @@ export const favListApi = {
             throw error;
         }
     },
-    changeFavList: async function (id, user, changes , cart) {
+    changeFavList: async function (id, user, changes, cart) {
         try {
-            const updatedUser = { ...user, favlist: changes , userCart : cart };
+            const updatedUser = { ...user, favlist: changes, userCart: cart };
             const response = await axios.put(`${usersUrl}/${id}`, updatedUser);
 
             return response.data;

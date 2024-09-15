@@ -18,7 +18,7 @@ function Header() {
   const [categories, setCategories] = useState([])
   const products = useSelector((state) => state.products.items)
   const cart = useSelector(state => state.cart.items)
-  const [country, setCountry] = useState('')
+  const [locationData, setLocationData] = useState('')
   const [isMenuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     productsApi.getAllProduct().then(res => setProducts(res))
@@ -56,7 +56,7 @@ function Header() {
     }
   };
   useEffect(() => {
-    usersApi.getUserCountry().then(res => setCountry(res))
+    usersApi.getUserCountry().then(res => setLocationData(res))
   }, [dispatch])
   return (
     <div className='header'>
