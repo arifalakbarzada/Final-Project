@@ -83,7 +83,9 @@ function Header() {
           <input type="text" placeholder="Search..." onChange={(e) => {
             setSearch(e.target.value)
           }} />
-          <button><CiSearch /></button>
+          <button onClick={()=>{
+            navigate(`search/${search}`)
+          }}><CiSearch /></button>
         </div>
 
 
