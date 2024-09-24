@@ -12,6 +12,8 @@ const Search = () => {
   const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'))
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cart = useSelector((state)=>state.cart.items)
+  const favList = useSelector((state)=>state.favList.items)
   useEffect(() => {
         const filteredResults = products.filter((item) =>
       item?.name.toLowerCase().includes(searchTerm.toLowerCase())
