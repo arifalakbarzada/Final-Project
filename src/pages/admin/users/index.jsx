@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usersApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers } from '../../../redux/slices/userSlice';
+import { changeUserStatus, setUsers } from '../../../redux/slices/userSlice';
 
 
 const UserManagement = () => {
@@ -36,12 +36,14 @@ const UserManagement = () => {
                 {user.status === 'Active' ? (
                   <button className={`ban-button ${user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? 'cannot-ban' : null}`} disabled={user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? true : false} onClick={() => {
                     usersApi.changeUserStatus(user.id, user, 'Banned')
-                    dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Banned' }]))
+                    dispatch(changeUserStatus({userData: user , status : 'Banned'}))
+                    // dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Banned' }]))
                   }}>Ban</button>
                 ) : (
                   <button className="active-button" onClick={() => {
                     usersApi.changeUserStatus(user.id, user, 'Active')
-                    dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Active' }]))
+                    dispatch(changeUserStatus({userData: user , status : 'Active'}))
+                    // dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Active' }]))
                   }}>Active</button>
                 )}
               </td>

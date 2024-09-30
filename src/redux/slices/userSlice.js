@@ -35,9 +35,16 @@ const userSlice = createSlice({
     setUserFromSessionStorage: (state, action) => {
       state.user = action.payload;
     },
+    changeUserStatus : (state , action) =>{
+      const {userData , status} = action.payload
+      const founded = state.items.findIndex((user)=>user.id === userData.id)
+      if(founded !== -1){
+        state.items[founded].status = status
+      }
+    }
   },
 });
 
-export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage } = userSlice.actions;
+export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage , changeUserStatus } = userSlice.actions;
 
 export default userSlice.reducer;
