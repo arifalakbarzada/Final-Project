@@ -19,18 +19,13 @@ const favListSlice = createSlice({
             const item = state.items.find(item => item.colorId === favItem.colorId);
             if (!item) {
                 state.items.push(favItem);
-                    favListApi.changeFavList(user.id, user, state.items, cart);
-                    console.log("FavList updated in the API");
-
-            } else {
-                console.log("This item is already in the favList");
+                favListApi.changeFavList(user.id, user, state.items, cart);
             }
         },
         removeFromFavList: (state, action) => {
             const { colorId, cart } = action.payload;
             state.items = state.items.filter(item => item.colorId !== colorId);
-                favListApi.changeFavList(user.id, user, state.items, cart);
-                console.log("FavList updated in the API");
+            favListApi.changeFavList(user.id, user, state.items, cart);
         }
     }
 });

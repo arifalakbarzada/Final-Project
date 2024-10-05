@@ -37,13 +37,11 @@ const UserManagement = () => {
                   <button className={`ban-button ${user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? 'cannot-ban' : null}`} disabled={user.userName === JSON.parse(storedUser).userName || user.role === 'admin' ? true : false} onClick={() => {
                     usersApi.changeUserStatus(user.id, user, 'Banned')
                     dispatch(changeUserStatus({userData: user , status : 'Banned'}))
-                    // dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Banned' }]))
                   }}>Ban</button>
                 ) : (
                   <button className="active-button" onClick={() => {
                     usersApi.changeUserStatus(user.id, user, 'Active')
                     dispatch(changeUserStatus({userData: user , status : 'Active'}))
-                    // dispatch(setUsers([...(reduxUsers.filter(filter => user.id !== filter.id)), { ...user, status: 'Active' }]))
                   }}>Active</button>
                 )}
               </td>
