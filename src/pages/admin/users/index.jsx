@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { usersApi } from '../../../service/base';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserStatus, setUsers } from '../../../redux/slices/userSlice';
 
 
 const UserManagement = () => {
-  const [users, setUsersFromApi] = useState(null);
   const reduxUsers = useSelector((state) => state.users.items)
   const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
   const dispatch = useDispatch();
