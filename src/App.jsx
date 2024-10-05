@@ -28,15 +28,13 @@ import AccountDashBoard from './pages/user/account/dashboard'
 import Register from './pages/user/register'
 import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
-import { cartApi, usersApi, favListApi } from './service/base'
-import { setCartItems } from './redux/slices/cartSlice'
+import { usersApi } from './service/base'
 import { setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
 import UserManagement from './pages/admin/users'
 
 function App() {
   const cart = useSelector((state) => state.cart.items)
-  const userInRedux = useSelector((state) => state.users.user)
   const dispatch = useDispatch();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
