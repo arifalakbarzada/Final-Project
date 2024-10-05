@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { cartApi, ordersApi, usersApi } from '../../../service/base';
-// import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { setOrders } from '../../../redux/slices/orderSlice';
+import { useSelector } from 'react-redux';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const [userCart, setUserCart] = useState([]);
-  const [lastOrders, setLastOrders] = useState();
-  // const stripe = useStripe();
-  // const elements = useElements();
-  // const cardStyle = {
-  //   style: {
-  //     base: {
-  //       color: "#32325d",
-  //       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-  //       fontSmoothing: "antialiased",
-  //       fontSize: "16px",
-  //       "::placeholder": {
-  //         color: "#aab7c4"
-  //       }
-  //     },
-  //     invalid: {
-  //       color: "#fa755a",
-  //       iconColor: "#fa755a"
-  //     }
-  //   }
-  // };
+  const orders = useSelector((state) => state.orders.items);
+
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [checkoutDetails, setCheckoutDetails] = useState({
     userName: '',
@@ -41,7 +24,7 @@ const Checkout = () => {
 
   useEffect(() => {
     cartApi.getCart(JSON.parse(user).id).then(res => setUserCart(res.userCart));
-    ordersApi.getOrders(JSON.parse(user).id).then(res => setLastOrders(res.orders));
+    ordersApi.getOrders(JSON.parse(user).id).then(res => setOrders(res.orders));
   }, [user]);
 
   const handleCheckout = async (e) => {
@@ -54,36 +37,11 @@ const Checkout = () => {
     };
 
     const validationErrors = validateAddressForm(addressData);
+    if (Object.keys(validationErrors).length) {
 
-    if (checkoutDetails.userName === JSON.parse(user).userName && checkoutDetails.email === JSON.parse(user).email && Object.keys(validationErrors).length === 0) {
-      if (!stripe || !elements) {
-        return;
-      }
-
-      const cardElement = elements.getElement(CardElement);
-
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-      });
-
-      if (error) {
-        console.error(error);
-      } else {
-        console.log({
-          "checkoutDetails": checkoutDetails,
-          "user": JSON.parse(user),
-          "orders": userCart,
-          "paymentMethod": paymentMethod
-        });
-        cartApi.clearUserCart(JSON.parse(user).id, JSON.parse(user))
-        alert("Payment Successful!");
-      }
-    } else if (Object.keys(validationErrors).length > 0) {
-      console.log('Errors', validationErrors);
-    } else {
-      console.log('User not found');
+      return;
     }
+
   };
 
   const validateAddressForm = (addressData) => {
@@ -138,10 +96,6 @@ const Checkout = () => {
               (e) => setCheckoutDetails({ ...checkoutDetails, zipCode: e.target.value })
             } />
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="payment">Card Number</label>
-            <CardElement options={cardStyle} className='stripe-card-element' />
-          </div> */}
           <button type="submit" className="btn-submit">Place Order</button>
         </form>
       </div>

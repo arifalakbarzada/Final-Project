@@ -4,12 +4,14 @@ import cartReducer from './slices/cartSlice';
 import usersReducer from './slices/userSlice';
 import searchReducer from './slices/searchSlice';
 import favListReducer from './slices/favListSlice';
+import orderReducer from './slices/orderSlice'
 export const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
     users: usersReducer,
-    search : searchReducer,
-    favList : favListReducer
+    search: searchReducer,
+    favList: favListReducer,
+    orders: orderReducer
   },
 })

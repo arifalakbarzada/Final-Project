@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { ordersApi } from '../../../../service/base';
 import NotFoundForUserPage from '../../notfound';
+import { useSelector } from 'react-redux';
+import { setOrders } from '../../../../redux/slices/orderSlice';
 
 function AccountOrders() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user')
-  const [orders, setOrders] = useState([])
+  const orders = useSelector(state => state.orders.items)
+
   useEffect(() => {
     ordersApi.getOrders(JSON.parse(user).id).then(res => setOrders(res.orders))
   }, [])
