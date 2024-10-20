@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsers, loginUser } from '../../../redux/slices/userSlice';
+import { setUsers, loginUser, setUserFromLocalStorage } from '../../../redux/slices/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
 
@@ -10,6 +10,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector(state => state.users.items);
+  const userRedux = useSelector((state)=>state.users.user)
 
   useEffect(() => {
     usersApi.getAllUsers().then(res => dispatch(setUsers(res)));
@@ -26,8 +27,10 @@ const Login = () => {
       if (user.status === 'Active') {
         if (rememberMe) {
           localStorage.setItem('user', JSON.stringify(user));
+          dispatch(setUserFromLocalStorage(user))
         } else {
           sessionStorage.setItem('user', JSON.stringify(user));
+          dispatch(setUserFromLocalStorage(user))
         }
         dispatch(loginUser({ user, rememberMe }));
         navigate('/myaccount/dashboard');

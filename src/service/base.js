@@ -103,7 +103,8 @@ export const cartApi = {
 
     },
     changeUserCart: function (id, user, changes, fav) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav })
+        const time = new Date()
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav , lastActivity : time })
 
     }
     ,
@@ -123,8 +124,9 @@ export const favListApi = {
         }
     },
     changeFavList: async function (id, user, changes, cart) {
+        const time = new Date()
         try {
-            const updatedUser = { ...user, favlist: changes, userCart: cart };
+            const updatedUser = { ...user, favlist: changes, userCart: cart , lastActivity : time };
             const response = await axios.put(`${usersUrl}/${id}`, updatedUser);
 
             return response.data;

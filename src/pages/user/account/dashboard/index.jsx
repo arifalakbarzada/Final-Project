@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { FiActivity, FiMapPin, FiShoppingCart, FiUser } from 'react-icons/fi';
 import { usersApi } from '../../../../service/base';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 function AccountDashBoard() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const navigate = useNavigate()
   const [activity, setActivity] = useState('')
+  const dispatch = useDispatch()
   const [role, setRole] = useState('')
   useEffect(() => {
-    usersApi.getSingleUser(JSON.parse(user).id).then(res => {
-      setRole(res.role)
-      setActivity(res.lastActivity)
+    if (user) {
+      usersApi.getSingleUser(JSON.parse(user).id).then(res => {
+        setRole(res.role)
+        setActivity(res.lastActivity)
+      }
+      )
     }
-
-    )
-  }, [window.location.href])
+  }, [dispatch])
   return (
     <div className="dashboard">
       <h2 className="dashboard-title">Welcome to Your Dashboard</h2>

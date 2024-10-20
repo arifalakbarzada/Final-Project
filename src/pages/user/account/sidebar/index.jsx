@@ -24,7 +24,7 @@ function SideBarForMyAccount() {
         <li onClick={()=>navigate('address')}><NavLink to="address"><FaMapMarkerAlt /> Address</NavLink></li>
         <li onClick={()=>navigate('settings')}><NavLink to="settings"><GrUserSettings /> Settings</NavLink></li>
       </ul>
-      <div className='logout' onClick={handleLogout}><button onClick={handleLogout}><FiLogOut /> Logout</button></div>
+      <div className='logout' onClick={handleLogout}><button><FiLogOut /> Logout</button></div>
 
     </div>
   )

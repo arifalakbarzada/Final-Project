@@ -36,13 +36,24 @@ import UserManagement from './pages/admin/users'
 function App() {
   const cart = useSelector((state) => state.cart.items)
   const dispatch = useDispatch();
+  const [userState, setUserState] = useState()
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
+  const userRedux = useSelector((state)=>state.users.user)
   useEffect(() => {
     if (user) {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
     }
   }, [user]);
+  useEffect(() => {
+    if (user) {
+      usersApi.getSingleUser(JSON.parse(user).id).then(res=>setUserState(res))
+     const time = new Date()
+    usersApi.changeUserActivity(JSON.parse(user).id , userState , time)
+  }
+   
+  }, [dispatch])
+  
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
 
   useEffect(() => {
@@ -60,14 +71,14 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="/search/:searchTerm" element={<Search />} />
-        <Route path="cart" element={user ? <Cart /> : <Navigate to="/login" />} />
-        <Route path="favlist" element={user ? <FavList /> : <Navigate to="/login" />} />
+        <Route path="cart" element={user || userRedux ? <Cart /> : <Navigate to="/login" />} />
+        <Route path="favlist" element={user || userRedux ? <FavList /> : <Navigate to="/login" />} />
         <Route path="register" element={<Register />} />
         {user && cart.length > 0 ? (<Route path='/submit' element={<Submit />} />) : null}
         {user && cart.length > 0 ? (<Route path='/checkout' element={<Checkout />} />) : null}
-        <Route path="/login" element={user || savedUser ? <Navigate to="/myaccount/dashboard" /> : <Login />} />
+        <Route path="/login" element={user || userRedux ? <Navigate to="/myaccount/dashboard" /> : <Login />} />
         <Route path='/resetpassword/:id/:token' element={<ResetPassword />} />
-        <Route path="/myaccount" element={user || savedUser ? <MyAccount /> : <Navigate to="/login" />}>
+        <Route path="/myaccount" element={user || userRedux ? <MyAccount /> : <Navigate to="/login" />}>
           <Route path='dashboard' index element={<AccountDashBoard />} />
           <Route path="orders" element={<AccountOrders />} />
           <Route path="address" element={<AccountAddress />} />
