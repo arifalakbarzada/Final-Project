@@ -4,6 +4,7 @@ import { productsApi } from '../../../service/base';
 import { useDispatch } from 'react-redux';
 import { setProducts } from '../../../redux/slices/productSlice';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'; // Yeni SDK'dan ithal
+import { v4 } from 'uuid';
 
 function EditForSingleProductPanel() {
   const { id } = useParams();
@@ -77,6 +78,7 @@ function EditForSingleProductPanel() {
 
       // Yeni renk bilgilerini ekle
       const newColor = {
+        id: v4(),
         name: colorData.name,
         hex: colorData.hex,
         stock: colorData.stock,
@@ -89,7 +91,7 @@ function EditForSingleProductPanel() {
         colors: [...product.colors, newColor],
       };
       setProduct(updatedProduct)
-      
+      productsApi.updateProduct(id , updatedProduct)
 
       // Backend'e güncellenen ürünü gönderme (API'ye göre ayarlayın)
       // await productsApi.updateProduct(id, updatedProduct);
