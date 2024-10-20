@@ -32,6 +32,7 @@ import { usersApi } from './service/base'
 import { setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
 import UserManagement from './pages/admin/users'
+import AddNewProduct from './pages/admin/addNewProduct'
 
 function App() {
   const cart = useSelector((state) => state.cart.items)
@@ -39,7 +40,7 @@ function App() {
   const [userState, setUserState] = useState()
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
-  const userRedux = useSelector((state)=>state.users.user)
+  const userRedux = useSelector((state) => state.users.user)
   useEffect(() => {
     if (user) {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
@@ -47,13 +48,13 @@ function App() {
   }, [user]);
   useEffect(() => {
     if (user) {
-      usersApi.getSingleUser(JSON.parse(user).id).then(res=>setUserState(res))
-     const time = new Date()
-    usersApi.changeUserActivity(JSON.parse(user).id , userState , time)
-  }
-   
+      usersApi.getSingleUser(JSON.parse(user).id).then(res => setUserState(res))
+      const time = new Date()
+      usersApi.changeUserActivity(JSON.parse(user).id, userState, time)
+    }
+
   }, [dispatch])
-  
+
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
 
   useEffect(() => {
@@ -91,6 +92,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index path='dashboard' element={<Dashboard />} />
             <Route path="edit" element={<EditPanel />} />
+            <Route path='addnew' element={<AddNewProduct />} />
             <Route path="edit/:id" element={<AddPanel />} />
             <Route path="orders" element={<Orders />} />
             <Route path="users" element={<UserManagement />} />
