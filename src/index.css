@@ -1,156 +1,8 @@
-:root {
-  --shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
-}
-
-
-
-
-.swiper-slide {
-  &::selection {
-    user-select: none;
-  }
-}
-
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.navbar-logo img {
-  width: 110px;
-  cursor: pointer;
-  margin-right: 30px;
-  transition: transform 0.3s ease;
-}
-
-.navbar-logo img:hover {
-  transform: scale(1.05);
-}
-
-.navbar-location {
-  margin-right: 30px;
-}
-
-.navbar-location span {
-  font-size: 12px;
-  color: #B0B6C3;
-}
-
-.navbar-location strong {
-  display: block;
-  font-size: 14px;
-  color: #fff;
-}
-
-.navbar-search {
-  display: flex;
-  flex: 1;
-  margin-right: 30px;
-  background-color: #fff;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.navbar-search-category {
-  padding: 10px;
-  border: none;
-  background-color: #F3F3F3;
-  font-size: 14px;
-  outline: none;
-}
-
-.navbar-search-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-}
-
-.navbar-search-button {
-  background-color: #febd69;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.navbar-search-button:hover {
-  background-color: #f3a847;
-}
-
-.navbar-search-button i {
-  font-size: 18px;
-  color: #131A22;
-}
-
-.navbar-account,
-.navbar-orders {
-  margin-right: 30px;
-  cursor: pointer;
-  text-align: center;
-  transition: color 0.3s ease;
-}
-
-.navbar-account:hover,
-.navbar-orders:hover {
-  color: #febd69;
-}
-
-.navbar-account span,
-.navbar-orders span {
-  font-size: 12px;
-  color: #B0B6C3;
-}
-
-.navbar-account strong,
-.navbar-orders strong {
-  display: block;
-  font-size: 14px;
-  color: #fff;
-}
-
-.navbar-cart {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.navbar-cart i {
-  font-size: 24px;
-  margin-right: 5px;
-  color: #fff;
-}
-
-.navbar-cart span {
-  font-size: 14px;
-  color: #fff;
-}
-
-.navbar-cart:hover i,
-.navbar-cart:hover span {
-  color: #febd69;
-}
-
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar-search {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .navbar-account,
-  .navbar-orders {
-    margin-right: 10px;
-  }
-}
-
 
 main>div {
   width: 60% !important;
@@ -162,14 +14,11 @@ main>div {
   margin: 0 auto;
 }
 
-.logo h1 {
-  cursor: pointer;
-  color: rgb(78, 109, 170);
-}
-
 main {
   margin-bottom: 1rem;
 }
+
+/*! User Header CSS start this side done  */
 
 header:has(.header) {
   position: sticky;
@@ -187,7 +36,6 @@ header:has(.header) {
     width: 80%;
     margin: 0 auto;
   }
-
   .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
@@ -373,10 +221,10 @@ header:has(.header) {
   transform: rotate(-45deg) translate(6px, -6px) !important;
 }
 
+/*! User Header CSS end  */
 
 
-
-/*? Products CSS start  */
+/*? Products CSS start this side done */
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -542,7 +390,7 @@ header:has(.header) {
 
 /*? Products CSS end  */
 
-/* ! About CSS start*/
+/* ! About CSS start this side done*/
 
 .about-container {
   font-family: Arial, sans-serif;
@@ -597,7 +445,7 @@ header:has(.header) {
 
 /* ! About CSS end */
 
-/* ? Login  CSS start */
+/* ? Login  CSS start this side done */
 
 .login-container,
 .register-container,
@@ -735,7 +583,7 @@ header:has(.header) {
 /* ? Login CSS end */
 
 
-/**  Contact CSS start */
+/**  Contact CSS start this side done */
 .contact-container {
   max-width: 500px;
   margin: 50px auto;
@@ -944,44 +792,16 @@ header:has(.header) {
     background-color: #d87d00;
   }
 }
-
+.swiper-slide {
+  &::selection {
+    user-select: none;
+  }
+}
 
 /* todo Details CSS end */
 
-/* ? Select CSS start */
-select {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  color: #333;
-  margin: 10px 0;
-  width: 150px;
-  cursor: pointer;
-  outline: none;
-}
 
-.select-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-select:focus {
-  border-color: #66afe9;
-  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
-}
-
-option {
-  padding: 10px;
-  background-color: #fff;
-  color: #333;
-}
-
-/* ? Select  CSS end */
-
-/** My Account CSS start  */
+/** My Account CSS start this side done  */
 #myAccount {
 
   .sidebar {
@@ -1315,7 +1135,7 @@ option {
 
 /** My Account CSS end  */
 
-/* ? Forget Password CSS start */
+/* ? Forget Password CSS start this side done */
 .forget-password-container {
   width: 300px;
   margin: 0 auto;
@@ -1365,7 +1185,7 @@ option {
 
 /* ? Forget Password CSS end */
 
-/* todo Reset Password CSS start */
+/* todo Reset Password CSS start this side done */
 
 .reset-password-container {
   width: 300px;
@@ -1415,7 +1235,7 @@ option {
 
 /* todo Reset Password CSS end */
 
-/*? Cart CSS start  */
+/*? Cart CSS start this side done */
 .cart-container {
   width: 100%;
   max-width: 800px;
@@ -1536,39 +1356,41 @@ option {
   background: #f9f9f9;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 28px;
+    color: #333;
+  }
+
+  p {
+    color: #777;
+    font-size: 18px;
+    margin: 20px 0;
+  }
+
+  .shop-now-btn {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ff5a50;
+    }
+  }
 }
 
-.empty-cart h2 {
-  font-size: 28px;
-  color: #333;
-}
 
-.empty-cart p {
-  color: #777;
-  font-size: 18px;
-  margin: 20px 0;
-}
-
-.shop-now-btn {
-  background-color: #ff6f61;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.shop-now-btn:hover {
-  background-color: #ff5a50;
-}
 
 
 
 /*? Cart CSS end */
 
-/*todo FavList CSS start */
+/*todo FavList CSS start this side done */
 
 .favList-container {
   width: 100%;
@@ -1719,44 +1541,7 @@ option {
 
 /*todo FavList CSS end  */
 
-/* ! Search Modal CSS start */
-.search-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.modal-content input {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  max-width: 400px;
-}
-
-.modal-content button {
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
-/* ! Search Modal CSS end */
-
-/*todo Submit CSS start  */
+/*todo Submit CSS start this side done  */
 .submit-container {
   display: flex;
   flex-direction: column;
@@ -1797,7 +1582,7 @@ option {
 /*todo Submit CSS end  */
 
 
-/*! Chechout CSS start */
+/*! Chechout CSS start  this side done*/
 .checkout-container {
   display: flex;
   flex-direction: column;
@@ -1907,7 +1692,7 @@ option {
 }
 
 /*! Checkout CSS end  */
-/*? Footer CSS start  */
+/*? Footer CSS start this side done */
 
 
 footer:has(.footer) {
@@ -1976,7 +1761,7 @@ footer:has(.footer) {
 
 /*? Footer CSS end  */
 
-/*! Admin Footer CSS start  */
+/*! Admin Footer CSS start this side done  */
 .admin-footer {
   background: linear-gradient(135deg, #99f2c8 0%, #1f4037 100%);
   padding: 20px 30px;
@@ -1997,7 +1782,7 @@ footer:has(.footer) {
 
 /*! Admin Footer CSS end  */
 
-/*? Admin Header CSS start  */
+/*? Admin Header CSS start this side done  */
 header:has(.admin-header) {
 
   background: linear-gradient(135deg, #1f4037 0%, #99f2c8 100%);
@@ -2177,7 +1962,7 @@ header:has(.admin-header) {
 /*todo Product Panel CSS end  */
 
 
-/*! Edit Panel CSS start  */
+/*! Edit Panel CSS start this side done  */
 .panel {
   max-width: 1200px;
   margin: 0 auto;
@@ -2187,143 +1972,146 @@ header:has(.admin-header) {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
 
-h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+  h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-details h3,
+  .specifications h4,
+  .colors h4 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="file"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #357abd;
+  }
+
+  .spec-item,
+  .color-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .spec-item p,
+  .color-item span {
+    flex: 1;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .color-sample {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .color-images img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .image-previews img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .edit-spec,
+  .edit-color {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .edit-spec h3,
+  .edit-color h3 {
+    margin-bottom: 10px;
+  }
+
+  .edit-spec input,
+  .edit-color input {
+    margin-bottom: 10px;
+  }
+
+  .edit-spec button,
+  .edit-color button {
+    margin-right: 10px;
+  }
+
+  .add-button {
+    background-color: #27ae60;
+  }
+
+  .add-button:hover {
+    background-color: #229954;
+  }
+
+  .close-button {
+    background-color: #e74c3c;
+  }
+
+  .close-button:hover {
+    background-color: #c0392b;
+  }
+
+  h3,
+  h4 {
+    text-align: center;
+  }
 }
 
-.product-details {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.product-details h3,
-.specifications h4,
-.colors h4 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: border-color 0.3s ease-in-out;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="file"]:focus {
-  border-color: #4a90e2;
-  outline: none;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #4a90e2;
-  color: white;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-button:hover {
-  background-color: #357abd;
-}
-
-.spec-item,
-.color-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.spec-item p,
-.color-item span {
-  flex: 1;
-  margin-right: 15px;
-  font-size: 1.1rem;
-  color: #555;
-}
-
-.color-sample {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.color-images img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.image-previews img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.edit-spec,
-.edit-color {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.edit-spec h3,
-.edit-color h3 {
-  margin-bottom: 10px;
-}
-
-.edit-spec input,
-.edit-color input {
-  margin-bottom: 10px;
-}
-
-.edit-spec button,
-.edit-color button {
-  margin-right: 10px;
-}
-
-.add-button {
-  background-color: #27ae60;
-}
-
-.add-button:hover {
-  background-color: #229954;
-}
-
-.close-button {
-  background-color: #e74c3c;
-}
-
-.close-button:hover {
-  background-color: #c0392b;
-}
-h3 , h4{
-  text-align: center;
-}
-}
 @media (min-width: 768px) {
   .product-details {
     flex-direction: row;
@@ -2381,7 +2169,7 @@ h3 , h4{
 
 /*! Edit Panel CSS end  */
 
-/*todo User Magement CSS start  */
+/*todo User Magement CSS start this side done  */
 .user-management {
   padding: 20px;
   background-color: #f9f9f9;

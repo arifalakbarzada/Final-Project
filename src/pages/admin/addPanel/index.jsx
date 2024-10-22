@@ -290,7 +290,7 @@ function EditForSingleProductPanel() {
               <img key={index} src={preview} alt="Preview" />
             ))}
           </div>
-          <button onClick={handleColorUpdate} disabled={!colorData.name || !colorData.hex || colorData.stock <= 0}>
+          <button onClick={handleColorUpdate} disabled={!colorData.name || !colorData.hex || colorData.stock < 0}>
             Update Color
           </button>
           <button onClick={() => {
