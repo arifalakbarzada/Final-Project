@@ -3,12 +3,13 @@ import { useParams } from 'react-router';
 import { productsApi } from '../../../service/base';
 import { useDispatch } from 'react-redux';
 import { setProducts } from '../../../redux/slices/productSlice';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'; // Yeni SDK'dan ithal
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { v4 } from 'uuid';
 
 function EditForSingleProductPanel() {
   const { id } = useParams();
   const dispatch = useDispatch();
+
   const [product, setProduct] = useState({
     name: '',
     brand: '',
@@ -16,10 +17,14 @@ function EditForSingleProductPanel() {
     price: '',
     discount: '',
     specifications: [],
-    colors: []
+    colors: [],
   });
 
-  const [specifications, setSpecifications] = useState([]);
+  const [newSpec, setNewSpec] = useState({ name: '', value: '' });
+  const [editingSpec, setEditingSpec] = useState(null);
+  const [addSpec, setAddSpec] = useState(false);
+  const [addColor, setAddColor] = useState(false);
+  const [editingColor, setEditingColor] = useState(null);
   const [colorData, setColorData] = useState({
     name: '',
     hex: '',
@@ -29,12 +34,10 @@ function EditForSingleProductPanel() {
     imagePreview: null,
   });
 
-  // AWS kimlik bilgilerini güvenli bir şekilde almak
   const acckey = import.meta.env.VITE_AWS_ACCESS_KEY_ID;
   const accSecret = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY;
   const region = 'eu-north-1';
 
-  // AWS S3 istemcisi oluşturma
   const s3Client = new S3Client({
     region: region,
     credentials: {
@@ -43,65 +46,120 @@ function EditForSingleProductPanel() {
     },
   });
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setColorData({
-      ...colorData,
-      imageFiles: file,
-      imagePreview: URL.createObjectURL(file), // Görüntü önizlemesi
-    });
-  };
-
   const uploadFile = async (file) => {
     const params = {
-      Bucket: 'arifsbucketforecommerceinitb', // S3 bucket adı
-      Key: file.name, // Dosya adı
-      Body: file, // Dosya içeriği
-      ContentType: file.type, // Dosya tipi
+      Bucket: 'arifsbucketforecommerceinitb',
+      Key: `${v4()}-${file.name}`,  // Adding a UUID to ensure unique file names
+      Body: file,
+      ContentType: file.type,
     };
 
     try {
       const data = await s3Client.send(new PutObjectCommand(params));
-      console.log('Dosya başarıyla yüklendi:', `https://${params.Bucket}.s3.${region}.amazonaws.com/${params.Key}`);
-      return `https://${params.Bucket}.s3.${region}.amazonaws.com/${params.Key}`; // Yüklenen dosyanın URL'si
+      return `https://${params.Bucket}.s3.${region}.amazonaws.com/${params.Key}`;
     } catch (err) {
-      console.log('Dosya yüklenirken hata oluştu:', err);
+      console.log('File upload error:', err);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files);
+    const uploadedUrls = await Promise.all(files.map(uploadFile));
+    setColorData((prevData) => ({
+      ...prevData,
+      images: [...prevData.images, ...uploadedUrls],
+      imageFiles: files,
+      imagePreview: files.map((file) => URL.createObjectURL(file)),
+    }));
+  };
 
-    // Dosya yüklemesi
+  const handleEditSpec = (index) => {
+    const spec = product.specifications[index];
+    setEditingSpec({ ...spec, index });
+    setAddSpec(false)
+  };
+
+  const handleEditColor = (index) => {
+    const color = product.colors[index];
+    setColorData(color);
+    setEditingColor({ ...color, index });
+  };
+
+  const handleSpecUpdate = () => {
+    const updatedSpecs = [...product.specifications];
+    updatedSpecs[editingSpec.index] = {
+      name: editingSpec.name,
+      value: editingSpec.value,
+    };
+
+    const updatedProduct = {
+      ...product,
+      specifications: updatedSpecs,
+    };
+    setProduct(updatedProduct);
+    productsApi.updateProduct(id, updatedProduct);
+    setEditingSpec(null);
+  };
+
+  const handleAddColor = async () => {
+    let imageUrls = colorData.images;
+
     if (colorData.imageFiles) {
-      const imageUrl = await uploadFile(colorData.imageFiles);
-
-      // Yeni renk bilgilerini ekle
-      const newColor = {
-        id: v4(),
-        name: colorData.name,
-        hex: colorData.hex,
-        stock: colorData.stock,
-        images: [imageUrl],
-      };
-
-      // Ürün rengini güncelle
-      const updatedProduct = {
-        ...product,
-        colors: [...product.colors, newColor],
-      };
-      setProduct(updatedProduct)
-      productsApi.updateProduct(id , updatedProduct)
-
-      // Backend'e güncellenen ürünü gönderme (API'ye göre ayarlayın)
-      // await productsApi.updateProduct(id, updatedProduct);
+      const newImageUrl = await uploadFile(colorData.imageFiles[0]);
+      imageUrls = [...colorData.images, newImageUrl];
     }
+
+    const updatedColors = [...product.colors, { ...colorData, id: v4() }];
+
+    const updatedProduct = {
+      ...product,
+      colors: updatedColors,
+    };
+    setProduct(updatedProduct);
+    productsApi.updateProduct(id, updatedProduct);
+    setAddColor(null);
+  }
+
+  const handleColorUpdate = async () => {
+    let imageUrls = colorData.images;
+
+    if (colorData.imageFiles) {
+      const newImageUrl = await uploadFile(colorData.imageFiles[0]);
+      imageUrls = [...colorData.images, newImageUrl];
+    }
+
+    const updatedColors = [...product.colors];
+    updatedColors[editingColor.index] = {
+      ...colorData,
+      images: imageUrls,
+    };
+
+    const updatedProduct = {
+      ...product,
+      colors: updatedColors,
+    };
+    setProduct(updatedProduct);
+    productsApi.updateProduct(id, updatedProduct);
+    setEditingColor(null);
+  };
+  const handleDeleteColor = (index) => {
+    const deletedColor = product.colors[index]
+    const updatedColors = product.colors.filter((color) => color.id !== deletedColor.id)
+    const updatedProduct = { ...product, colors: updatedColors }
+    setProduct(updatedProduct)
+    productsApi.updateProduct(id, updatedProduct)
+  }
+
+  const handleDeleteSpec = (index) => {
+    const updatedSpecs = product.specifications.filter((_, i) => i !== index);
+    const updatedProduct = { ...product, specifications: updatedSpecs };
+    setProduct(updatedProduct);
+    productsApi.updateProduct(id, updatedProduct);
   };
 
   useEffect(() => {
     productsApi.getSingleProduct(id).then((res) => {
       setProduct(res);
-      setSpecifications(res.specifications);
     });
 
     productsApi.getAllProduct().then((res) => dispatch(setProducts(res)));
@@ -110,75 +168,187 @@ function EditForSingleProductPanel() {
   return (
     <div className="panel">
       <h2>Product Management</h2>
-       <div className="product-details">
+
+      <div className="product-details">
         <h3>Product Details</h3>
-        <p><strong>Name:</strong><input type="text" value={product?.name} onChange={
-          (e) => setProduct({ ...product, name: e.target.value })
-        } /> {}</p>
-        <p><strong>Brand:</strong><input type="text" value={product?.brand} onChange={
-          (e) => setProduct({ ...product, brand: e.target.value })
-        } /> {}</p>
-        <p><strong>Category:</strong><input type="text" value={product?.category} onChange={
-          (e) => setProduct({ ...product, category: e.target.value })
-        } /> {}</p>
-        <p><strong>Price:</strong><input type="text" value={product?.price} onChange={
-          (e) => setProduct({ ...product, price: e.target.value })
-        } /> ${}</p>
-        <p><strong>Discount:</strong><input type="text" value={product?.discount} onChange={
-          (e) => setProduct({ ...product, discount: e.target.value })
-        } /> {}%</p>
+        <p><strong>Name:</strong>
+          <input type="text" value={product?.name} onChange={
+            (e) => setProduct({ ...product, name: e.target.value })
+          } />
+        </p>
 
         <div className="specifications">
           <h4>Specifications</h4>
-          {specifications.map((spec, index) => (
-            <p key={index}><strong>{spec.name}:</strong> {spec.value}</p>
+          {product?.specifications.map((spec, index) => (
+            <div key={index} className="spec-item">
+              <p><strong>{spec.name}:</strong> {spec.value}</p>
+              <button onClick={() => handleEditSpec(index)}>Edit</button>
+              <button onClick={() => handleDeleteSpec(index)}>Delete</button>
+            </div>
           ))}
+          {addSpec ? (
+            <div className="edit-spec">
+              <h3>Add Specification</h3>
+              <input
+                type="text"
+                placeholder="Specification Name"
+                value={newSpec.name}
+                onChange={(e) => setNewSpec({ ...newSpec, name: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Specification Value"
+                value={newSpec.value}
+                onChange={(e) => setNewSpec({ ...newSpec, value: e.target.value })}
+              />
+              <button onClick={() => {
+                if (newSpec.name && newSpec.value) {
+                  const updatedSpecs = [...product.specifications, newSpec];
+                  const updatedProduct = { ...product, specifications: updatedSpecs };
+                  setProduct(updatedProduct);
+                  productsApi.updateProduct(id, updatedProduct);
+                  setNewSpec({ name: '', value: '' });
+                  setAddSpec(false);
+                }
+              }}>Add</button>
+              <button onClick={() => setAddSpec(false)}>Close</button>
+            </div>
+          ) : (
+            <button onClick={() => {
+              setAddSpec(true)
+              setEditingSpec(null)
+            }}>Add Specification</button>
+          )}
         </div>
-
+        {editingSpec && (
+          <div className="edit-spec">
+            <h3>Edit Specification</h3>
+            <input
+              type="text"
+              value={editingSpec.name}
+              onChange={(e) => setEditingSpec({ ...editingSpec, name: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editingSpec.value}
+              onChange={(e) => setEditingSpec({ ...editingSpec, value: e.target.value })}
+            />
+            <button onClick={handleSpecUpdate} disabled={!editingSpec.name || !editingSpec.value}>
+              Update
+            </button>
+            <button onClick={() => {
+              setEditingSpec(null);
+            }}>Close</button>
+          </div>
+        )
+        }
         <div className="colors">
           <h4>Colors</h4>
-          {product?.colors.map((color) => (
-            <div key={color.id} className="color-item">
+          {product?.colors.map((color, index) => (
+            <div key={index} className="color-item">
               <div className="color-sample" style={{ backgroundColor: color.hex }}></div>
               <span>{color.name}</span>
               <span>Stock: {color.stock}</span>
               <div className="color-images">
-                {color.images.map((img, index) => (
-                  <img key={index} src={img} alt={`${color.name} color`} />
+                {color.images.map((img, imgIndex) => (
+                  <img key={imgIndex} src={img} alt={`${color.name} color`} />
                 ))}
               </div>
+              <button onClick={() => {
+                handleEditColor(index)
+                setAddColor(false)
+              }}>Edit</button>
+              <button onClick={() => handleDeleteColor(index)}>Delete</button>
             </div>
           ))}
         </div>
       </div>
+      {editingColor && (
+        <div className="edit-color">
+          <h3>Edit Color</h3>
+          <input
+            type="text"
+            placeholder="Color Name"
+            value={colorData.name}
+            onChange={(e) => setColorData({ ...colorData, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Color Hex Code"
+            value={colorData.hex}
+            onChange={(e) => setColorData({ ...colorData, hex: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Stock"
+            value={colorData.stock}
+            onChange={(e) => setColorData({ ...colorData, stock: parseInt(e.target.value) })}
+          />
+          <input type="file" multiple onChange={handleImageChange} />
+          <div className="image-previews">
+            {colorData.imagePreview?.map((preview, index) => (
+              <img key={index} src={preview} alt="Preview" />
+            ))}
+          </div>
+          <button onClick={handleColorUpdate} disabled={!colorData.name || !colorData.hex || colorData.stock <= 0}>
+            Update Color
+          </button>
+          <button onClick={() => {
+            setEditingColor(false);
+            setColorData({ name: "", hex: "", stock: 0, imagePreview: [] })
+          }}>Close</button>
 
 
-      {/* Form ve Ürün Detayları */}
-      {/* ... */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Color Name"
-          value={colorData.name}
-          onChange={(e) => setColorData({ ...colorData, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Color Hex Code"
-          value={colorData.hex}
-          onChange={(e) => setColorData({ ...colorData, hex: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Stock"
-          defaultValue={colorData.stock}
-          onChange={(e) => setColorData({ ...colorData, stock :e.target.value})}
-        />
-        <input type="file" onChange={handleImageChange} />
-        {colorData.imagePreview && <img src={colorData.imagePreview} alt="Preview" width="100" />}
-        <button type="submit">Add Color</button>
-      </form>
-    </div>
+        </div>
+      )}
+
+
+
+      {addColor ?
+        <div className="edit-color">
+          <h3>Add Color</h3>
+          <input
+            type="text"
+            placeholder="Color Name"
+            value={colorData.name}
+            onChange={(e) => setColorData({ ...colorData, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Color Hex Code"
+            value={colorData.hex}
+            onChange={(e) => setColorData({ ...colorData, hex: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Stock"
+            value={colorData.stock}
+            onChange={(e) => setColorData({ ...colorData, stock: parseInt(e.target.value) })}
+          />
+          <input type="file" multiple onChange={handleImageChange} />
+          <div className="image-previews">
+            {colorData.imagePreview?.map((preview, index) => (
+              <img key={index} src={preview} alt="Preview" />
+            ))}
+          </div>
+          <button onClick={() => {
+            setAddColor(false)
+            handleAddColor()
+          }} disabled={!colorData.name || !colorData.hex || colorData.stock <= 0}>
+            Add Color
+          </button>
+          <button onClick={() => {
+            setAddColor(false)
+            setColorData({ name: "", hex: "", stock: 0, imagePreview: [] })
+          }}>Close</button>
+
+        </div>
+
+        : <button onClick={() => {
+          setEditingColor(false);
+          setAddColor(true);
+        }}>Add Color</button>
+      } </div>
   );
 }
 

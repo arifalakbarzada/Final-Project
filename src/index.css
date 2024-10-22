@@ -249,12 +249,13 @@ header:has(.header) {
     }
   }
 
-.responsive-side{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: space-between;
-}
+  .responsive-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
   .center-urls {
     display: flex;
     list-style: none;
@@ -330,16 +331,17 @@ header:has(.header) {
 
 
 @media screen and (max-width: 1060px) {
-.header{
-  position: static;
-  .center-urls,
-  .right-urls,
-  .search-bar,
-  .filter {
-    display: none !important;
-  } 
-}
- 
+  .header {
+    position: static;
+
+    .center-urls,
+    .right-urls,
+    .search-bar,
+    .filter {
+      display: none !important;
+    }
+  }
+
 
   .responsive-menu {
     display: block !important;
@@ -347,12 +349,13 @@ header:has(.header) {
 }
 
 @media screen and (max-width:510px) {
-  main>div{
+  main>div {
     width: 80% !important;
   }
 }
+
 @media screen and (max-width:510px) {
-  main>div{
+  main>div {
     width: 100% !important;
   }
 }
@@ -1823,34 +1826,6 @@ option {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   }
 
-  .stripe-card-element {
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    font-size: 16px;
-    width: 100%;
-    margin-bottom: 20px;
-    transition: border-color 0.3s ease;
-  }
-
-  .stripe-card-element:focus {
-    border-color: #007bff;
-  }
-
-  .stripe-card-element-error {
-    border-color: #e74c3c;
-  }
-
-  .stripe-card-element::placeholder {
-    color: #aab7c4;
-  }
-
-  .stripe-card-element:disabled {
-    background-color: #e0e0e0;
-    cursor: not-allowed;
-  }
-
   h3 {
     margin-bottom: 15px;
     font-size: 22px;
@@ -2097,90 +2072,106 @@ header:has(.admin-header) {
 
 /*? Admin Header CSS end  */
 /*todo Product Panel CSS start  */
-main.admin {
-  .product-panel {
-    padding: 20px;
-    background-color: #f5f5f5;
+.product-panel {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
   }
 
-  .product-panel h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  .add-product-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 10px auto 20px auto;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #218838;
+    }
   }
+
 
   .product-list {
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
   }
 
   .product-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .product-item span {
-    flex: 1;
-  }
-
-  .product-item button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .product-item button:hover {
-    background-color: #0056b3;
-  }
-
-  .edit-form,
-  .add-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-
-  .edit-form h3,
-  .add-form h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-
-  .edit-form input,
-  .add-form input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    background-color: white;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+    }
   }
 
-  .edit-form button,
-  .add-form button {
-    padding: 10px 20px;
+  .product-name {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .product-price {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .product-category {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .edit-btn {
+    background-color: #007bff;
+    color: white;
     border: none;
-    background-color: #28a745;
-    color: #fff;
+    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
   }
 
-  .edit-form button:hover,
-  .add-form button:hover {
-    background-color: #218838;
-  }
+  .delete-btn {
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #ff0b00;
 
+    &:hover {
+      background-color: #ff3f00;
+    }
+  }
 }
 
 /*todo Product Panel CSS end  */
@@ -2188,103 +2179,205 @@ main.admin {
 
 /*! Edit Panel CSS start  */
 .panel {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
 
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
+h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
 
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-details h3,
+.specifications h4,
+.colors h4 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+.spec-item,
+.color-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.spec-item p,
+.color-item span {
+  flex: 1;
+  margin-right: 15px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.color-sample {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.color-images img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.image-previews img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.edit-spec,
+.edit-color {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-spec h3,
+.edit-color h3 {
+  margin-bottom: 10px;
+}
+
+.edit-spec input,
+.edit-color input {
+  margin-bottom: 10px;
+}
+
+.edit-spec button,
+.edit-color button {
+  margin-right: 10px;
+}
+
+.add-button {
+  background-color: #27ae60;
+}
+
+.add-button:hover {
+  background-color: #229954;
+}
+
+.close-button {
+  background-color: #e74c3c;
+}
+
+.close-button:hover {
+  background-color: #c0392b;
+}
+h3 , h4{
+  text-align: center;
+}
+}
+@media (min-width: 768px) {
   .product-details {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    flex-direction: row;
   }
 
   .specifications,
   .colors {
-    margin-top: 20px;
+    flex: 1;
   }
 
-  .specifications p,
+  .specifications .spec-item,
   .colors .color-item {
-    margin-bottom: 10px;
+    flex-direction: row;
+    gap: 20px;
   }
 
-  .color-item {
+  input[type="text"],
+  input[type="number"] {
+    width: 300px;
+  }
+
+  .edit-spec input,
+  .edit-color input {
+    width: 200px;
+  }
+
+  .image-previews {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-  }
-
-  .color-sample {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  .color-images img {
-    width: 60px;
-    height: auto;
-    margin-right: 5px;
-  }
-
-  .edit-form,
-  .add-color-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-
-  .edit-form h3,
-  .add-color-form h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-
-  .edit-form input,
-  .add-color-form input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-
-  .edit-form button,
-  .add-color-form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #28a745;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .edit-form button:hover,
-  .add-color-form button:hover {
-    background-color: #218838;
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
   }
 }
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 /*! Edit Panel CSS end  */
 
@@ -2466,3 +2559,71 @@ main.admin {
 }
 
 /*! Admin Orders CSS end  */
+
+.add-product-panel {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+
+  h2 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .submit-btn {
+    display: block;
+    margin: 20px auto;
+    width: 200px;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .color-group {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+}
