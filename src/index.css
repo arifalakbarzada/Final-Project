@@ -2256,7 +2256,7 @@ header:has(.admin-header) {
 
 /*todo User Magement CSS end  */
 
-/*? Admin Dashboard CSS start  */
+/*? Admin Dashboard CSS start this side done */
 .statistics-dashboard {
   padding: 20px;
   background-color: #f9f9f9;
@@ -2303,7 +2303,7 @@ header:has(.admin-header) {
 
 /*? Admin Dashboard CSS end  */
 
-/*! Admin Orders CSS start */
+/*! Admin Orders CSS start this side done */
 .order-page {
   padding: 20px;
   background-color: #f9f9f9;
@@ -2355,6 +2355,7 @@ header:has(.admin-header) {
 
 /*! Admin Orders CSS end  */
 
+/*todo Add Product Panel CSS start */
 .add-product-panel {
   padding: 20px;
   max-width: 900px;
@@ -2422,3 +2423,5 @@ header:has(.admin-header) {
     margin-bottom: 15px;
   }
 }
+
+/*todo Add Product Panel CSS end  */
