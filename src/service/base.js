@@ -80,11 +80,13 @@ export const usersApi = {
         }
     },
     resetPassword: function (id, data, password) {
-        axios.put(`${usersUrl}/${id}`, { ...data, password: password, token: v4() })
+        const time = new Date();
+        axios.put(`${usersUrl}/${id}`, { ...data, password: password, token: v4() , lastActivity : time })
     }
     ,
     changeUserData: function (id, user, param) {
-        axios.put(`${usersUrl}/${id}`, { ...user, ...param })
+        const time = new Date();
+        axios.put(`${usersUrl}/${id}`, { ...user, ...param ,lastActivity : time  })
     },
     changeUserActivity: function (id, user, param) {
         axios.put(`${usersUrl}/${id}`, { ...user, lastActivity: param })
@@ -104,12 +106,12 @@ export const cartApi = {
     },
     changeUserCart: function (id, user, changes, fav) {
         const time = new Date()
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav , lastActivity : time })
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav, lastActivity: time })
 
     }
     ,
-    clearUserCart: function (id, user) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: [] })
+    clearUserCart: function (id, user, fav, orders) {
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: [], favlist: fav, orders: orders })
     }
 }
 
@@ -126,7 +128,7 @@ export const favListApi = {
     changeFavList: async function (id, user, changes, cart) {
         const time = new Date()
         try {
-            const updatedUser = { ...user, favlist: changes, userCart: cart , lastActivity : time };
+            const updatedUser = { ...user, favlist: changes, userCart: cart, lastActivity: time };
             const response = await axios.put(`${usersUrl}/${id}`, updatedUser);
 
             return response.data;
