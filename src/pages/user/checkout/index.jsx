@@ -96,10 +96,6 @@ const Checkout = () => {
               (e) => setCheckoutDetails({ ...checkoutDetails, zipCode: e.target.value })
             } />
           </div>
-          <button type="submit" className="btn-submit">Place Order</button>
-        </form>
-      </div>
-
       <div className="order-summary">
         <h3>Order Summary</h3>
         {userCart.length > 0 ? userCart.map((item, index) => (
@@ -117,10 +113,18 @@ const Checkout = () => {
           <span>${calculateTotal()}</span>
         </div>
       </div>
+                      <button type="submit" className="btn-submit">Place Order</button>
 
-      <button className="btn-back-to-cart" onClick={() => { navigate('/cart') }}>
+<div className="back-to-cart flex-center">
+  <button className="btn-back-to-cart" onClick={() => { navigate('/cart') }}>
         Back to Cart
-      </button>
+      </button>     
+</div>
+
+      </form>
+      </div>
+
+   
     </div>
   );
 };

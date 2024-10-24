@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUsers, loginUser, setUserFromLocalStorage } from '../../../redux/slices/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
+import { BsEye } from 'react-icons/bs';
+import { FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -10,7 +12,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector(state => state.users.items);
-  const userRedux = useSelector((state)=>state.users.user)
+  const userRedux = useSelector((state) => state.users.user)
+  const [visiblePassword, setVisiblePassword] = useState(false)
 
   useEffect(() => {
     usersApi.getAllUsers().then(res => dispatch(setUsers(res)));
@@ -58,15 +61,23 @@ const Login = () => {
           />
         </div>
         <div className="input-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input
-            type="password"
+            type={visiblePassword ? 'text' : 'password'}
             id="password"
             name="password"
             value={loginData.password}
             onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
             required
           />
+
+          <div className='eyeIcon' onClick={() => {
+            setVisiblePassword(!visiblePassword)
+          }}>{visiblePassword ? <>
+           <FaEyeSlash />
+          </> : <>
+            <BsEye />
+          </>}</div>
         </div>
         <button type="submit" className="btn-login">Login</button>
         <div className="remember-me">
