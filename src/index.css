@@ -514,6 +514,7 @@ header:has(.header) {
       position: absolute;
       top: 50%;
       right: 20px;
+      cursor: pointer;
   }
 
   .btn-login,
@@ -556,6 +557,7 @@ header:has(.header) {
 
   .remember-me input {
     margin-right: 5px;
+    cursor: pointer;
   }
 
   .login-redirect {
