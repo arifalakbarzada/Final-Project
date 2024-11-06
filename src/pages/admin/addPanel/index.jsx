@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setProducts } from '../../../redux/slices/productSlice';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { v4 } from 'uuid';
+import { BiXCircle } from 'react-icons/bi';
 
 function EditForSingleProductPanel() {
   const { id } = useParams();
@@ -328,7 +329,17 @@ function EditForSingleProductPanel() {
           <input type="file" multiple onChange={handleImageChange} />
           <div className="image-previews">
             {colorData.imagePreview?.map((preview, index) => (
-              <img key={index} src={preview} alt="Preview" />
+              <div className="prewiew-image">
+                <img key={index} src={preview} alt="Preview" />
+                <button className='delete-img-prewiew'><BiXCircle onClick={
+                  () => {
+                    const deletedImage = colorData.imagePreview[index]
+                    const newImages = colorData.imagePreview?.filter((img) => img != deletedImage)
+                    setColorData({ ...colorData, imagePreview: newImages })
+                  }
+                } /></button>
+
+              </div>
             ))}
           </div>
           <button onClick={() => {
