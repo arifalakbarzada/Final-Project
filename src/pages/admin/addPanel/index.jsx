@@ -37,6 +37,7 @@ function EditForSingleProductPanel() {
 
   const acckey = import.meta.env.VITE_AWS_ACCESS_KEY_ID;
   const accSecret = import.meta.env.VITE_AWS_SECRET_ACCESS_KEY;
+  const bucketName = import.meta.env.VITE_AWS_BUCKET_NAME;
   const region = 'eu-north-1';
 
   const s3Client = new S3Client({
@@ -49,8 +50,8 @@ function EditForSingleProductPanel() {
 
   const uploadFile = async (file) => {
     const params = {
-      Bucket: 'arifsbucketforecommerceinitb',
-      Key: `${v4()}-${file.name}`,  // Adding a UUID to ensure unique file names
+      Bucket: bucketName,
+      Key: `${v4()}-${file.name}`,
       Body: file,
       ContentType: file.type,
     };
