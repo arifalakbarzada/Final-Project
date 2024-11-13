@@ -177,7 +177,11 @@ header:has(.header) {
 
 }
 
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 @media screen and (max-width: 1060px) {
   .header {
@@ -2003,6 +2007,20 @@ header:has(.admin-header) {
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 5px;
   }
+  .edit-name{
+    display: flex;
+    align-items: center;
+    button{
+      width: inherit;
+      height: 100%;
+      padding: 0px 10px;
+      margin: 0;
+    }
+    input{
+      margin: 0;
+    }
+
+  }
 
   .prewiew-image {
     position: relative;
@@ -2093,6 +2111,7 @@ header:has(.admin-header) {
     height: 40px;
     border-radius: 50%;
     margin-right: 15px;
+    border: 1px solid;
   }
 
   .color-images img {

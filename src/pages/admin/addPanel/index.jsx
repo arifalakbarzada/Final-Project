@@ -173,9 +173,15 @@ function EditForSingleProductPanel() {
       <div className="product-details">
         <h3>Product Details</h3>
         <p><strong>Name:</strong>
-          <input type="text" value={product?.name} onChange={
+        <div className="edit-name">
+           <input type="text" value={product?.name} onChange={
             (e) => setProduct({ ...product, name: e.target.value })
           } />
+          <button onClick={()=>{
+            productsApi.updateProduct(id , {...product})
+          }}>Update Name</button>
+        </div>
+         
         </p>
 
         <div className="specifications">
@@ -331,13 +337,22 @@ function EditForSingleProductPanel() {
             {colorData.imagePreview?.map((preview, index) => (
               <div className="prewiew-image">
                 <img key={index} src={preview} alt="Preview" />
-                <button className='delete-img-prewiew'><BiXCircle onClick={
-                  () => {
-                    const deletedImage = colorData.imagePreview[index]
-                    const newImages = colorData.imagePreview?.filter((img) => img != deletedImage)
-                    setColorData({ ...colorData, imagePreview: newImages })
-                  }
-                } /></button>
+                <button className='delete-img-prewiew'><BiXCircle onClick={() => {
+  const deletedImagePreview = colorData.imagePreview[index];
+  const deletedImageFile = colorData.imageFiles[index];
+
+  const updatedImagePreviews = colorData.imagePreview.filter((img, i) => i !== index);
+  const updatedImageFiles = colorData.imageFiles.filter((file, i) => i !== index);
+
+  setColorData({
+    ...colorData,
+    imagePreview: updatedImagePreviews,
+    imageFiles: updatedImageFiles,
+  });
+
+}}
+
+ /></button>
 
               </div>
             ))}
@@ -349,9 +364,17 @@ function EditForSingleProductPanel() {
             Add Color
           </button>
           <button onClick={() => {
-            setAddColor(false)
-            setColorData({ name: "", hex: "", stock: 0, imagePreview: [] })
-          }}>Close</button>
+  setAddColor(false);
+  
+  setColorData((prevData) => ({
+    ...prevData,
+    imagePreview: [],
+    imageFiles: [],
+  }));
+
+  handleAddColor();
+}}
+>Close</button>
 
         </div>
 
