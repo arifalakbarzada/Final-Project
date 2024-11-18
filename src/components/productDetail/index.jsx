@@ -56,109 +56,129 @@ function ProductDetail() {
 
   return (
     <div className="product-detail-container container">
-      <div className="row">
-        <div className="col-lg-6 col-sm-12">
-          <div className="product-detail-image">
-            <Swiper spaceBetween={20} slidesPerView={1} navigation modules={[Navigation]}>
-              {colorData.images.map((image, idx) => (
-                <SwiperSlide key={idx}>
-                  <img
-                    src={image}
-                    alt={`${product.name} ${colorData.name}`}
-                    style={{ width: '100%', height: 'auto', borderRadius: '12px', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)' }}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-sm-12">
-          <div className="product-info">
-            <h1>{product.name}</h1>
-            <p className="brand">Brand: {capitalizeFirstLetter(product.brand)}</p>
-            <p className="category">Category: {capitalizeFirstLetter(product.category)}</p>
-            <div className="specifications">
-              <h3>Specifications:</h3>
-              <ul>
-                {product.specifications.map((spec, index) => (
-                  <li key={index}>
-                    <strong>{capitalizeFirstLetter(spec.name)}:</strong> {capitalizeFirstLetter(spec.value)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="price">
-              <span className="discounted-price">
-                ${(product.price - product.price * product.discount / 100).toFixed(2)}
-              </span>
-              <span className="main-price">${product.price}</span>
-            </p>
-            <p className="stock">Stock: {colorData.stock}</p>
-            <div className="colors">
-              {product.colors.length > 1 && (
-                <>
-                  <h3>Available Colors:</h3>
-                  <div className="color-options">
-                    {product.colors.map((color, index) => (
-                      <div
-                        key={index}
-                        className={`color ${color.id === selectedColorId ? 'selected' : ''}`}
-                        style={{ backgroundColor: color.hex }}
-                        title={color.name}
-                        onClick={() => {
-                          setSelectedColorId(color.id);
-                        }}
-                      ><NavLink to={`/products/${product.id}/${color.id}/${color.name.toLowerCase()}`}></NavLink></div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-          <div className="product-action">
-            <button
-              className="addToCart"
-              onClick={(e) => {
-                e.preventDefault();
-                const cartItem = {
-                  id : product.id,
-                  name: product.name,
-                  colorId: selectedColorId,
-                  color: selectedColor,
-                  price: product.price - product.price * product.discount / 100,
-                  image: colorData.images[0],
-                  stock: colorData.stock,
-                };
-                user ? dispatch(addCartItem({cartItem , favList})) : navigate('/login');
-              }}
-            >
-              <BsCartPlus /> Add To Cart
-            </button>
-
-            <button
-              className="addToFav"
-              onClick={(e) => {
-                e.preventDefault();
-                const favoriteItem = {
-                  id: product.id,
-                  name: product.name,
-                  image: colorData.images[0],
-                  price: product.price - product.price * product.discount / 100,
-                  colorId: selectedColorId,
-                  color: selectedColor,
-                  stock : colorData.stock
-                }
-                dispatch(addToFavList({favItem : favoriteItem, cart}))
-              }}
-            >
-              <BsHeart /> Add To Favorite
-            </button>
-          </div>
-
-        </div>
+  <div className="row">
+    {/* Ürün Görselleri */}
+    <div className="col-lg-6 col-sm-12">
+      <div className="product-detail-image">
+        <Swiper spaceBetween={20} slidesPerView={1} navigation modules={[Navigation]}>
+          {colorData.images.map((image, idx) => (
+            <SwiperSlide key={idx}>
+              <img
+                src={image}
+                alt={`${product.name} ${colorData.name}`}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
+
+    {/* Ürün Bilgileri */}
+    <div className="col-lg-6 col-sm-12">
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p className="brand">
+          <strong>Brand:</strong> {capitalizeFirstLetter(product.brand)}
+        </p>
+        <p className="category">
+          <strong>Category:</strong> {capitalizeFirstLetter(product.category)}
+        </p>
+
+        <div className="price-stock">
+          <p className="price">
+            <span className="discounted-price">
+              ${(product.price - (product.price * product.discount) / 100).toFixed(2)}
+            </span>
+            <span className="main-price">${product.price}</span>
+          </p>
+          <p className="stock">
+            <strong>Stock:</strong> {colorData.stock}
+          </p>
+        </div>
+
+        {/* Ürün Özellikleri */}
+        <div className="specifications">
+          <h3>Specifications</h3>
+          <ul>
+            {product.specifications.map((spec, index) => (
+              <li key={index}>
+                <strong>{capitalizeFirstLetter(spec.name)}:</strong> {capitalizeFirstLetter(spec.value)}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Renk Seçenekleri */}
+        {product.colors.length > 1 && (
+          <div className="colors">
+            <h3>Available Colors</h3>
+            <div className="color-options">
+              {product.colors.map((color, index) => (
+                <div
+                  key={index}
+                  className={`color ${color.id === selectedColorId ? 'selected' : ''}`}
+                  style={{ backgroundColor: color.hex }}
+                  title={color.name}
+                  onClick={() => setSelectedColorId(color.id)}
+                >
+                  <NavLink to={`/products/${product.id}/${color.id}/${color.name.toLowerCase()}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Aksiyonlar */}
+      <div className="product-action">
+        <button
+          className="addToCart"
+          onClick={(e) => {
+            e.preventDefault();
+            const cartItem = {
+              id: product.id,
+              name: product.name,
+              colorId: selectedColorId,
+              color: selectedColor,
+              price: product.price - (product.price * product.discount) / 100,
+              image: colorData.images[0],
+              stock: colorData.stock,
+            };
+            user ? dispatch(addCartItem({ cartItem, favList })) : navigate('/login');
+          }}
+        >
+          <BsCartPlus /> Add To Cart
+        </button>
+
+        <button
+          className="addToFav"
+          onClick={(e) => {
+            e.preventDefault();
+            const favoriteItem = {
+              id: product.id,
+              name: product.name,
+              image: colorData.images[0],
+              price: product.price - (product.price * product.discount) / 100,
+              colorId: selectedColorId,
+              color: selectedColor,
+              stock: colorData.stock,
+            };
+            dispatch(addToFavList({ favItem: favoriteItem, cart }));
+          }}
+        >
+          <BsHeart /> Add To Favorite
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
   );
 }
 
