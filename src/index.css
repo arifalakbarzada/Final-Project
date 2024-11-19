@@ -678,151 +678,145 @@ input::-webkit-inner-spin-button {
   align-items: flex-start;
 
 
-.product-detail-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 25px;
-  background-color: #ffffff;
-  border: 1px solid #e3e3e3;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-detail-image:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.product-detail-image .swiper {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-}
-
-.product-detail-image .swiper-slide img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.product-info {
-  flex: 1;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.product-info:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-}
-
-.product-info h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.product-info .brand,
-.product-info .category,
-.product-info .price,
-.product-info .stock {
-  margin-bottom: 16px;
-  font-size: 18px;
-  color: #555;
-}
-ul{
-  padding: 0;
-}
-.product-info .discounted-price {
-  color: #b12704;
-  font-weight: 700;
-  font-size: 22px;
-  margin-right: 12px;
-}
-
-.product-info .main-price {
-  text-decoration: line-through;
-  color: #767676;
-  font-size: 18px;
-}
-
-.colors {
-  margin-top: 20px;
-}
-
-.color-options {
-  display: flex;
-  gap: 12px;
-}
-
-.color {
-  width: 36px;
-  height: 36px;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-
-  a {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
+  .product-detail-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   &:hover {
-    transform: scale(1.2);
-    border-color: #444;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  .swiper {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+  .product-info {
+    flex: 1;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  &:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  .brand,
+  .category,
+  .price,
+  .stock {
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #555;
+  }
+.discounted-price {
+    color: #b12704;
+    font-weight: 700;
+    font-size: 22px;
+    margin-right: 12px;
+  }
+  .main-price {
+    text-decoration: line-through;
+    color: #767676;
+    font-size: 18px;
+  }}
+
+
+
+  ul {
+    padding: 0;
   }
 
-  &.selected {
-    border-color: #b12704;
-    transform: scale(1.2);
+  .colors {
+    margin-top: 20px;
+  }
+
+  .color-options {
+    display: flex;
+    gap: 12px;
+  }
+
+  .color {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+      border-color: #444;
+    }
+
+    &.selected {
+      border-color: #b12704;
+      transform: scale(1.2);
+    }
+  }
+
+  .addToCart,
+  .addToFav {
+    background: linear-gradient(to right, #ffa41c, #ff8c00);
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(255, 164, 28, 0.4);
+  }
+
+  .addToCart:hover,
+  .addToFav:hover {
+    background: linear-gradient(to right, #ff8c00, #d87d00);
+    transform: translateY(-2px);
+  }
+
+  .product-action {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 25px;
+    gap: 20px;
+  }
+
+  .addToFav {
+    background: linear-gradient(to right, #f08804, #d87d00);
+  &:hover {
+    background: linear-gradient(to right, #d87d00, #b05d00);
   }
 }
 
-.addToCart,
-.addToFav {
-  background: linear-gradient(to right, #ffa41c, #ff8c00);
-  color: #fff;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(255, 164, 28, 0.4);
-}
-
-.addToCart:hover,
-.addToFav:hover {
-  background: linear-gradient(to right, #ff8c00, #d87d00);
-  transform: translateY(-2px);
-}
-
-.product-action {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 25px;
-  gap: 20px;
-}
-
-.addToFav {
-  background: linear-gradient(to right, #f08804, #d87d00);
-}
-
-.addToFav:hover {
-  background: linear-gradient(to right, #d87d00, #b05d00);
-}
 }
 
 /* todo Details CSS end */
@@ -2020,16 +2014,19 @@ header:has(.admin-header) {
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 5px;
   }
-  .edit-name{
+
+  .edit-name {
     display: flex;
     align-items: center;
-    button{
+
+    button {
       width: inherit;
       height: 100%;
       padding: 0px 10px;
       margin: 0;
     }
-    input{
+
+    input {
       margin: 0;
     }
 
@@ -2037,8 +2034,9 @@ header:has(.admin-header) {
 
   .prewiew-image {
     position: relative;
-    &:hover{
-      .delete-img-prewiew{
+
+    &:hover {
+      .delete-img-prewiew {
         opacity: 1;
         visibility: visible;
       }
@@ -2061,11 +2059,13 @@ header:has(.admin-header) {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     visibility: hidden;
-    svg{
+
+    svg {
       width: 100%;
       height: 100%;
     }
-    &:hover{
+
+    &:hover {
       background: none;
     }
   }
