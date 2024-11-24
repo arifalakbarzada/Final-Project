@@ -28,7 +28,6 @@ function Cart() {
     <div className="cart-page">
       {cart.length > 0 ? (
         <div className="cart-container">
-          <h1>Your Cart</h1>
           {cart.map((item, index) => (
             <div key={index} className="cart-item">
               <div className="cart-image">
