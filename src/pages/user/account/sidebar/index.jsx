@@ -17,7 +17,7 @@ function SideBarForMyAccount() {
     navigate('/login');
   };
   return (
-    <div className="sidebar col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+    <div className="sidebar">
       <ul>
         <li onClick={()=>navigate('dashboard')}> <NavLink to="dashboard"><MdDashboard /> Dashboard</NavLink></li>
         <li onClick={()=>navigate('orders')}><NavLink to="orders"><FaShoppingCart /> Orders</NavLink></li>

@@ -58,6 +58,7 @@ const Login = () => {
             value={loginData.email}
             onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
             required
+            autoComplete='false'
           />
         </div>
         <div className="input-group">
@@ -69,6 +70,7 @@ const Login = () => {
             value={loginData.password}
             onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
             required
+            autoComplete='false'
           />
 
           <div className='eyeIcon' onClick={() => {
