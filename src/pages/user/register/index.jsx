@@ -77,6 +77,7 @@ function Register() {
             value={registerData.name}
             onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
             required
+            autoComplete='off'
           />
         </div>
         <div className="input-group">
@@ -88,6 +89,7 @@ function Register() {
             value={registerData.email}
             onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
             required
+            autoComplete='off'
           />
         </div>
         <div className="input-group">

@@ -29,7 +29,7 @@ import Register from './pages/user/register'
 import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
 import { productsApi, usersApi } from './service/base'
-import { setUserFromLocalStorage } from './redux/slices/userSlice'
+import { logoutUser, setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
 import UserManagement from './pages/admin/users'
 import AddNewProduct from './pages/admin/addNewProduct'
@@ -42,10 +42,11 @@ function App() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
   const userRedux = useSelector((state) => state.users.user)
+
   useEffect(() => {
-    productsApi.getAllProduct().then(res=>dispatch(setProducts(res)))
+    productsApi.getAllProduct().then(res => dispatch(setProducts(res)))
   }, [dispatch])
-  
+
   useEffect(() => {
     if (user) {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
@@ -61,7 +62,11 @@ function App() {
   }, [dispatch])
 
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
-
+  useEffect(() => {
+    if (savedUser.status === 'Banned') {
+      dispatch(logoutUser())
+    }
+  }, [])
   useEffect(() => {
     if (savedUser) {
       dispatch(setUserFromLocalStorage(savedUser));

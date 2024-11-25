@@ -68,63 +68,63 @@ const Checkout = () => {
         <form onSubmit={handleCheckout}>
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
-            <input type="text" id="name" placeholder="John Doe" required onChange={
+            <input type="text" id="name" autoComplete='off' placeholder="John Doe" required onChange={
               (e) => setCheckoutDetails({ ...checkoutDetails, userName: e.target.value })
             } />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="john.doe@example.com" required onChange={
+            <input type="email" id="email" autoComplete='off' placeholder="john.doe@example.com" required onChange={
               (e) => setCheckoutDetails({ ...checkoutDetails, email: e.target.value })
             } />
           </div>
           <div className="form-group">
             <label htmlFor="address">Address</label>
-            <input type="text" id="address" placeholder="123 Main St" required onChange={
+            <input type="text" id="address" autoComplete='off' placeholder="123 Main St" required onChange={
               (e) => setCheckoutDetails({ ...checkoutDetails, address: e.target.value })
             } />
           </div>
           <div className="form-group">
             <label htmlFor="city">City</label>
-            <input type="text" id="city" placeholder="Anytown" required onChange={
+            <input type="text" id="city" autoComplete='off' placeholder="Anytown" required onChange={
               (e) => setCheckoutDetails({ ...checkoutDetails, city: e.target.value })
             } />
           </div>
           <div className="form-group">
             <label htmlFor="zipcode">Zip Code</label>
-            <input type="text" id="zipcode" placeholder="12345" required onChange={
+            <input type="text" id="zipcode" autoComplete='off' placeholder="12345" required onChange={
               (e) => setCheckoutDetails({ ...checkoutDetails, zipCode: e.target.value })
             } />
           </div>
-      <div className="order-summary">
-        <h3>Order Summary</h3>
-        {userCart.length > 0 ? userCart.map((item, index) => (
-          <div key={index} className="summary-item">
-            <span>{item.name} , {item.color} x {item.quantity}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
+          <div className="order-summary">
+            <h3>Order Summary</h3>
+            {userCart.length > 0 ? userCart.map((item, index) => (
+              <div key={index} className="summary-item">
+                <span>{item.name} , {item.color} x {item.quantity}</span>
+                <span>${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            )) : (
+              <div>
+                <p>No items in cart</p>
+              </div>
+            )}
+            <div className="summary-total">
+              <span>Total</span>
+              <span>${calculateTotal()}</span>
+            </div>
           </div>
-        )) : (
-          <div>
-            <p>No items in cart</p>
+          <button type="submit" className="btn-submit">Place Order</button>
+
+          <div className="back-to-cart flex-center">
+            <button className="btn-back-to-cart" onClick={() => { navigate('/cart') }}>
+              Back to Cart
+            </button>
           </div>
-        )}
-        <div className="summary-total">
-          <span>Total</span>
-          <span>${calculateTotal()}</span>
-        </div>
-      </div>
-                      <button type="submit" className="btn-submit">Place Order</button>
 
-<div className="back-to-cart flex-center">
-  <button className="btn-back-to-cart" onClick={() => { navigate('/cart') }}>
-        Back to Cart
-      </button>     
-</div>
-
-      </form>
+        </form>
       </div>
 
-   
+
     </div>
   );
 };
