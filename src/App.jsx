@@ -63,7 +63,7 @@ function App() {
 
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
   useEffect(() => {
-    if (userState.status === 'Banned') {
+    if (userState?.status === 'Banned') {
       dispatch(logoutUser())
       useNavigate('/login')
     }
