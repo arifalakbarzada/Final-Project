@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes, useNavigate } from 'react-router'
 import Home from './pages/user/home'
 import Contact from './pages/user/contact'
 import UserLayout from './layout/user'
@@ -63,8 +63,9 @@ function App() {
 
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
   useEffect(() => {
-    if (savedUser.status === 'Banned') {
+    if (userState.status === 'Banned') {
       dispatch(logoutUser())
+      useNavigate('/login')
     }
   }, [])
   useEffect(() => {
