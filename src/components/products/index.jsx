@@ -97,7 +97,7 @@ function Products() {
             <div className="product-price">
               <span className="discounted-price">${(product.price - (product.price * product.discount) / 100).toFixed(2)}</span>
               {product.discount > 0 && (
-                <span className="main-price">${product.price.toFixed(2)}</span>
+                <span className="main-price">${parseFloat(product.price).toFixed(2)}</span>
               )}
             </div>
           </div>
