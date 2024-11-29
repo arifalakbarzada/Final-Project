@@ -301,7 +301,11 @@ function EditForSingleProductPanel() {
           <input type="file" multiple onChange={handleImageChange} />
           <div className="image-previews">
             {colorData.imagePreview?.map((preview, index) => (
-              <img key={index} src={preview} alt="Preview" />
+              <div className="preview-image">
+                 <img key={index} src={preview} alt="Preview" />
+                 <button type="button" className='delete-img-preview'><BiXCircle /></button>
+              </div>
+             
             ))}
           </div>
           <button onClick={handleColorUpdate} disabled={!colorData.name || !colorData.hex || colorData.stock < 0}>
