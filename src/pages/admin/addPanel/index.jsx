@@ -177,19 +177,47 @@ function EditForSingleProductPanel() {
     <div className="panel">
       <h2>Product Management</h2>
 
-      <div className="product-details">
+      <div className="product-details container">
         <h3>Product Details</h3>
-        <p><strong>Name:</strong>
-          <div className="edit-name">
-            <input type="text" value={product?.name} onChange={
+        <div className="edit-general-info row">
+          <div className="edit-name col-xl-6 col-lg-12">
+            <label htmlFor="editName"><strong>Name</strong></label>
+            <input type="text" value={product?.name} required onChange={
               (e) => setProduct({ ...product, name: e.target.value })
             } />
             <button onClick={() => {
               productsApi.updateProduct(id, { ...product })
             }}>Update Name</button>
           </div>
+          <div className="edit-name col-xl-6 col-lg-12">
+            <label htmlFor="editBrand"><strong>Brand</strong></label>
+            <input type="text" value={product?.brand} required onChange={
+              (e) => setProduct({ ...product, brand: e.target.value })
+            } />
+            <button onClick={() => {
+              productsApi.updateProduct(id, { ...product })
+            }}>Update Brand</button>
+          </div>
+          <div className="edit-name col-xl-6 col-lg-12">
+            <label htmlFor="editCategory"><strong>Category</strong></label>
+            <input type="text" value={product?.category} required onChange={
+              (e) => setProduct({ ...product, category: e.target.value })
+            } />
+            <button onClick={() => {
+              productsApi.updateProduct(id, { ...product })
+            }}>Update Category</button>
+          </div>
+          <div className="edit-name col-xl-6 col-lg-12">
+            <label htmlFor="editPrice"><strong>Price</strong></label>
+            <input type="number" value={product?.price} required onChange={
+              (e) => setProduct({ ...product, price: +(e.target.value) })
+            } />
+            <button onClick={() => {
+              productsApi.updateProduct(id, { ...product })
+            }}>Update Price</button>
+          </div>
+        </div>
 
-        </p>
 
         <div className="specifications">
           <h4>Specifications</h4>
@@ -302,10 +330,10 @@ function EditForSingleProductPanel() {
           <div className="image-previews">
             {colorData.imagePreview?.map((preview, index) => (
               <div className="preview-image">
-                 <img key={index} src={preview} alt="Preview" />
-                 <button type="button" className='delete-img-preview'><BiXCircle /></button>
+                <img key={index} src={preview} alt="Preview" />
+                <button type="button" className='delete-img-preview'><BiXCircle /></button>
               </div>
-             
+
             ))}
           </div>
           <button onClick={handleColorUpdate} disabled={!colorData.name || !colorData.hex || colorData.stock < 0}>
