@@ -101,7 +101,14 @@ function EditForSingleProductPanel() {
     productsApi.updateProduct(id, updatedProduct);
     setEditingSpec(null);
   };
-
+  const removeImage = (indexToRemove) => {
+    setColorData((prevData) => ({
+      ...prevData,
+      imagePreview: prevData.imagePreview.filter((_, index) => index !== indexToRemove),
+      imageFiles: prevData.imageFiles?.filter((_, index) => index !== indexToRemove),
+      images: prevData.images.filter((_, index) => index !== indexToRemove),
+    }));
+  };
   const handleAddColor = async () => {
     let imageUrls = colorData.images;
 
@@ -173,15 +180,15 @@ function EditForSingleProductPanel() {
       <div className="product-details">
         <h3>Product Details</h3>
         <p><strong>Name:</strong>
-        <div className="edit-name">
-           <input type="text" value={product?.name} onChange={
-            (e) => setProduct({ ...product, name: e.target.value })
-          } />
-          <button onClick={()=>{
-            productsApi.updateProduct(id , {...product})
-          }}>Update Name</button>
-        </div>
-         
+          <div className="edit-name">
+            <input type="text" value={product?.name} onChange={
+              (e) => setProduct({ ...product, name: e.target.value })
+            } />
+            <button onClick={() => {
+              productsApi.updateProduct(id, { ...product })
+            }}>Update Name</button>
+          </div>
+
         </p>
 
         <div className="specifications">
@@ -335,28 +342,18 @@ function EditForSingleProductPanel() {
           <input type="file" multiple onChange={handleImageChange} />
           <div className="image-previews">
             {colorData.imagePreview?.map((preview, index) => (
-              <div className="prewiew-image">
-                <img key={index} src={preview} alt="Preview" />
-                <button className='delete-img-prewiew'><BiXCircle onClick={() => {
-  const deletedImagePreview = colorData.imagePreview[index];
-  const deletedImageFile = colorData.imageFiles[index];
-
-  const updatedImagePreviews = colorData.imagePreview.filter((img, i) => i !== index);
-  const updatedImageFiles = colorData.imageFiles.filter((file, i) => i !== index);
-
-  setColorData({
-    ...colorData,
-    imagePreview: updatedImagePreviews,
-    imageFiles: updatedImageFiles,
-  });
-
-}}
-
- /></button>
-
+              <div key={index} className="preview-image">
+                <img src={preview} alt="Preview" />
+                <button
+                  className="delete-img-preview"
+                  onClick={() => removeImage(index)}
+                >
+                  <BiXCircle />
+                </button>
               </div>
             ))}
           </div>
+
           <button onClick={() => {
             setAddColor(false)
             handleAddColor()
@@ -364,17 +361,17 @@ function EditForSingleProductPanel() {
             Add Color
           </button>
           <button onClick={() => {
-  setAddColor(false);
-  
-  setColorData((prevData) => ({
-    ...prevData,
-    imagePreview: [],
-    imageFiles: [],
-  }));
+            setAddColor(false);
 
-  handleAddColor();
-}}
->Close</button>
+            setColorData((prevData) => ({
+              ...prevData,
+              imagePreview: [],
+              imageFiles: [],
+            }));
+
+            handleAddColor();
+          }}
+          >Close</button>
 
         </div>
 
