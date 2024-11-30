@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
-  user: null
+  user: null,
+  responsivity : false
 };
 
 const userSlice = createSlice({
@@ -40,10 +41,13 @@ const userSlice = createSlice({
       if (founded !== -1) {
         state.items[founded].status = status
       }
-    }
+    },
+    changeResponsivity: (state, action) => {
+      state.responsivity = action.payload
+      }
   },
 });
 
-export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage, changeUserStatus } = userSlice.actions;
+export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage, changeUserStatus , changeResponsivity } = userSlice.actions;
 
 export default userSlice.reducer;

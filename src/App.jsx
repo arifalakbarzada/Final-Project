@@ -66,7 +66,7 @@ function App() {
     if (userState?.status === 'Banned') {
       dispatch(logoutUser())
       useNavigate('/login')
-    }
+    } 
   }, [])
   useEffect(() => {
     if (savedUser) {

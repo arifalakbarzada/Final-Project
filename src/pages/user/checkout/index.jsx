@@ -41,6 +41,7 @@ const Checkout = () => {
 
       return;
     }
+    console.log(checkoutDetails)
 
   };
 

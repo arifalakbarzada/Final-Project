@@ -7,6 +7,7 @@ import { cartApi, favListApi, productsApi, usersApi } from '../../../service/bas
 import { filterByCategory, setFilter, setProducts } from '../../../redux/slices/productSlice'
 import { setCartItems } from '../../../redux/slices/cartSlice'
 import { setFavList } from '../../../redux/slices/favListSlice'
+import { changeResponsivity } from '../../../redux/slices/userSlice'
 
 function Header() {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ function Header() {
   const [categories, setCategories] = useState([])
   const products = useSelector((state) => state.products.items)
   const cart = useSelector(state => state.cart.items)
+  const resp = useSelector((state) => state.users.responsivity)
   const [locationData, setLocationData] = useState('')
   const [isMenuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
@@ -65,9 +67,14 @@ function Header() {
       </div>
       <div className="responsive-side">
         <div className={isMenuOpen ? 'responsive-menu active' : 'responsive-menu'} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
+          <div className="responsive-menu-icon" onClick={()=>{
+            dispatch(changeResponsivity(isMenuOpen))
+          }}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
         </div>
         <div className='filter'>
           <select onChange={handleCategoryChange}>
@@ -83,7 +90,7 @@ function Header() {
           <input type="text" placeholder="Search..." onChange={(e) => {
             setSearch(e.target.value)
           }} />
-          <button onClick={()=>{
+          <button onClick={() => {
             navigate(`search/${search}`)
           }}><CiSearch /></button>
         </div>

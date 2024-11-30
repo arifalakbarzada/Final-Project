@@ -46,6 +46,7 @@ const Contact = () => {
             value={formData.name}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
         <div className="form-group">
@@ -57,6 +58,7 @@ const Contact = () => {
             value={formData.email}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
         <div className="form-group">
