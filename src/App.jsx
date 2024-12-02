@@ -28,12 +28,14 @@ import AccountDashBoard from './pages/user/account/dashboard'
 import Register from './pages/user/register'
 import Submit from './pages/user/submit'
 import Checkout from './pages/user/checkout'
-import { productsApi, usersApi } from './service/base'
-import { logoutUser, setUserFromLocalStorage } from './redux/slices/userSlice'
+import { cartApi, favListApi, productsApi, usersApi } from './service/base'
+import { logoutUser, setUser, setUserFromLocalStorage } from './redux/slices/userSlice'
 import AddPanel from './pages/admin/addPanel'
 import UserManagement from './pages/admin/users'
 import AddNewProduct from './pages/admin/addNewProduct'
 import { setProducts } from './redux/slices/productSlice'
+import { setCartItems } from './redux/slices/cartSlice'
+import { setFavList } from './redux/slices/favListSlice'
 
 function App() {
   const cart = useSelector((state) => state.cart.items)
@@ -42,6 +44,12 @@ function App() {
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [role, setRole] = useState(null)
   const userRedux = useSelector((state) => state.users.user)
+  useEffect(() => {
+    if (userState?.status === 'Banned') {
+      dispatch(logoutUser())
+      useNavigate('/login')
+    }
+  }, [dispatch])
 
   useEffect(() => {
     productsApi.getAllProduct().then(res => dispatch(setProducts(res)))
@@ -50,8 +58,17 @@ function App() {
   useEffect(() => {
     if (user) {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setRole(res.role))
+      usersApi.getSingleUser(JSON.parse(user).id).then(res => dispatch(setUser(res)))
+      favListApi.getFavList(JSON.parse(user).id).then(res=>setFavList(res.favlist))
     }
-  }, [user]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      cartApi.getCart(JSON.parse(user).id).then(res => dispatch(setCartItems(res.userCart)))
+    }
+  }, [dispatch])
+
   useEffect(() => {
     if (user) {
       usersApi.getSingleUser(JSON.parse(user).id).then(res => setUserState(res))
@@ -62,12 +79,7 @@ function App() {
   }, [dispatch])
 
   const savedUser = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
-  useEffect(() => {
-    if (userState?.status === 'Banned') {
-      dispatch(logoutUser())
-      useNavigate('/login')
-    } 
-  }, [])
+
   useEffect(() => {
     if (savedUser) {
       dispatch(setUserFromLocalStorage(savedUser));

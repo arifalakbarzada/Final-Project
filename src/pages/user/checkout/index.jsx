@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { cartApi, ordersApi, usersApi } from '../../../service/base';
-import { setOrders } from '../../../redux/slices/orderSlice';
-import { useSelector } from 'react-redux';
-
+import { addOrder, setOrders } from '../../../redux/slices/orderSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const Checkout = () => {
   const navigate = useNavigate();
   const [userCart, setUserCart] = useState([]);
   const orders = useSelector((state) => state.orders.items);
-
+  const reduxUser = useSelector((state) => state.users.user)
+  const dispatch = useDispatch();
   const user = localStorage.getItem('user') || sessionStorage.getItem('user');
   const [checkoutDetails, setCheckoutDetails] = useState({
     userName: '',
@@ -25,7 +25,7 @@ const Checkout = () => {
   useEffect(() => {
     cartApi.getCart(JSON.parse(user).id).then(res => setUserCart(res.userCart));
     ordersApi.getOrders(JSON.parse(user).id).then(res => setOrders(res.orders));
-  }, [user]);
+  }, [dispatch]);
 
   const handleCheckout = async (e) => {
     e.preventDefault();
@@ -39,10 +39,17 @@ const Checkout = () => {
     const validationErrors = validateAddressForm(addressData);
     if (Object.keys(validationErrors).length) {
 
-      return;
+      console.log('Error')
     }
     console.log(checkoutDetails)
-
+    const order = {
+      userId: JSON.parse(user).id,
+      products: userCart,
+      total: calculateTotal(),
+      ...checkoutDetails
+    }
+    dispatch(addOrder({order: order , userData : reduxUser}))
+    navigate('/submit')
   };
 
   const validateAddressForm = (addressData) => {

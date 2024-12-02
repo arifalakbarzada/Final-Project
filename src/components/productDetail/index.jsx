@@ -14,6 +14,7 @@ function ProductDetail() {
   const dispatch = useDispatch();
   const cart = useSelector((state)=>state.cart.items)
   const favList = useSelector((state)=>state.favList.items)
+  const reduxUser = useSelector((state)=>state.users.user)
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -57,7 +58,6 @@ function ProductDetail() {
   return (
     <div className="product-detail-container container">
   <div className="row">
-    {/* Ürün Görselleri */}
     <div className="col-lg-6 col-sm-12">
       <div className="product-detail-image">
         <Swiper spaceBetween={20} slidesPerView={1} navigation modules={[Navigation]}>
@@ -70,7 +70,7 @@ function ProductDetail() {
                   width: '100%',
                   height: 'auto',
                   borderRadius: '12px',
-                  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)',
+                  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.25)',
                 }}
               />
             </SwiperSlide>
@@ -79,7 +79,6 @@ function ProductDetail() {
       </div>
     </div>
 
-    {/* Ürün Bilgileri */}
     <div className="col-lg-6 col-sm-12">
       <div className="product-info">
         <h1>{product.name}</h1>
@@ -102,7 +101,6 @@ function ProductDetail() {
           </p>
         </div>
 
-        {/* Ürün Özellikleri */}
         <div className="specifications">
           <h3>Specifications</h3>
           <ul>
@@ -114,7 +112,6 @@ function ProductDetail() {
           </ul>
         </div>
 
-        {/* Renk Seçenekleri */}
         {product.colors.length > 1 && (
           <div className="colors">
             <h3>Available Colors</h3>
@@ -135,7 +132,6 @@ function ProductDetail() {
         )}
       </div>
 
-      {/* Aksiyonlar */}
       <div className="product-action">
         <button
           className="addToCart"
@@ -150,7 +146,7 @@ function ProductDetail() {
               image: colorData.images[0],
               stock: colorData.stock,
             };
-            user ? dispatch(addCartItem({ cartItem, favList })) : navigate('/login');
+            user ? dispatch(addCartItem({ cartItem, reduxUser : reduxUser })) : navigate('/login');
           }}
         >
           <BsCartPlus /> Add To Cart
@@ -169,7 +165,7 @@ function ProductDetail() {
               color: selectedColor,
               stock: colorData.stock,
             };
-            dispatch(addToFavList({ favItem: favoriteItem, cart }));
+            dispatch(addToFavList({ favItem: favoriteItem, reduxUser : reduxUser }));
           }}
         >
           <BsHeart /> Add To Favorite

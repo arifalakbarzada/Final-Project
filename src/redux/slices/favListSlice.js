@@ -15,17 +15,17 @@ const favListSlice = createSlice({
             state.items = action.payload;
         },
         addToFavList: (state, action) => {
-            const { favItem, cart } = action.payload;
+            const { favItem, reduxUser } = action.payload;
             const item = state.items.find(item => item.colorId === favItem.colorId);
             if (!item) {
                 state.items.push(favItem);
-                favListApi.changeFavList(user.id, user, state.items, cart);
+                favListApi.changeFavList(user.id, reduxUser, state.items);
             }
         },
         removeFromFavList: (state, action) => {
-            const { colorId, cart } = action.payload;
+            const { colorId, reduxUser } = action.payload;
             state.items = state.items.filter(item => item.colorId !== colorId);
-            favListApi.changeFavList(user.id, user, state.items, cart);
+            favListApi.changeFavList(user.id, reduxUser, state.items);
         }
     }
 });

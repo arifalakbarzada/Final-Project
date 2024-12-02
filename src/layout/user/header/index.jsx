@@ -108,7 +108,7 @@ function Header() {
           <li>
             <NavLink to='/cart'>
               <BsCart />
-              <span className='total-price'>
+              <span className={user ? 'total-price' : null}>
                 {cart.length > 0 && user || userInDis ? `(${cart.length})` : null}
               </span>
             </NavLink>

@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { cartApi, favListApi } from '../../../service/base';
 import { removeFromFavList, setFavList, addToFavList } from '../../../redux/slices/favListSlice';
-import { addCartItem, setCartItems } from '../../../redux/slices/cartSlice';
+import { addCartItem } from '../../../redux/slices/cartSlice';
 import { BsCart } from 'react-icons/bs';
 
 function FavList() {
   const dispatch = useDispatch();
   const favList = useSelector(state => state.favList.items);
-  const cart = useSelector(state => state.cart.items);
-
+  const reduxUser = useSelector((state) => state.users.user)
   const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
 
   useEffect(() => {
@@ -18,11 +17,6 @@ function FavList() {
       favListApi.getFavList(user.id).then(res => dispatch(setFavList(res.favlist)));
     }
   }, [dispatch]);
-  useEffect(() => {
-    if (user && user.id) {
-      cartApi.getCart(user.id).then(res => dispatch(setCartItems(res.userCart)))
-    }
-  }, [dispatch])
 
   return (
     <>
@@ -43,10 +37,10 @@ function FavList() {
                 </p>
               </div>
               <div className="fav-item-actions">
-                <button onClick={() => dispatch(addCartItem({ cartItem: item, favList }))} className="addToCartBtn">
+                <button onClick={() => dispatch(addCartItem({ cartItem: item, reduxUser : reduxUser }))} className="addToCartBtn">
                   <BsCart /> Add To Cart
                 </button>
-                <button onClick={() => dispatch(removeFromFavList({ colorId: item.colorId, cart }))} className="removeBtn">
+                <button onClick={() => dispatch(removeFromFavList({ colorId: item.colorId, reduxUser : reduxUser }))} className="removeBtn">
                   Remove
                 </button>
               </div>

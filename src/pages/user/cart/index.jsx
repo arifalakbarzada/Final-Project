@@ -9,10 +9,8 @@ function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector(state => state.cart.items);
-  const favList = useSelector(state => state.favList.items);
-
   const user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
-
+  const reduxUser = useSelector((state) => state.users.user)
   useEffect(() => {
     if (user && user.id) {
       cartApi.getCart(user.id).then(res => dispatch(setCartItems(res.userCart)));
@@ -42,17 +40,17 @@ function Cart() {
                 <p>Price: ${parseFloat(item.price).toFixed(2)}</p>
                 <div className="cart-quantity">
                   <button onClick={() => {
-                    dispatch(decreaseQuantity({ colorId: item.colorId, fav: favList }));
+                    dispatch(decreaseQuantity({ colorId: item.colorId, reduxUser : reduxUser }));
                   }}>-</button>
                   <p>{item.quantity}</p>
                   <button onClick={() => {
-                    dispatch(increaseQuantity({ colorId: item.colorId, fav: favList }));
+                    dispatch(increaseQuantity({ colorId: item.colorId, reduxUser : reduxUser }));
                   }}>+</button>
                 </div>
               </div>
               <div className="cart-remove">
                 <button onClick={() => {
-                  dispatch(removeCartItem({ colorId: item.colorId, fav: favList }));
+                  dispatch(removeCartItem({ colorId: item.colorId, reduxUser : reduxUser }));
                 }}>Remove</button>
               </div>
             </div>

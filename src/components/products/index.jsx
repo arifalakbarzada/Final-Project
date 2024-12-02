@@ -14,8 +14,7 @@ function Products() {
   const products = useSelector((state) => state.products.items);
   const filtered = useSelector((state) => state.products.filteredByCategory)
   const user = JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user'));
-  const cart = useSelector((state) => state.cart.items)
-  const favList = useSelector((state) => state.favList.items)
+  const reduxUser = useSelector((state)=>state.users.user)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -43,7 +42,7 @@ function Products() {
         image: color.images[0],
         stock: color.stock,
       };
-      dispatch(addCartItem({ cartItem, favList }));
+      dispatch(addCartItem({ cartItem, reduxUser : reduxUser }));
     } else {
       navigate('/login');
     }
@@ -60,7 +59,7 @@ function Products() {
         image: color.images[0],
         stock: color.stock,
       };
-      dispatch(addToFavList({ favItem, cart }));
+      dispatch(addToFavList({ favItem, reduxUser : reduxUser }));
     } else {
       navigate('/login');
     }

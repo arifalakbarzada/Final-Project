@@ -104,14 +104,10 @@ export const cartApi = {
         }
 
     },
-    changeUserCart: function (id, user, changes, fav) {
+    changeUserCart: function (id, user, changes) {
         const time = new Date()
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes, favlist: fav, lastActivity: time })
+        axios.put(`${usersUrl}/${id}`, { ...user, userCart: changes , lastActivity: time })
 
-    }
-    ,
-    clearUserCart: function (id, user, fav, orders) {
-        axios.put(`${usersUrl}/${id}`, { ...user, userCart: [], favlist: fav, orders: orders })
     }
 }
 
@@ -125,10 +121,10 @@ export const favListApi = {
             throw error;
         }
     },
-    changeFavList: async function (id, user, changes, cart) {
+    changeFavList: async function (id, user, changes) {
         const time = new Date()
         try {
-            const updatedUser = { ...user, favlist: changes, userCart: cart, lastActivity: time };
+            const updatedUser = { ...user, favlist: changes, lastActivity: time };
             const response = await axios.put(`${usersUrl}/${id}`, updatedUser);
 
             return response.data;
@@ -150,6 +146,6 @@ export const ordersApi = {
         }
     },
     changeOrder: function (id, user, changes) {
-        axios.put(`${usersUrl}/${id}`, { ...user, orders: changes })
+        axios.put(`${usersUrl}/${id}`, { ...user, orders: changes , userCart : [] })
     }
 }

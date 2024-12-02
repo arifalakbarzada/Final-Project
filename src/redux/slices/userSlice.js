@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   user: null,
-  responsivity : false
+  responsivity: true
 };
 
 const userSlice = createSlice({
@@ -44,10 +44,13 @@ const userSlice = createSlice({
     },
     changeResponsivity: (state, action) => {
       state.responsivity = action.payload
-      }
+    },
+    setUser: (state, action) => {
+      state.user = action.payload
+    }
   },
 });
 
-export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage, changeUserStatus , changeResponsivity } = userSlice.actions;
+export const { setUsers, loginUser, logoutUser, setUserFromLocalStorage, setUserFromSessionStorage, changeUserStatus, changeResponsivity, setUser } = userSlice.actions;
 
 export default userSlice.reducer;
