@@ -7,6 +7,7 @@ import { BsCartPlus } from 'react-icons/bs';
 import { CiHeart } from 'react-icons/ci';
 import { addCartItem } from '../../redux/slices/cartSlice';
 import { addToFavList } from '../../redux/slices/favListSlice';
+import toast from 'react-hot-toast';
 
 function Products() {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function Products() {
       dispatch(addCartItem({ cartItem, reduxUser : reduxUser }));
     } else {
       navigate('/login');
+      toast.error("Please sign in or sign up first" , {
+        position : 'top-center'
+      })
     }
   };
 
@@ -62,6 +66,9 @@ function Products() {
       dispatch(addToFavList({ favItem, reduxUser : reduxUser }));
     } else {
       navigate('/login');
+      toast.error("Please sign in or sign up" , {
+        position : 'top-center'
+      })
     }
   };
 

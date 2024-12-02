@@ -36,6 +36,7 @@ import AddNewProduct from './pages/admin/addNewProduct'
 import { setProducts } from './redux/slices/productSlice'
 import { setCartItems } from './redux/slices/cartSlice'
 import { setFavList } from './redux/slices/favListSlice'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const cart = useSelector((state) => state.cart.items)
@@ -87,8 +88,9 @@ function App() {
   }, [dispatch]);
 
   return (
-
+<>      <Toaster/>
     <Routes>
+
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
         <Route path='products/:id/:colorId/:color' element={<Details />} />
@@ -126,6 +128,8 @@ function App() {
       <Route path='*' element={<NotFound />} />
 
     </Routes>
+</>
+
 
 
   )
