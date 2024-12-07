@@ -76,7 +76,7 @@ const Login = () => {
           <div className='eyeIcon' onClick={() => {
             setVisiblePassword(!visiblePassword)
           }}>{visiblePassword ? <>
-           <FaEyeSlash />
+            <FaEyeSlash />
           </> : <>
             <BsEye />
           </>}</div>
@@ -93,8 +93,12 @@ const Login = () => {
         </div>
       </form>
       <div className="login-options">
-        <Link to={'/forgetpassword'}>Lost your password?</Link>
-        <Link to={'/register'}>Create Account</Link>
+        <div className="login-option">
+          <Link to={'/forgetpassword'}>Lost your password?</Link>
+        </div>
+        <div className="login-option">
+          <Link to={'/register'}>Create Account</Link>
+        </div>
       </div>
     </div>
   );

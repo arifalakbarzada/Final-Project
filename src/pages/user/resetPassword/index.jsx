@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { usersApi } from '../../../service/base';
 import { setUsers } from '../../../redux/slices/userSlice';
+import toast from 'react-hot-toast';
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ const ResetPassword = () => {
         e.preventDefault();
         if (password === confirmPassword && user && validatePassword(password)) {
             usersApi.resetPassword(id, user, password);
-            alert('Password has been reset successfully.');
+            toast.success('Password is reset successfully.')
         } else {
             alert('Passwords do not match or invalid.');
         }

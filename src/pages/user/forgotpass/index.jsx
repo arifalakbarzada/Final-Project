@@ -6,6 +6,7 @@ import { setUsers } from '../../../redux/slices/userSlice';
 import emailjs from '@emailjs/browser';
 import { Link } from 'react-router-dom';
 import { PiArrowLeft } from 'react-icons/pi';
+import toast from 'react-hot-toast';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
@@ -32,9 +33,9 @@ const ForgetPassword = () => {
         { link },
         'uZiU_jvMcoRVe1YyL'
       );
-      alert('Password reset link sent to your email.');
+      toast.success('Password reset link sent to your email.')
     } else {
-      alert('No user found with this email.');
+      toast.error('Email not found')
     }
   };
 
@@ -53,7 +54,7 @@ const ForgetPassword = () => {
             autoComplete='off'
           />
         </div>
-        <button type="submit">Send Reset Link</button>
+        <button type="submit" className='forgetPassBtn'>Send Reset Link</button>
       </form>
       <div className="login-redirect">
         <p><Link to="/login"><PiArrowLeft /> Back to Log in</Link></p>

@@ -517,11 +517,7 @@ input::-webkit-inner-spin-button {
 /* ! About CSS end */
 
 /* ? Login  CSS start this side done */
-
-.login-container,
-.register-container,
-.forget-password-container,
-.reset-password-container {
+.login-container , .reset-password-container , .register-container , .forget-password-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -531,138 +527,126 @@ input::-webkit-inner-spin-button {
   border: 1px solid #ddd;
 
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-  }
-
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus {
-    border-color: var(--primary-color);
-    outline: none;
-  }
-
-  button {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-
-  button:hover {
-    background-color: var(--hover-color);
-    transform: translateY(-2px);
-  }
-
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  .input-group {
-    margin-bottom: 15px;
-  }
-
-  .input-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #555;
-  }
-
-  .eyeIcon {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    cursor: pointer;
-  }
-
-  .error-side {
-    color: red;
-    position: absolute;
-    bottom: -20px;
-
-    p {
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-  }
-
-  .btn-login,
-  .btn-register {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    margin-top: 8px;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-login:hover,
-  .btn-register:hover {
-    background-color: var(--hover-color);
-  }
-
-  .login-options {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .login-options a {
-    margin: 0 10px;
-    font-size: 14px;
-    color: var(--primary-color);
-    text-decoration: none;
-  }
-
-  .login-options a:hover {
-    text-decoration: underline;
-  }
-
-  .remember-me {
-    margin: 10px 0;
-  }
-
-  .remember-me input {
-    margin-right: 5px;
-    cursor: pointer;
-  }
-
-  .login-redirect {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
-  }
-
-  .login-redirect a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .login-redirect a:hover {
-    text-decoration: underline;
-  }
+ h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
+ form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 18px;
+}
+
+.error-side {
+  color: red;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.error-side p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-options,
+.login-redirect {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+.login-options{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.login-options a,
+.login-redirect a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-options a:hover,
+.login-redirect a:hover {
+  text-decoration: underline;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.remember-me input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+}
 /* ? Login CSS end */
 
 
@@ -1137,7 +1121,7 @@ input::-webkit-inner-spin-button {
 
 
 .account-details-form {
-  /* max-width: 500px; */
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #eaeaea;
@@ -1184,105 +1168,8 @@ input::-webkit-inner-spin-button {
 
 /** My Account CSS end  */
 
-/* ? Forget Password CSS start this side done */
-.forget-password-container {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 
-  .forget-password-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .form-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-}
-
-/* ? Forget Password CSS end */
-
-/* todo Reset Password CSS start this side done */
-
-.reset-password-container {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  .reset-password-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .form-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-}
-
-/* todo Reset Password CSS end */
 
 /*? Cart CSS start this side done */
 .cart-page {
