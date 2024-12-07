@@ -3,12 +3,20 @@
   justify-content: center;
   align-items: center;
 }
-#root{
-  overflow: hidden;
+
+:root {
+  --primary-color: #dd00dd;
+  --hover-color: #aa00aa;
 }
+
 main>div {
   width: 60% !important;
   margin: 0 auto;
+}
+
+main:has(.products-container) {
+  background: linear-gradient(135deg, #e0e0f7 10%, #fafafa 90%);
+
 }
 
 .footer {
@@ -42,12 +50,12 @@ header:has(.header) {
   .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #00aced;
+    color: var(--primary-color);
     cursor: pointer;
     transition: color 0.3s ease;
 
     &:hover {
-      color: #0077b5;
+      color: var(--hover-color);
     }
   }
 
@@ -69,7 +77,7 @@ header:has(.header) {
     }
 
     button {
-      background-color: #00aced;
+      background-color: var(--primary-color);
       border: none;
       padding: 8px 16px;
       color: white;
@@ -79,7 +87,7 @@ header:has(.header) {
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #0077b5;
+        background-color: var(--hover-color);
       }
     }
   }
@@ -254,8 +262,9 @@ input::-webkit-inner-spin-button {
   top: 0;
   z-index: 1000;
 }
+
 @media screen and (max-width: 1060px) {
-  .header-responsive{
+  .header-responsive {
     width: 100%;
     opacity: 1;
     visibility: visible;
@@ -266,6 +275,7 @@ input::-webkit-inner-spin-button {
     background-color: #fff;
   }
 }
+
 /*! User Header CSS end  */
 
 
@@ -276,7 +286,6 @@ input::-webkit-inner-spin-button {
   gap: 24px;
   padding: 24px;
   background-color: #f0f0f5;
-  /* Daha zarif bir arka plan rengi */
   background-image: linear-gradient(135deg, #e0e0f7 10%, #fafafa 90%);
 
   .product {
@@ -289,7 +298,6 @@ input::-webkit-inner-spin-button {
 
     &:hover {
       transform: scale(1.05) rotate(0.5deg);
-      /* Hafif bir büyüme ve dönüş */
       box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
     }
 
@@ -317,18 +325,13 @@ input::-webkit-inner-spin-button {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        /* Görüntünün tam oturması için */
         background-color: #f5f5f5;
-        /* PNG olmayan görüntülerde daha iyi görünmesi için arka plan rengi */
         border-radius: 8px;
-        /* Görüntülere zarif bir köşe yuvarlama efekti */
         transition: transform 0.5s ease;
-        /* Smooth zoom transition */
       }
 
       &:hover img {
         transform: translate(-50%, -50%) scale(1.1);
-        /* Hover sırasında zoom efekti */
       }
 
       .product-action {
@@ -348,6 +351,7 @@ input::-webkit-inner-spin-button {
           width: 50px;
           height: 50px;
           display: flex;
+          margin-bottom: 4px;
           align-items: center;
           justify-content: center;
           cursor: pointer;
@@ -359,9 +363,8 @@ input::-webkit-inner-spin-button {
           }
 
           &:hover {
-            background-color: #f90;
+            background-color: var(--hover-color);
             transform: scale(1.2);
-            /* Simge üzerinde büyüme efekti */
 
             svg {
               color: #fff;
@@ -381,7 +384,6 @@ input::-webkit-inner-spin-button {
       top: 1px;
       left: 16px;
       background-color: #ff4d4f;
-      /* Daha çarpıcı bir etiket rengi */
       color: white;
       z-index: 100;
       font-size: 14px;
@@ -405,7 +407,6 @@ input::-webkit-inner-spin-button {
 
         &:hover {
           color: #ff4d4f;
-          /* Daha dikkat çekici bir hover rengi */
         }
       }
 
@@ -432,6 +433,31 @@ input::-webkit-inner-spin-button {
   }
 }
 
+/* @media screen and (max-width: 768px) {
+  .products {
+    .product {
+      &:hover{
+        transform: scale(1) rotate(0);
+      }
+      .product-image {
+                 img{
+            transform: scale(1);
+            top: 0;
+            left: 0;
+          } 
+        &:hover{
+          transform: scale(1) rotate(0);
+
+        }
+        .product-action {
+          display: none;
+        }
+      }
+
+    }
+  }
+
+} */
 
 /*? Products CSS end  */
 
@@ -519,12 +545,12 @@ input::-webkit-inner-spin-button {
   input[type="text"]:focus,
   input[type="email"]:focus,
   input[type="password"]:focus {
-    border-color: #ff9900;
+    border-color: var(--primary-color);
     outline: none;
   }
 
   button {
-    background-color: #ff9900;
+    background-color: var(--primary-color);
     color: white;
     padding: 12px 20px;
     border: none;
@@ -535,7 +561,7 @@ input::-webkit-inner-spin-button {
   }
 
   button:hover {
-    background-color: #cc7a00;
+    background-color: var(--hover-color);
     transform: translateY(-2px);
   }
 
@@ -563,13 +589,26 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
   }
 
+  .error-side {
+    color: red;
+    position: absolute;
+    bottom: -20px;
+
+    p {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+  }
+
   .btn-login,
   .btn-register {
     width: 100%;
     padding: 12px;
-    background-color: #ff9900;
+    background-color: var(--primary-color);
     color: white;
     border: none;
+    margin-top: 8px;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
@@ -578,7 +617,7 @@ input::-webkit-inner-spin-button {
 
   .btn-login:hover,
   .btn-register:hover {
-    background-color: #cc7a00;
+    background-color: var(--hover-color);
   }
 
   .login-options {
@@ -589,7 +628,7 @@ input::-webkit-inner-spin-button {
   .login-options a {
     margin: 0 10px;
     font-size: 14px;
-    color: #ff9900;
+    color: var(--primary-color);
     text-decoration: none;
   }
 
@@ -614,7 +653,7 @@ input::-webkit-inner-spin-button {
   }
 
   .login-redirect a {
-    color: #ff9900;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
   }
@@ -622,15 +661,6 @@ input::-webkit-inner-spin-button {
   .login-redirect a:hover {
     text-decoration: underline;
   }
-
-  .notification {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-
 }
 
 /* ? Login CSS end */
@@ -680,7 +710,7 @@ input::-webkit-inner-spin-button {
   }
 
   .btn-send {
-    background-color: #ff9900;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -691,7 +721,7 @@ input::-webkit-inner-spin-button {
 
 
     &:hover {
-      background-color: #e68a00;
+      background-color: var(--hover-color);
     }
   }
 
@@ -1006,59 +1036,6 @@ input::-webkit-inner-spin-button {
     background-color: #f8f9fa;
   }
 
-  .orders-title {
-    color: #007bff;
-    font-size: 32px;
-    margin-bottom: 25px;
-    text-align: center;
-  }
-
-  .orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .orders-table th,
-  .orders-table td {
-    padding: 15px;
-    text-align: left;
-  }
-
-  .orders-table th {
-    background-color: #007bff;
-    color: #ffffff;
-    font-weight: 600;
-  }
-
-  .orders-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  .orders-table tr:hover {
-    background-color: #e9ecef;
-  }
-
-  .status {
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  .status.delivered {
-    color: #28a745;
-  }
-
-  .status.in-transit {
-    color: #ffc107;
-  }
-
-  .status.canceled {
-    color: #dc3545;
-  }
-
   .address {
     padding: 30px;
     background-color: #ffffff;
@@ -1201,7 +1178,7 @@ input::-webkit-inner-spin-button {
   }
 
   .save-btn:hover {
-    background-color: #007BFF;
+    background-color: var(--primary-color);
   }
 }
 
@@ -1292,7 +1269,7 @@ input::-webkit-inner-spin-button {
   button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 3px;
@@ -1418,7 +1395,7 @@ input::-webkit-inner-spin-button {
   }
 
   .checkout-button {
-    background-color: #28a745;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 10px 20px;
     font-size: 18px;
@@ -1429,7 +1406,7 @@ input::-webkit-inner-spin-button {
   }
 
   .checkout-button:hover {
-    background-color: #218838;
+    background-color: var(--hover-color);
   }
 }
 
@@ -1509,9 +1486,10 @@ input::-webkit-inner-spin-button {
     }
   }
 
-  .fav-item-image img .fav-item-details {
+  .fav-item-details {
     flex: 1;
     margin-left: 20px;
+    width: 50%;
   }
 
   .fav-item-name h4 {
@@ -1709,7 +1687,7 @@ input::-webkit-inner-spin-button {
   }
 
   input {
-    width: 100%;
+    width: -webkit-fill-available;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -1724,7 +1702,7 @@ input::-webkit-inner-spin-button {
   .btn-submit {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     font-size: 18px;
     border: none;
@@ -1733,7 +1711,7 @@ input::-webkit-inner-spin-button {
   }
 
   .btn-submit:hover {
-    background-color: #0056b3;
+    background-color: var(--hover-color);
   }
 
   .order-summary {
@@ -2298,36 +2276,6 @@ header:has(.admin-header) {
   }
 }
 
-@media (min-width: 768px) {
-  .product-details {
-    flex-direction: row;
-  }
-
-  .specifications,
-  .colors {
-    flex: 1;
-  }
-
-  .specifications .spec-item,
-  .colors .color-item {
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  input[type="text"],
-  input[type="number"] {
-    width: 300px;
-  }
-
-  .edit-spec input,
-  .edit-color input {
-    width: 200px;
-  }
-
-  .image-previews {
-    display: flex;
-  }
-}
 
 
 @keyframes fadeIn {
