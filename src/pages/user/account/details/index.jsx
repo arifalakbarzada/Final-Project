@@ -85,7 +85,6 @@ const AccountDetails = () => {
         name="email"
         placeholder="Email Address"
         defaultValue={userData.email}
-        // value={formData.email}
         onChange={handleChange}
       />
 

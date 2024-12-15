@@ -718,7 +718,7 @@ button:disabled {
 
 /**  Contact CSS end */
 
-/* todo Details CSS start*/
+/* todo Product Details CSS start*/
 .product-detail-container {
   padding: 20px;
   background: #f9f9f9;
@@ -884,7 +884,7 @@ button:disabled {
 
 }
 
-/* todo Details CSS end */
+/* todo Product Details CSS end */
 
 
 /** My Account CSS start this side done  */
@@ -1153,7 +1153,7 @@ button:disabled {
   .save-btn {
     width: 100%;
     padding: 12px;
-    background-color: #0056b3;
+    background-color: var(--primary-color);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -1162,7 +1162,7 @@ button:disabled {
   }
 
   .save-btn:hover {
-    background-color: var(--primary-color);
+    background-color: var(--hover-color);
   }
 }
 

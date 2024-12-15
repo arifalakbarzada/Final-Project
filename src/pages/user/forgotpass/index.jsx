@@ -19,6 +19,9 @@ const ForgetPassword = () => {
   useEffect(() => {
     usersApi.getAllUsers().then(res => dispatch(setUsers(res)));
   }, [dispatch]);
+  const validateEmail = (email) =>{
+    
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

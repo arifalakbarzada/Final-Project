@@ -15,9 +15,13 @@ function Register() {
   const [visiblePassword, setVisiblePassword] = useState(false)
   const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false)
   const [nameError, setNameError] = useState(false)
+  const [nameErrorVisible, setNameErrorVisible] = useState(false)
   const [emailError, setEmailError] = useState(false)
+  const [emailErrorVisible, setEmailErrorVisible] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [confirmPasswordError, setConfirmPasswordError] = useState(false)
+  const [passwordErrorVisible, setPasswordErrorVisible] = useState(false)
+  const [confirmPasswordErrorVisible, setConfirmPasswordErrorVisible] = useState(false)
   const [userNames, setUserNames] = useState([])
   const [userEmails, setUserEmails] = useState([])
 
@@ -101,26 +105,30 @@ function Register() {
               setRegisterData({ ...registerData, name: e.target.value })
               if (e.target.value.trim() === '' || validateUserName(e.target.value)) {
                 setNameError(false)
+                setNameErrorVisible(false)
               }
               else if (!validateUserName(e.target.value)) {
                 setNameError(true)
+                setNameErrorVisible(true)
               }
             }
             }
             onFocus={(e) => {
               if (e.target.value.trim() === '' || validateUserName(e.target.value)) {
                 setNameError(false)
+                setNameErrorVisible(false)
               }
               else if (!validateUserName(e.target.value)) {
                 setNameError(true)
+                setNameErrorVisible(true)
               }
             }}
-            onBlur={() => { setNameError(false) }}
+            onBlur={() => { setNameErrorVisible(false) }}
             required
             autoComplete='off'
           />
           <div className="error-side">
-            {nameError ? <p>Username must be at least 3 characters long.</p> : null}
+            {nameErrorVisible ? <p>Username must be at least 3 characters long.</p> : null}
             {userNames.includes(registerData.name) ? <p>This username is already taken.</p> : null}
           </div>
         </div>
@@ -135,26 +143,30 @@ function Register() {
               setRegisterData({ ...registerData, email: e.target.value })
               if (e.target.value.trim() === '' || validateEmail(e.target.value)) {
                 setEmailError(false)
+                setEmailErrorVisible(false)
               }
               else if (!validateEmail(e.target.value)) {
                 setEmailError(true)
+                setEmailErrorVisible(true)
               }
             }
             }
             onFocus={(e) => {
               if (e.target.value.trim() === '' || validateEmail(e.target.value)) {
                 setEmailError(false)
+                setEmailErrorVisible(false)
               }
               else if (!validateEmail(e.target.value)) {
                 setEmailError(true)
+                setEmailErrorVisible(true)
               }
             }}
-            onBlur={() => { setEmailError(false) }}
+            onBlur={() => { setEmailErrorVisible(false) }}
             required
             autoComplete='off'
           />
           <div className="error-side">
-            {emailError ? <p>Invalid email address.</p> : null}
+            {emailErrorVisible ? <p>Invalid email address.</p> : null}
             {userEmails.includes(registerData.email) ? <p>This email is already in use.</p> : null}
           </div>
         </div>
@@ -169,9 +181,11 @@ function Register() {
               setRegisterData({ ...registerData, password: e.target.value })
               if (e.target.value.trim() === '' || validatePassword(e.target.value)) {
                 setPasswordError(false)
+                setPasswordErrorVisible(false)
               }
               else if (!validatePassword(e.target.value)) {
                 setPasswordError(true)
+                setPasswordErrorVisible(true)
               }
             }
             }
@@ -179,13 +193,15 @@ function Register() {
               (e) => {
                 if (e.target.value.trim() === '' || validatePassword(e.target.value)) {
                   setPasswordError(false)
+                  setPasswordErrorVisible(false)
                 }
                 else if (!validatePassword(e.target.value)) {
                   setPasswordError(true)
+                  setPasswordErrorVisible(true)
                 }
               }
             }
-            onBlur={() => { setPasswordError(false) }}
+            onBlur={() => { setPasswordErrorVisible(false) }}
             required
           />
           <div className='eyeIcon' onClick={() => {
@@ -196,7 +212,7 @@ function Register() {
             <BsEye />
           </>}</div>
           <div className="error-side">
-            {passwordError ? <p>Password must be at least 8 characters long, containing at least one letter and one number.</p> : null}
+            {passwordErrorVisible ? <p>Password must be at least 8 characters long, containing at least one letter and one number.</p> : null}
           </div>
         </div>
         <div className="input-group">
@@ -210,9 +226,11 @@ function Register() {
               setRegisterData({ ...registerData, confirmPassword: e.target.value })
               if (e.target.value.trim() === '' || e.target.value === registerData.password) {
                 setConfirmPasswordError(false)
+                setConfirmPasswordErrorVisible(false)
               }
               else if (e.target.value !== registerData.password) {
                 setConfirmPasswordError(true)
+                setConfirmPasswordErrorVisible(true)
               }
             }
             }
@@ -220,13 +238,15 @@ function Register() {
               (e) => {
                 if (e.target.value.trim() === '' || e.target.value === registerData.password) {
                   setConfirmPasswordError(false)
+                  setConfirmPasswordErrorVisible(false)
                 }
                 else if (e.target.value !== registerData.password) {
                   setConfirmPasswordError(true)
+                  setConfirmPasswordErrorVisible(true)
                 }
               }
             }
-            onBlur={() => { setConfirmPasswordError(false) }}
+            onBlur={() => { setConfirmPasswordErrorVisible(false) }}
             required
           />
           <div className='eyeIcon' onClick={() => {
@@ -237,10 +257,10 @@ function Register() {
             <BsEye />
           </>}</div>
           <div className="error-side">
-            {confirmPasswordError ? <p>Passwords do not match</p> : null}
+            {confirmPasswordErrorVisible ? <p>Passwords do not match</p> : null}
           </div>
         </div>
-        <button type="submit" className="btn-register" disabled={!passwordError && !confirmPasswordError && !nameError && !emailError && !userNames.includes(registerData.name) && !userEmails.includes(registerData.email) ? false : true}>Register</button>
+        <button type="submit" className="btn-register" disabled={!passwordError && !confirmPasswordError && !nameError && !emailError && !userNames.includes(registerData.name) && !userEmails.includes(registerData.email) && registerData.confirmPassword.trim() && registerData.email.trim() && registerData.name.trim() && registerData.password.trim() ? false : true}>Register</button>
       </form>
       <div className="login-redirect">
         <p>Already have an account? <Link to="/login">Log in</Link></p>
