@@ -50,7 +50,10 @@ function AccountDashBoard() {
         </div> {
           role === 'admin' ? <>
             <div className="widget widget-admin" onClick={() => {
-              navigate('/admin/dashboard')
+              setTimeout(() => {
+                navigate('/admin/dashboard')
+
+              }, 10)
             }}>
 
               <FiUser className="widget-icon" />

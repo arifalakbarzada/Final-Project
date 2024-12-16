@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { usersApi } from '../../../service/base';
 import { BsEye } from 'react-icons/bs';
 import { FaEyeSlash } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -38,10 +39,10 @@ const Login = () => {
         dispatch(loginUser({ user, rememberMe }));
         navigate('/myaccount/dashboard');
       } else {
-        alert('Your account is not active. Please contact admin');
+        toast.error('Your account is not active')
       }
     } else {
-      alert('Invalid login credentials');
+      toast.error('Invalid email or password')
     }
   };
 

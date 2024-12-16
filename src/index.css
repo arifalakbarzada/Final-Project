@@ -237,19 +237,6 @@ input::-webkit-inner-spin-button {
 }
 
 
-/* .header-responsive {
-  position: absolute;
-  height: 100%;
-  width: 60%;
-  background-color: #f0f0f0;
-  box-shadow: 1px 0 -5px #001111;
-  opacity: 0;
-  right: 0;
-  visibility: hidden;
-  top: 0;
-  z-index: 1000;
-} */
-
 .header-responsive.active {
   position: absolute;
   height: 100%;
@@ -432,32 +419,6 @@ input::-webkit-inner-spin-button {
     }
   }
 }
-
-/* @media screen and (max-width: 768px) {
-  .products {
-    .product {
-      &:hover{
-        transform: scale(1) rotate(0);
-      }
-      .product-image {
-                 img{
-            transform: scale(1);
-            top: 0;
-            left: 0;
-          } 
-        &:hover{
-          transform: scale(1) rotate(0);
-
-        }
-        .product-action {
-          display: none;
-        }
-      }
-
-    }
-  }
-
-} */
 
 /*? Products CSS end  */
 
