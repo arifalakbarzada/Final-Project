@@ -53,7 +53,7 @@ function AccountDashBoard() {
               setTimeout(() => {
                 navigate('/admin/dashboard')
 
-              }, 10)
+              }, 100)
             }}>
 
               <FiUser className="widget-icon" />
